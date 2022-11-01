@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'default' => env('DB_CONNECTION', 'mysql'),
+    'default' => env('DB_CONNECTION', 'sqlsrv'),
 
     /*
     |--------------------------------------------------------------------------
@@ -81,11 +81,11 @@ return [
         'sqlsrv' => [
             'driver' => 'sqlsrv',
             'url' => env('DATABASE_URL'),
-            'host' => env('DB_HOST', 'localhost'),
-            'port' => env('DB_PORT', '1433'),
-            'database' => env('DB_DATABASE', 'forge'),
-            'username' => env('DB_USERNAME', 'forge'),
-            'password' => env('DB_PASSWORD', ''),
+            'host' => env('DB_HOST', 'trialapps3.genexus.com'),
+            'port' => env('DB_PORT'),
+            'database' => env('DB_DATABASE', 'Id4c841c91c6c5085002121c5f0995aa10'),
+            'username' => env('DB_USERNAME', 'u2PZj8Y3BamTcr3t'),
+            'password' => env('DB_PASSWORD', 'u2PZj8Y3BamTcr3t'),
             'charset' => 'utf8',
             'prefix' => '',
             'prefix_indexes' => true,
