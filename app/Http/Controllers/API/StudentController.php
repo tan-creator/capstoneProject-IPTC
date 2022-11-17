@@ -5,9 +5,11 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Student;
+use Helpers;
 
 class StudentController extends Controller
 {
+    
     /**
      * Display a listing of the resource.
      *
@@ -16,10 +18,13 @@ class StudentController extends Controller
     public function index()
     {
         //dd(Student::all());
-        $studentData = mb_convert_encoding(Student::all(), "UTF-8", "ascii");
-        return $studentData;
+        $studentData = json_encode(Student::all(), JSON_INVALID_UTF8_SUBSTITUTE);
+        // return Student;
+
+        
     }
 
+    
     /**
      * Store a newly created resource in storage.
      *

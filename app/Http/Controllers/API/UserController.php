@@ -15,7 +15,15 @@ class UserController extends Controller
      */
     public function index()
     {
+        // $arr = collect();
+        // foreach (User::all() as $User) {
+        //     $arr->push($User->Images);
+        // }
+
+        // return response()->json($arr);
+        //dd(User::all());
         return User::all();
+        
     }
 
     /**

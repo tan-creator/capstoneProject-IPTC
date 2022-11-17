@@ -8,6 +8,7 @@ use App\Models\Notification;
 
 class NotificationController extends Controller
 {
+    
     /**
      * Display a listing of the resource.
      *
