@@ -18,8 +18,8 @@ class StudentController extends Controller
     public function index()
     {
         //dd(Student::all());
-        $studentData = json_encode(Student::all(), JSON_INVALID_UTF8_SUBSTITUTE);
-        // return Student;
+        //$studentData = json_encode(Student::all(), JSON_INVALID_UTF8_SUBSTITUTE);
+        return Student::all();
 
         
     }

@@ -23,7 +23,7 @@ class User extends Authenticatable
         'PassWord',
         'Role',
         'Names',
-        // s
+        'Images',
         'Images_GXI',
         'Phone',
         'Positions',
