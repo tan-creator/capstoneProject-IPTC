@@ -25,7 +25,7 @@ class UserController extends Controller
         return User::all();
         
     }
-
+  
     /**
      * Store a newly created resource in storage.
      *
@@ -57,7 +57,6 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
     }
 
     /**
