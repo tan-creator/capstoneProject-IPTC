@@ -13,10 +13,10 @@ class Subject extends Model
     
     protected $fillable = [
         'SubjectID',
-        'SubjectName',
-        'SubjectTime',
         'TeacherSubjectUserName',
         'ClassID',
+        'SubjectName',
+        'SubjectTime',
         'DateOfWeek',
     ];
 }

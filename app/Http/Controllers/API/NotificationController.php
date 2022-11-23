@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Notification;
+use Illuminate\Support\Facades\DB;
 
 class NotificationController extends Controller
 {
@@ -27,7 +28,8 @@ class NotificationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        DB::unprepared('SET IDENTITY_INSERT Notification ON;');
+        return DB::table('Notification')->insert($request->all());
     }
 
     /**
@@ -50,7 +52,7 @@ class NotificationController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        return DB::table('Notification')->where('NotificationID', $id)->update($request->all());
     }
 
     /**
@@ -61,6 +63,6 @@ class NotificationController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return DB::table('Notification')->where('NotificationID', $id)->delete();
     }
 }

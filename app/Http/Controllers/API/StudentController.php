@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Student;
 use Helpers;
+use Illuminate\Support\Facades\DB;
 
 class StudentController extends Controller
 {
@@ -33,7 +34,8 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        DB::unprepared('SET IDENTITY_INSERT Student ON;');
+        return DB::table('Student')->insert($request->all());
     }
 
     /**
@@ -56,7 +58,7 @@ class StudentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        return DB::table('Student')->where('StudentID', $id)->update($request->all());
     }
 
     /**
@@ -67,6 +69,6 @@ class StudentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return DB::table('Student')->where('StudentID', $id)->delete();
     }
 }

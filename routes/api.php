@@ -27,10 +27,27 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('student', [StudentController::class, 'index']);
+Route::post('student', [StudentController::class, 'store']);
+Route::put('student/{id}', [StudentController::class, 'update']);
+Route::delete('student/{id}', [StudentController::class, 'destroy']);
+
 Route::get('subject', [SubjectController::class, 'index']);
+Route::post('subject', [SubjectController::class, 'store']);
+Route::put('subject/{id}', [SubjectController::class, 'update']);
+Route::delete('subject/{id}', [SubjectController::class, 'destroy']);
+
 Route::get('class', [ClassController::class, 'index']);
 Route::get('user', [UserController::class, 'index']);
 Route::get('post', [PostController::class, 'index']);
+
 Route::get('notification', [NotificationController::class, 'index']);
+Route::post('notification', [NotificationController::class, 'store']);
+Route::put('notification/{id}', [NotificationController::class, 'update']);
+Route::delete('notification/{id}', [NotificationController::class, 'destroy']);
+
 Route::get('comment', [CommentController::class, 'index']);
+Route::post('comment', [CommentController::class, 'store']);
+Route::put('comment/{id}', [CommentController::class, 'update']);
+Route::delete('comment/{id}', [CommentController::class, 'destroy']);
+
 Route::get('like', [LikesController::class, 'index']);

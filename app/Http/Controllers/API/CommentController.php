@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Comment;
+use Illuminate\Support\Facades\DB;
 
 class CommentController extends Controller
 {
@@ -26,7 +27,8 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        DB::unprepared('SET IDENTITY_INSERT Comment ON;');
+        return DB::table('Comment')->insert($request->all());
     }
 
     /**
@@ -49,7 +51,7 @@ class CommentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        return DB::table('Comment')->where('ID', $id)->update($request->all());
     }
 
     /**
@@ -60,6 +62,6 @@ class CommentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return DB::table('Comment')->where('ID', $id)->delete();
     }
 }
