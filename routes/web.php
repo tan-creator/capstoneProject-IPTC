@@ -19,9 +19,7 @@ use App\Http\Controllers\API\UserController;
 Route::get('/', function () {
     return view('welcome');
 });
-
 // Route::get('/subject', [SubjectController::class, 'show']);
 Route::get('student', [StudentController::class, 'index']);
 Route::get('user', [UserController::class, 'index']);
-
 

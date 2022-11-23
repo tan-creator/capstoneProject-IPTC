@@ -25,7 +25,6 @@ use App\Http\Controllers\API\LikesController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-
 Route::get('student', [StudentController::class, 'index']);
 Route::post('student', [StudentController::class, 'store']);
 Route::put('student/{id}', [StudentController::class, 'update']);
