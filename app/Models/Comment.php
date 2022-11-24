@@ -12,9 +12,9 @@ class Comment extends Model
     protected $table = 'Comment';
 
     protected $fillable = [
-        'ID',
+        'CommentID',
         'PostID',
-        'Content',
-        'UserName',
+        'PersonUserName',
+        'CommentContent',
     ];
 }

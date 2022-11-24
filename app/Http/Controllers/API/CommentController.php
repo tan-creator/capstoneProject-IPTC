@@ -51,7 +51,7 @@ class CommentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        return DB::table('Comment')->where('ID', $id)->update($request->all());
+        return DB::table('Comment')->where('CommentID', $id)->update($request->all());
     }
 
     /**
@@ -62,6 +62,6 @@ class CommentController extends Controller
      */
     public function destroy($id)
     {
-        return DB::table('Comment')->where('ID', $id)->delete();
+        return DB::table('Comment')->where('CommentID', $id)->delete();
     }
 }
