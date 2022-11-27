@@ -16,6 +16,24 @@ class CommentController extends Controller
      */
     public function index()
     {
+        // $CommentContents = DB::table('Comment')->pluck('CommentContent', 'CommentID');
+
+        // foreach ($CommentContents as $CommentID => $CommentContent) {
+        //     echo $CommentID . ': ' . $CommentContent . "\n";
+        // }
+
+        // DB::table('Comment')->orderBy('CommentID')->lazy()->each(function ($comment) {
+        //     echo $comment->CommentID . "\n";
+        // });
+
+        // $comment = DB::table('Comment')
+        //     ->select(DB::raw('count(*) as commentCount, PostID'))
+        //     ->where('PostID', '<>', 5)
+        //     ->groupBy('PostID')
+        //     ->get();
+
+        // return $comment;
+
         return Comment::all();
     }
 

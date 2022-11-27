@@ -10,6 +10,7 @@ use App\Http\Controllers\API\PostController;
 use App\Http\Controllers\API\NotificationController;
 use App\Http\Controllers\API\CommentController;
 use App\Http\Controllers\API\LikesController;
+use App\Http\Controllers\Auth\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +26,8 @@ use App\Http\Controllers\API\LikesController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
 Route::get('student', [StudentController::class, 'index']);
 Route::post('student', [StudentController::class, 'store']);
 Route::put('student/{id}', [StudentController::class, 'update']);
@@ -50,3 +53,8 @@ Route::put('comment/{id}', [CommentController::class, 'update']);
 Route::delete('comment/{id}', [CommentController::class, 'destroy']);
 
 Route::get('like', [LikesController::class, 'index']);
+
+Route::get('login', function() {
+    return 1;
+});
+Route::post('login', [AuthController::class, 'login']);
