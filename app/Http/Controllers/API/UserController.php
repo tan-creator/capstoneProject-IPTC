@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -15,13 +16,6 @@ class UserController extends Controller
      */
     public function index()
     {
-        // $arr = collect();
-        // foreach (User::all() as $User) {
-        //     $arr->push($User->Images);
-        // }
-
-        // return response()->json($arr);
-        //dd(User::all());
         return User::all();
         
     }
@@ -34,7 +28,8 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //DB::unprepared('SET IDENTITY_INSERT Users ON;');
+        return DB::table('Users')->insert($request->all());
     }
 
     /**
@@ -55,8 +50,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $UserName)
     {
+        return DB::table('Users')->where('UserName', $UserName)->update($request->all());
     }
 
     /**
@@ -65,8 +61,8 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($UserName)
     {
-        //
+        return DB::table('Users')->where('UserName', $UserName)->delete();
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\MClass;
+use Illuminate\Support\Facades\DB;
 
 class ClassController extends Controller
 {
@@ -26,7 +27,8 @@ class ClassController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        DB::unprepared('SET IDENTITY_INSERT TheClass ON;');
+        return DB::table('TheClass')->insert($request->all());
     }
 
     /**
@@ -35,9 +37,9 @@ class ClassController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($ClassID)
     {
-        //
+        return DB::table('TheClass')->where('ClassID', $ClassID)->get();
     }
 
     /**
@@ -47,9 +49,9 @@ class ClassController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $ClassID)
     {
-        //
+        return DB::table('TheClass')->where('ClassID', $ClassID)->update($request->all());
     }
 
     /**
@@ -58,8 +60,8 @@ class ClassController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($ClassID)
     {
-        //
+        return DB::table('TheClass')->where('ClassID', $ClassID)->delete();
     }
 }

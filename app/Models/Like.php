@@ -12,8 +12,8 @@ class Like extends Model
     protected $table = 'Likes';
 
     protected $fillable = [
-        'ID',
+        'LikesID',
         'PostID',
-        'UserName',
+        'PersonUserName',
     ];
 }

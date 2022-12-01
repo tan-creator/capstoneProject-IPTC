@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Post;
+use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
 {
@@ -26,7 +27,8 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        DB::unprepared('SET IDENTITY_INSERT Post ON;');
+        return DB::table('Post')->insert($request->all());
     }
 
     /**
@@ -47,9 +49,9 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $PostID)
     {
-        //
+        return DB::table('Post')->where('PostID', $PostID)->update($request->all());
     }
 
     /**
@@ -58,8 +60,8 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($PostID)
     {
-        //
+        return DB::table('Post')->where('PostID', $PostID)->delete();
     }
 }

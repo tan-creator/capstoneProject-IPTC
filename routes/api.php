@@ -24,34 +24,66 @@ use App\Http\Controllers\API\PointController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+
+Route::controller(StudentController::class)->group(function () {
+    Route::get('student', 'index');
+    Route::post('student', 'store');
+    Route::put('student/{id}', 'update');
+    Route::delete('student/{id}', 'destroy'); 
 });
 
+Route::controller(SubjectController::class)->group(function () {
+    Route::get('subject', 'index');
+    Route::post('subject', 'store');
+    Route::put('subject/{id}', 'update');
+    Route::delete('subject/{id}', 'destroy');  
+});
 
-Route::get('student', [StudentController::class, 'index']);
-Route::post('student', [StudentController::class, 'store']);
-Route::put('student/{id}', [StudentController::class, 'update']);
-Route::delete('student/{id}', [StudentController::class, 'destroy']);
+Route::controller(SubjectController::class)->group(function () {    
+    Route::get('subject', 'index');
+    Route::post('subject', 'store');
+    Route::put('subject/{id}', 'update');
+    Route::delete('subject/{id}', 'destroy');
+});
 
-Route::get('subject', [SubjectController::class, 'index']);
-Route::post('subject', [SubjectController::class, 'store']);
-Route::put('subject/{id}', [SubjectController::class, 'update']);
-Route::delete('subject/{id}', [SubjectController::class, 'destroy']);
+Route::controller(ClassController::class)->group(function () {
+    Route::get('class', 'index');  
+    Route::get('class/{ClassID}', 'show');
+    Route::post('class', 'store');
+    Route::put('class/{ClassID}', 'update');
+    Route::delete('class/{ClassID}', 'destroy');  
+});
 
-Route::get('class', [ClassController::class, 'index']);
-Route::get('user', [UserController::class, 'index']);
-Route::get('post', [PostController::class, 'index']);
+Route::controller(UserController::class)->group(function () {
+    Route::get('user', 'index'); 
+    Route::post('user', 'store');
+    Route::put('user/{UserName}', 'update');
+    Route::delete('user/{UserName}', 'destroy');     
+});
 
-Route::get('notification', [NotificationController::class, 'index']);
-Route::post('notification', [NotificationController::class, 'store']);
-Route::put('notification/{id}', [NotificationController::class, 'update']);
-Route::delete('notification/{id}', [NotificationController::class, 'destroy']);
+Route::controller(PostController::class)->group(function () {
+    Route::get('post', 'index'); 
+    Route::post('post', 'store');
+    Route::put('post/{PostID}', 'update');
+    Route::delete('post/{PostID}', 'destroy');   
+});
 
-Route::get('comment', [CommentController::class, 'index']);
-Route::post('comment', [CommentController::class, 'store']);
-Route::put('comment/{id}', [CommentController::class, 'update']);
-Route::delete('comment/{id}', [CommentController::class, 'destroy']);
+Route::controller(NotificationController::class)->group(function () {
+    Route::get('notification', 'index');
+    Route::post('notification', 'store');
+    Route::put('notification/{id}', 'update');
+    Route::delete('notification/{id}', 'destroy');    
+});
+
+Route::controller(CommentController::class)->group(function () {
+    Route::get('comment', 'index');
+    Route::post('comment', 'store');
+    Route::put('comment/{id}', 'update');
+    Route::delete('comment/{id}', 'destroy');
+});
 
 Route::controller(PointController::class)->group(function () {
     Route::get('Points', 'index');
@@ -61,6 +93,13 @@ Route::controller(PointController::class)->group(function () {
     Route::delete('Point/{StudentID}', 'destroy');
 });
 
-Route::get('like', [LikesController::class, 'index']);
+Route::controller(LikesController::class)->group(function () {
+    Route::get('like', 'index'); 
+    Route::post('like', 'store');   
+    Route::delete('like/{LikesID}', 'destroy');
+});
 
-Route::post('login', [AuthController::class, 'login']);
+Route::controller(AuthController::class)->group(function () {
+    Route::get('login', 'login');    
+});
+

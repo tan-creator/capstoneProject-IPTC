@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Like;
+use Illuminate\Support\Facades\DB;
 
 class LikesController extends Controller
 {
@@ -26,7 +27,8 @@ class LikesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        DB::unprepared('SET IDENTITY_INSERT Likes ON;');
+        return DB::table('Likes')->insert($request->all());
     }
 
     /**
@@ -58,8 +60,8 @@ class LikesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($LikesID)
     {
-        //
+        return DB::table('Likes')->where('LikesID', $LikesID)->delete();
     }
 }

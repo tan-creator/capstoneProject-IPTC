@@ -27,7 +27,7 @@ class PointController extends Controller
      */
     public function store(Request $request)
     {
-        DB::unprepared('SET IDENTITY_INSERT Notification ON;');
+        DB::unprepared('SET IDENTITY_INSERT Point ON;');
         return DB::table('Point')->insert($request->all());
     }
 
