@@ -12,6 +12,8 @@ use App\Http\Controllers\API\CommentController;
 use App\Http\Controllers\API\LikesController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\API\PointController;
+use App\Http\Controllers\API\RollCallController;
+use App\Http\Controllers\API\RiewviewLessionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -93,10 +95,24 @@ Route::controller(PointController::class)->group(function () {
     Route::delete('Point/{StudentID}', 'destroy');
 });
 
+Route::controller(RiewviewLessionController::class)->group(function () {
+    Route::get('Lesson', 'index');
+    Route::get('Lesson/{LessonID}', 'show');
+    Route::post('Lesson', 'store');
+    Route::put('Lesson/{LessonID}', 'update');
+    Route::delete('Lesson/{LessonID}', 'destroy');
+});
+
 Route::controller(LikesController::class)->group(function () {
     Route::get('like', 'index'); 
     Route::post('like', 'store');   
     Route::delete('like/{LikesID}', 'destroy');
+});
+
+Route::controller(RollCallController::class)->group(function () {
+    Route::get('rollCall', 'index'); 
+    Route::post('rollCall', 'store');   
+    Route::delete('rollCall/{LikesID}', 'destroy');
 });
 
 Route::controller(AuthController::class)->group(function () {
