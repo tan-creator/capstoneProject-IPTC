@@ -19,10 +19,10 @@ class AuthController extends Controller
             if($request->PassWord == $Password[0]->PassWord) {
                 return DB::table('Users')->where('UserName', $request->UserName)->get();
             } else {
-                return response()->json('Sai mật khẩu, mời nhập lại!');
+                return response(400)->json('Sai mật khẩu, mời nhập lại!');
             }
         } else {
-            return response()->json('Tài khoản không tồn tại!');
+            return response(400)->json('Tài khoản không tồn tại!');
         }
     }
 }

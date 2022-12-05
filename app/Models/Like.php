@@ -12,7 +12,7 @@ class Like extends Model
     protected $table = 'Likes';
 
     protected $fillable = [
-        'LikesID',
+        'LikeID',
         'PostID',
         'PersonUserName',
     ];

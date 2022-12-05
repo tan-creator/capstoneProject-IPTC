@@ -13,10 +13,9 @@ class Student extends Model
 
     protected $fillable = [
         'StudentID',
-        'StudentName',
-        'ClassID',
-        'StudentImage',
-        'StudentImage_GXI',
         'ParentUserName',
+        'ClassID',
+        'StudentName',
+        'StudentImage',
     ];
 }

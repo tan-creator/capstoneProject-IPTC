@@ -18,6 +18,5 @@ class Notification extends Model
         'NotificationTitle',
         'NotificationContent',
         'NotificationDate',
-        'NotificationAttachment',
     ];
 }

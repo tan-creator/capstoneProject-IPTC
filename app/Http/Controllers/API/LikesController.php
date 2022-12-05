@@ -60,8 +60,8 @@ class LikesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($LikesID)
+    public function destroy($LikeID)
     {
-        return DB::table('Likes')->where('LikesID', $LikesID)->delete();
+        return DB::table('Likes')->where('LikeID', $LikeID)->delete();
     }
 }

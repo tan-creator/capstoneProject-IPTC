@@ -16,6 +16,6 @@ class RollCall extends Model
         'StudentID',
         'RollCallDate',
         'RollCallStatus',
-        'ReasonForAbsence',
+        'RollcallForAbsence',
     ];
 }

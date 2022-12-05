@@ -13,10 +13,8 @@ class Post extends Model
     
     protected $fillable = [
         'PostID',
-        'Content',
-        'AttachedFiles',
-        'PostImage',
-        'PostImage_GXI',
         'UserName',
+        'Content',
+        'PostImage',
     ];
 }
