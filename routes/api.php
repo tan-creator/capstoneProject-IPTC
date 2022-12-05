@@ -116,6 +116,6 @@ Route::controller(RollCallController::class)->group(function () {
 });
 
 Route::controller(AuthController::class)->group(function () {
-    Route::get('login', 'login');    
+    Route::post('login', 'login');    
 });
 
