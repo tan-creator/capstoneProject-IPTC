@@ -56,7 +56,7 @@ export default function Sidebar() {
               </li>
               <ul className="menu-links">
                 <li id="dashboard" className="nav-link">
-                  <a href="/statistic">
+                  <a href="/dashboard">
                     <i className="bx bx-home-alt icon" />
                     <span className="text nav-text">Dashboard</span>
                   </a>
@@ -74,9 +74,9 @@ export default function Sidebar() {
                   </a>
                 </li>
                 <li className="nav-link">
-                  <a href="#">
+                  <a href="/grade">
                     <i className="bx bx-pie-chart-alt icon" />
-                    <span className="text nav-text">Analytics</span>
+                    <span className="text nav-text">Grade</span>
                   </a>
                 </li>
                 <li className="nav-link">

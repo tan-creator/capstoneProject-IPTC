@@ -38,7 +38,8 @@ export default function Login(props) {
     if (statusCode === 400) {
       alert.error(msg);
     } else {
-      navigate("/layout");
+      navigate("/dashboard");
+      alert.success("Đăng nhập thành công!");
     }
   };
   return (

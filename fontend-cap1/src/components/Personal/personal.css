@@ -1,0 +1,39 @@
+.Personnal {
+  margin-top: 200px;
+  margin-left: 25px;
+  background-color: #fff;
+}
+.func-title-user {
+  height: 31px;
+  line-height: 31px;
+  font-size: 18px;
+  color: #d82c2c;
+  font-weight: 700;
+  background: #fff url(../images/main/ico-user-info.png) no-repeat 20px center;
+  border-bottom: #a8a8a8 solid 1px;
+  margin-bottom: 3px;
+  text-transform: uppercase;
+  padding: 5px 0 5px 57px;
+}
+.info-basic .info {
+  float: left;
+  width: 510px;
+  padding: 5px 0;
+}
+.txtcel1 {
+  display: block;
+  float: left;
+  height: 25px;
+  line-height: 25px;
+  width: 170px;
+  text-align: right;
+  color: #464646;
+  font-weight: 700;
+  padding-right: 10px;
+}
+.txtcel2 {
+  display: block;
+  height: 25px;
+  line-height: 25px;
+  color: #464646;
+}

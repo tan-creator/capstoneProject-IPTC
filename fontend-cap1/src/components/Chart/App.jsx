@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Header from "../Header/Header";
+import NavBar from "../NavBar/NavBar";
 import Sidebar from "../Layout/DefaultLayout/Sidebar/Sidebar";
 import BarChart from "./BarChart";
 import LineChart from "./LineChart";
@@ -138,7 +138,7 @@ function App() {
   });
   return (
     <div className="App">
-      <Header />
+      <NavBar />
       <Sidebar />
       <div style={{ width: 200, marginTop: 200, marginLeft: 260 }}>
         <select name="" id="input" className="form-control" required="required">

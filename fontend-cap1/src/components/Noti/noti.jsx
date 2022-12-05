@@ -1,45 +1,26 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import Header from "../Header/Header";
+import NavBar from "../NavBar/NavBar";
 import Sidebar from "../Layout/DefaultLayout/Sidebar/Sidebar";
+import { getNotification } from "./../../helpers/getUser";
 import "./noti.css";
 export default function noti() {
-  const [notis, set_notis] = useState([]);
-  useEffect(() => {
-    axios("http://127.0.0.1:8000/notification")
-      .then((response) => response.data)
-      .then((json) => {
-        console.log(json);
-        set_notis([...json]);
-      });
-  }, []);
+  // const [notis, set_notis] = useState([]);
+  // useEffect(() => {
+  //   axios("http://127.0.0.1:8000/notification")
+  //     .then((response) => response.data)
+  //     .then((json) => {
+  //       console.log(json);
+  //       set_notis([...json]);
+  //     });
+  // }, []);
+  const notis = getNotification();
   return (
     <div>
-      <Header />
+      <NavBar />
       <div className="container">
         <Sidebar />
         <div className="forum-content">
-          <div class="row">
-            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-              <form action="" method="POST" role="form">
-                <legend>Form title</legend>
-
-                <div class="form-group">
-                  <label for="">label</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    id=""
-                    placeholder="Input field"
-                  />
-                </div>
-                <button type="submit" class="btn btn-primary">
-                  Submit
-                </button>
-              </form>
-            </div>
-          </div>
-
           <div className="annouce">
             <span>
               <i className="bx bxs-notepad" />
