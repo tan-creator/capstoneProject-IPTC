@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Sidebar from "../Layout/DefaultLayout/Sidebar/Sidebar";
 import NavBar from "../NavBar/NavBar";
-import "./grade.css";
+import "./Grade.css";
 export default function Grade() {
     const [students, setStudent] = useState([]);
     useEffect(() => {
@@ -15,6 +15,18 @@ export default function Grade() {
             <Sidebar />
 
             <div className="grade">
+                <div
+                    className="annouce"
+                    style={{
+                        marginTop: 50,
+                        marginBottom: 50,
+                    }}
+                >
+                    <span>
+                        <i className="bx bxs-notepad" />
+                        DANH SÁCH SINH VIÊN
+                    </span>
+                </div>
                 <table class="table table-hover">
                     <thead>
                         <tr>

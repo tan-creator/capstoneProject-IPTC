@@ -92,8 +92,6 @@ export default function Student() {
     };
     const handleSubmit = async () => {
         try {
-
-            
             const obj = {
                 ...point,
                 StudentID: id,
@@ -135,11 +133,16 @@ export default function Student() {
                 >
                     <button
                         type="button"
-                        class="btn btn-success"
+                        class="btn btn-secondary"
                         data-toggle="modal"
                         data-target="#exampleModal"
+                        style={{
+                            fontSize: 15,
+                            fontWeight: "600",
+                            marginBottom: 50,
+                        }}
                     >
-                        Create
+                        Nhập điểm
                     </button>
                     <div
                         class="modal fade"
@@ -247,7 +250,7 @@ export default function Student() {
                     <table class="table table-bordered table-hover p-5">
                         <thead>
                             <tr>
-                                <th>MON</th>
+                                <th>Môn</th>
                                 <th>Final</th>
                                 <th>Midterm</th>
                                 <th>Oral_1</th>

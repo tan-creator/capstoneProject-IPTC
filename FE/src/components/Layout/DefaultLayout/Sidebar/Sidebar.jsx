@@ -44,7 +44,11 @@ export default function Sidebar() {
                     <header>
                         <div className="image-text">
                             <span className="image">
-                                <img src="./img/logo.svg" alt="#" />
+                                <img
+                                    src={
+                                        window.location.origin + "/img/logo.svg"
+                                    }
+                                />
                             </span>
                             <div className="text logo-text">
                                 <span className="name">IPTC</span>

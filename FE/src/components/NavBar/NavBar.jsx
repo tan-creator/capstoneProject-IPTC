@@ -14,7 +14,7 @@ export default function NavBar() {
                 <div className="header-left">
                     <div className="logo">
                         <img
-                            src={window.location.origin + "./img/logo.svg"}
+                            src={window.location.origin + "/img/logo.svg"}
                             alt="#"
                         />
                         <span className="title-header">IPTC</span>
@@ -23,9 +23,12 @@ export default function NavBar() {
                 <div className="header-right">
                     <div class="profile-div">
                         <img
+                            src={
+                                window.location.origin +
+                                "/img/profilepic@2x.png"
+                            }
                             class="profile-pic-icon"
                             alt=""
-                            src="./img/profilepic@2x.png"
                             type="button"
                             data-toggle="collapse"
                             data-target="#collapseExample"
@@ -41,13 +44,13 @@ export default function NavBar() {
                     <img
                         class="notificatios-icon"
                         alt=""
-                        src="./img/notificatios.svg"
+                        src={window.location.origin + "/img/notificatios.svg"}
                     />
                     <div class="button-div">
                         <img
                             class="plus-circle-icon"
                             alt=""
-                            src="./img/pluscircle.svg"
+                            src={window.location.origin + "/img/pluscircle.svg"}
                         />
 
                         <div class="ask-a-question">Ask a question</div>
