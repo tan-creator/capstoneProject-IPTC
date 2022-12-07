@@ -91,7 +91,7 @@ Route::controller(PointController::class)->group(function () {
     Route::get('Points', 'index');
     Route::get('Point/{StudentID}', 'show');
     Route::post('Point', 'store');
-    Route::put('Point/{StudentID}', 'update');
+    Route::put('Point/{StudentID}-{SubjectID}', 'update');
     Route::delete('Point/{StudentID}', 'destroy');
 });
 
