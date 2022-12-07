@@ -27,7 +27,6 @@ class PointController extends Controller
      */
     public function store(Request $request)
     {
-        DB::unprepared('SET IDENTITY_INSERT Point ON;');
         return DB::table('Point')->insert($request->all());
     }
 
@@ -49,9 +48,14 @@ class PointController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $StudentID)
+    public function update(Request $request, $StudentID, $SubjectID)
     {
-        return DB::table('Point')->where('StudentID', $StudentID)->update($request->all());
+        return DB::table('Point')
+                ->where([
+                    ['StudentID', $StudentID],
+                    ['SubjectID', $SubjectID]
+                ])
+                ->update($request->all());
     }
 
     /**

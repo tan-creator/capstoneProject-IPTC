@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Sidebar from "../Layout/DefaultLayout/Sidebar/Sidebar";
-import NavBar from "../NavBar/NavBar";
+import NavBar from "../NavBar/Main";
 import "./grade.css";
 export default function Grade() {
     const [students, setStudent] = useState([]);
@@ -28,7 +28,7 @@ export default function Grade() {
                         {students.map((student) => {
                             return (
                                 <tr>
-                                    <Link to={`/student/${student?.StudentID}`}>
+                                    <Link to={`/student/${student?.ClassID}`}>
                                         <td>{student?.StudentID}</td>
                                     </Link>
                                     <td>{student?.ParentUserName}</td>
@@ -40,6 +40,8 @@ export default function Grade() {
                     </tbody>
                 </table>
             </div>
+
+            
         </div>
     );
 }
