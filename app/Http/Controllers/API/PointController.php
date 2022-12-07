@@ -48,9 +48,14 @@ class PointController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $StudentID)
+    public function update(Request $request, $StudentID, $SubjectID)
     {
-        return DB::table('Point')->where('StudentID', $StudentID)->update($request->all());
+        return DB::table('Point')
+                ->where([
+                    ['StudentID', $StudentID],
+                    ['SubjectID', $SubjectID]
+                ])
+                ->update($request->all());
     }
 
     /**
