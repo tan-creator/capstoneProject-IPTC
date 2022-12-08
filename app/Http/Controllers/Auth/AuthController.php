@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
@@ -16,7 +17,7 @@ class AuthController extends Controller
         $Password = DB::table('Users')->select('PassWord')->where('UserName', $request->UserName)->get();
 
         if ($Password->count() > 0) {
-            if($request->PassWord == $Password[0]->PassWord) {
+            if(Hash::check($request->PassWord, $Password[0]->PassWord)) {
                 return DB::table('Users')->where('UserName', $request->UserName)->get();
             } else {
                 return response()->json(['statusCode' => 400, 'msg' => 'Sai mật khẩu, mời nhập lại!']);
