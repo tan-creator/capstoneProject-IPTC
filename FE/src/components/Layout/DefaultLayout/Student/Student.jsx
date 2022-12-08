@@ -23,6 +23,7 @@ export default function Student() {
         const pointList = await result.data;
         return pointList;
     };
+    
     const handleSubject = async () => {
         const subjectList = JSON.parse(localStorage.getItem("subjects"));
         const pointList = await getAllPoint();

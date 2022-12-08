@@ -9,6 +9,7 @@ export default function Login(props) {
         PassWord: "",
         UserName: "",
     });
+    
     let navigate = useNavigate();
     const alert = useAlert();
     const handleChange = (e) => {

@@ -1,6 +1,10 @@
 import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "./NavBar.css";
 export default function NavBar() {
+    const handleOnClick = () => {
+        alert("Bạn có muốn đăng xuất?");
+    };
     useEffect(() => {
         const body = document.querySelector("body");
         body.onclick = () => {
@@ -21,13 +25,13 @@ export default function NavBar() {
                     </div>
                 </div>
                 <div className="header-right">
-                    <div class="profile-div">
+                    <div className="profile-div">
                         <img
                             src={
                                 window.location.origin +
                                 "/img/profilepic@2x.png"
                             }
-                            class="profile-pic-icon"
+                            className="profile-pic-icon"
                             alt=""
                             type="button"
                             data-toggle="collapse"
@@ -36,34 +40,34 @@ export default function NavBar() {
                             aria-controls="collapseExample"
                         />
                         <img
-                            class="vector-icon"
+                            className="vector-icon"
                             alt=""
                             src="./img/vector.svg"
                         />
                     </div>
                     <img
-                        class="notificatios-icon"
+                        className="notificatios-icon"
                         alt=""
                         src={window.location.origin + "/img/notificatios.svg"}
                     />
-                    <div class="button-div">
+                    <div className="button-div">
                         <img
-                            class="plus-circle-icon"
+                            className="plus-circle-icon"
                             alt=""
                             src={window.location.origin + "/img/pluscircle.svg"}
                         />
 
-                        <div class="ask-a-question">Ask a question</div>
+                        <div className="ask-a-question">Ask a question</div>
                     </div>
                 </div>
 
                 <div
-                    class="collapse"
+                    className="collapse"
                     id="collapseExample"
                     style={{ marginTop: "180px" }}
                 >
                     <div
-                        class=""
+                        className=""
                         style={{
                             width: "200px",
                             background: "rgba(255, 255, 255, 1)",
@@ -75,13 +79,22 @@ export default function NavBar() {
                             textAlign: "center",
                         }}
                     >
-                        <ul
+                        <a
+                            href="/personal"
                             style={{
-                                borderBottom: "1px solid rgb(235, 228, 228)",
+                                textDecoration: "none",
+                                color: "#606060",
                             }}
                         >
-                            Xem thông tin
-                        </ul>
+                            <ul
+                                style={{
+                                    borderBottom:
+                                        "1px solid rgb(235, 228, 228)",
+                                }}
+                            >
+                                Xem thông tin
+                            </ul>
+                        </a>
                         <ul
                             style={{
                                 borderBottom: "1px solid rgb(235, 228, 228)",
@@ -89,13 +102,23 @@ export default function NavBar() {
                         >
                             Đóng góp ý kiến
                         </ul>
-                        <ul
+                        <a
+                            onClick={handleOnClick}
+                            href="/"
                             style={{
-                                borderBottom: "1px solid rgb(235, 228, 228)",
+                                textDecoration: "none",
+                                color: "#606060",
                             }}
                         >
-                            Đăng xuất
-                        </ul>
+                            <ul
+                                style={{
+                                    borderBottom:
+                                        "1px solid rgb(235, 228, 228)",
+                                }}
+                            >
+                                Đăng xuất
+                            </ul>
+                        </a>
                     </div>
                 </div>
             </div>

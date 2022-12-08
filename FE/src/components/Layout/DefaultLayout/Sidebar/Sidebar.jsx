@@ -75,11 +75,12 @@ export default function Sidebar() {
                                         </span>
                                     </a>
                                 </li>
+
                                 <li className="nav-link">
                                     <a href="/chart">
                                         <i className="bx bx-bar-chart-alt-2 icon" />
                                         <span className="text nav-text">
-                                            Revenue
+                                            Statistic
                                         </span>
                                     </a>
                                 </li>
@@ -91,14 +92,16 @@ export default function Sidebar() {
                                         </span>
                                     </a>
                                 </li>
-                                <li className="nav-link">
-                                    <a href="/grade">
-                                        <i className="bx bx-pie-chart-alt icon" />
-                                        <span className="text nav-text">
-                                            Grade
-                                        </span>
-                                    </a>
-                                </li>
+                                {account?.Role === "Teacher" && (
+                                    <li className="nav-link">
+                                        <a href="/grade">
+                                            <i className="bx bx-pie-chart-alt icon" />
+                                            <span className="text nav-text">
+                                                Grade
+                                            </span>
+                                        </a>
+                                    </li>
+                                )}
                                 <li className="nav-link">
                                     <a href="/forum">
                                         <i className="bx bx-heart icon" />

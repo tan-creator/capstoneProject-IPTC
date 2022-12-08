@@ -26,6 +26,11 @@ export default function App() {
             .then((json) => {
                 localStorage.setItem("subjects", JSON.stringify(json));
             });
+        fetch("http://127.0.0.1:8000/api/post")
+            .then((response) => response.json())
+            .then((json) => {
+                localStorage.setItem("posts", JSON.stringify(json));
+            });
     };
     useEffect(() => {
         getApi();
