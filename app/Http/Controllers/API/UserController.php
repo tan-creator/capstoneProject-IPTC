@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Arr;
 
 class UserController extends Controller
 {
@@ -52,9 +53,11 @@ class UserController extends Controller
      */
     public function update(Request $request, $UserName)
     {
+        $data = Arr::except($request->all(), ['PassWord']);
+        
         return DB::table('Users')
                 ->where('UserName', $UserName)
-                ->update($request->all());
+                ->update($data);
     }
 
     /**

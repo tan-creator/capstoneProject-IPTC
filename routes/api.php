@@ -123,6 +123,7 @@ Route::controller(CostController::class)->group(function () {
 });
 
 Route::controller(AuthController::class)->group(function () {
-    Route::post('login', 'login');    
+    Route::post('login', 'login');  
+    Route::post('resetPassword', 'resetPassword');  
 });
 

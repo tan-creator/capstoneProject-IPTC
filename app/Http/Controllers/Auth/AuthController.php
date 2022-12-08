@@ -13,7 +13,6 @@ use Illuminate\Support\Facades\Hash;
 class AuthController extends Controller
 {
     public function login(Request $request) {
-        DB::unprepared('SET IDENTITY_INSERT Subject ON;');
         $Password = DB::table('Users')->select('PassWord')->where('UserName', $request->UserName)->get();
 
         if ($Password->count() > 0) {
@@ -25,5 +24,11 @@ class AuthController extends Controller
         } else {
             return response()->json(['statusCode' => 400, 'msg' => 'Tài khoản không tồn tại !']);
         }
+    }
+
+    public function resetPassword(Request $request) {
+        return DB::table('Users')
+                ->where('UserName', $request->UserName)
+                ->update(['PassWord', bcrypt($request->PassWord)]);
     }
 }
