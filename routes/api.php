@@ -14,6 +14,7 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\API\PointController;
 use App\Http\Controllers\API\RollCallController;
 use App\Http\Controllers\API\RiewviewLessionController;
+use App\Http\Controllers\API\CostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -113,6 +114,12 @@ Route::controller(RollCallController::class)->group(function () {
     Route::get('rollCall', 'index'); 
     Route::post('rollCall', 'store');   
     Route::delete('rollCall/{LikesID}', 'destroy');
+});
+
+Route::controller(CostController::class)->group(function () {
+    Route::get('cost', 'index'); 
+    Route::post('cost', 'store');   
+    Route::delete('cost/{CostID}', 'destroy');
 });
 
 Route::controller(AuthController::class)->group(function () {
