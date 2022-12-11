@@ -21,10 +21,10 @@ export default function App() {
             .then((json) => {
                 localStorage.setItem("students", JSON.stringify(json));
             });
-        fetch("http://127.0.0.1:8000/api/subject")
+        fetch("http://127.0.0.1:8000/api/notification")
             .then((response) => response.json())
             .then((json) => {
-                localStorage.setItem("subjects", JSON.stringify(json));
+                localStorage.setItem("notifications", JSON.stringify(json));
             });
         fetch("http://127.0.0.1:8000/api/post")
             .then((response) => response.json())

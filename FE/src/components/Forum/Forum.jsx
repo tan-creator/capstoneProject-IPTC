@@ -46,15 +46,15 @@ export default function Forum() {
                             </div>
                             <div className="box-icon">
                                 <div className="action">
-                                    <i class="bx bx-like"></i>
+                                    <i className="bx bx-like"></i>
                                     <h4>Like</h4>
                                 </div>
                                 <div className="action">
-                                    <i class="bx bx-comment-dots"></i>
+                                    <i className="bx bx-comment-dots"></i>
                                     <h4>Comment</h4>
                                 </div>
                                 <div className="action">
-                                    <i class="bx bx-share"></i>
+                                    <i className="bx bx-share"></i>
                                     <h4>Share</h4>
                                 </div>
                             </div>

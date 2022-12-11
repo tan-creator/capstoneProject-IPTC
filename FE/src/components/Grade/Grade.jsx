@@ -27,7 +27,7 @@ export default function Grade() {
                         DANH SÁCH SINH VIÊN
                     </span>
                 </div>
-                <table class="table table-hover">
+                <table className="table table-hover">
                     <thead>
                         <tr>
                             <th>StudentID</th>
