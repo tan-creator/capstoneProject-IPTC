@@ -1,5 +1,17 @@
-
 .box-forum {
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
+}
+.box-icon {
+    display: flex;
+    justify-content: space-between;
+}
+.action {
+    display: flex;
+    font-size: 24px;
+    padding-top: 15px;
+}
+.action h4 {
+    font-size: 20px;
+    padding-left: 10px;
 }
