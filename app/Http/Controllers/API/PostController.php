@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use Illuminate\Support\Facades\DB;
+use App\Http\Resources\PostResource;
 
 class PostController extends Controller
 {
@@ -16,7 +17,9 @@ class PostController extends Controller
      */
     public function index()
     {
-        return Post::all();
+        $posts = PostResource::collection(Post::all());
+        return $posts;
+        // return Post::all();
     }
 
     /**
