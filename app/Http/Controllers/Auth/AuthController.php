@@ -29,6 +29,6 @@ class AuthController extends Controller
     public function resetPassword(Request $request) {
         return DB::table('Users')
                 ->where('UserName', $request->UserName)
-                ->update(['PassWord', bcrypt($request->PassWord)]);
+                ->update(['PassWord' => bcrypt($request->PassWord)]);
     }
 }
