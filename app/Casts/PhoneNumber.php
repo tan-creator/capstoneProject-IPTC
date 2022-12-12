@@ -18,7 +18,7 @@ class PhoneNumber implements CastsAttributes
      */
     public function get($model, string $key, $value, array $attributes)
     {
-        return Str::replaceFirst(['84'], '0', $value);
+        return Str::replaceFirst('84', '0', $value);
     }
 
     /**
