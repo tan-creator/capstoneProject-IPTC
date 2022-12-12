@@ -2,16 +2,54 @@
     display: flex;
     flex-direction: column;
 }
+.format-icon {
+    display: flex;
+    justify-content: flex-end;
+    padding-bottom: 10px;
+}
+.first {
+    padding-right: 400px;
+}
 .box-icon {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
 }
-.action {
+.action1 {
+    font-family: "Poppins", sans-serif;
     display: flex;
-    font-size: 24px;
+    font-size: 20px;
     padding-top: 15px;
 }
-.action h4 {
-    font-size: 20px;
+
+.action1 i {
+    padding-right: 10px;
+}
+.action1 h4 {
+    font-size: 18px;
     padding-left: 10px;
+}
+
+.action1 {
+    font-family: "Poppins", sans-serif;
+    display: flex;
+    font-size: 20px;
+    padding-top: 15px;
+}
+
+.action i {
+    padding-right: 10px;
+}
+.action h4 {
+    font-size: 18px;
+    padding-left: 10px;
+}
+.action:hover {
+    background-color: #dfdddd;
+}
+.action {
+    font-family: "Poppins", sans-serif;
+    border-radius: 7px;
+    display: flex;
+    font-size: 20px;
+    padding: 10px;
 }

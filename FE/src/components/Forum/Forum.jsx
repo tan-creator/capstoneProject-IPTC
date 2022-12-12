@@ -46,19 +46,38 @@ export default function Forum() {
                                     />
                                 </div>
                             </div>
-                            
+                            <div
+                                className="format-icon"
+                                style={{
+                                    borderBottom:
+                                        "1px solid rgb(235, 228, 228)",
+                                }}
+                            >
+                                <div className="action1 first">
+                                    <i class="bx bxs-like "></i>
+                                    <h5>29K</h5>
+                                </div>
+                                <div className="action1">
+                                    <i class="bx bxs-chat"></i>
+                                    <h5>1,4K Lượt thích</h5>
+                                </div>
+                                <div className="action1">
+                                    <i class="bx bxs-share"></i>
+                                    <h5>118 Lượt chia sẻ</h5>
+                                </div>
+                            </div>
                             <div className="box-icon">
                                 <div className="action">
                                     <i className="bx bx-like"></i>
-                                    <h4>Like</h4>
+                                    <h4>Thích</h4>
                                 </div>
                                 <div className="action">
-                                    <i className="bx bx-comment-dots"></i>
-                                    <h4>Comment</h4>
+                                    <i class="bx bx-chat"></i>
+                                    <h4>Bình luận</h4>
                                 </div>
                                 <div className="action">
                                     <i className="bx bx-share"></i>
-                                    <h4>Share</h4>
+                                    <h4>Chia sẻ</h4>
                                 </div>
                             </div>
                         </div>
