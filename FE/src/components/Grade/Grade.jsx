@@ -24,16 +24,16 @@ export default function Grade() {
                 >
                     <span>
                         <i className="bx bxs-notepad" />
-                        DANH SÁCH SINH VIÊN
+                        DANH SÁCH HỌC SINH
                     </span>
                 </div>
                 <table className="table table-hover">
                     <thead>
                         <tr>
-                            <th>StudentID</th>
-                            <th>ParentUserName</th>
-                            <th>ClassID</th>
-                            <th>StudentName</th>
+                            <th>Mã học sinh</th>
+                            <th>Tên tài khoản</th>
+                            <th>Lớp</th>
+                            <th>Tên học sinh</th>
                         </tr>
                     </thead>
                     <tbody>
