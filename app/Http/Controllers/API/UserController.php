@@ -21,12 +21,6 @@ class UserController extends Controller
         return User::all();
         
     }
-
-    public function testIndex()
-    {
-        return Str::replace(['84', '89'], '0', 89476);
-        
-    }
   
     /**
      * Store a newly created resource in storage.

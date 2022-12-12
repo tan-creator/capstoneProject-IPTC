@@ -23,7 +23,6 @@ Route::get('/', function () {
 });
 // Route::get('/subject', [SubjectController::class, 'show']);
 Route::get('student', [StudentController::class, 'index']);
-Route::get('user', [UserController::class, 'testIndex']);
 Route::get('comment', [CommentController::class, 'index']);
 
 
