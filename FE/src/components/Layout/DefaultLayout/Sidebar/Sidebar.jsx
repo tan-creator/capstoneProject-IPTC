@@ -111,7 +111,7 @@ export default function Sidebar() {
                                     </a>
                                 </li>
                                 <li className="nav-link">
-                                    <a href="#">
+                                    <a href="/schedule">
                                         <i className="bx bx-wallet icon" />
                                         <span className="text nav-text">
                                             Schedule
