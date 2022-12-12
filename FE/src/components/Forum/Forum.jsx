@@ -13,7 +13,7 @@ export default function Forum() {
             <div className="container">
                 <Sidebar />
                 <div className="forum-content" style={{ width: "800px" }}>
-                    {posts.map((post) => (
+                    {posts.data.map((post) => (
                         <div className="box" key={post.PostID}>
                             <div className="box-profile">
                                 <img
@@ -29,7 +29,7 @@ export default function Forum() {
                                         <i className="bx bxs-check-circle" />
                                     </div>
                                     <div className="box-user-desc">
-                                        {post.BirthDay}
+                                        {post.PostTime}
                                     </div>
                                 </div>
                             </div>
@@ -40,10 +40,13 @@ export default function Forum() {
                                 <div className="box-subtitle">
                                     <img
                                         src={post.PostImage}
-                                        style={{ width: "800px" }}
+                                        style={{
+                                            width: "700px",
+                                        }}
                                     />
                                 </div>
                             </div>
+                            
                             <div className="box-icon">
                                 <div className="action">
                                     <i className="bx bx-like"></i>
