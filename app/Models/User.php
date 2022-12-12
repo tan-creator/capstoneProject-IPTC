@@ -32,7 +32,7 @@ class User extends Authenticatable
     ];
 
     protected $casts = [
-        'BirthDay' => 'date:Y-m-d',
+        'BirthDay' => 'date:d-m-Y',
     ];
 
     /**
