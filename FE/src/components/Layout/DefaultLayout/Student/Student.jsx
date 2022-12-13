@@ -23,7 +23,7 @@ export default function Student() {
         const pointList = await result.data;
         return pointList;
     };
-    
+
     const handleSubject = async () => {
         const subjectList = JSON.parse(localStorage.getItem("subjects"));
         const pointList = await getAllPoint();
@@ -72,7 +72,7 @@ export default function Student() {
                         [name]: "",
                     };
                 });
-                return alert.error(name + " Is Must be greater than 0");
+                return alert.error(" Điểm phải lớn hơn 0");
             } else if (value > 10) {
                 setPoint((prevStte) => {
                     return {
@@ -80,7 +80,7 @@ export default function Student() {
                         [name]: "",
                     };
                 });
-                return alert.error(name + " Is Must be smaller than 10");
+                return alert.error(" Điểm phải nhỏ hơn 10");
             }
         }
 
@@ -130,11 +130,11 @@ export default function Student() {
                 </div>
                 <div
                     className="grade-table"
-                    style={{ padding: "30px", fontSize: "15px" }}
+                    style={{ fontSize: "16px", margin: 10 }}
                 >
                     <button
                         type="button"
-                        class="btn btn-secondary"
+                        className="btn btn-secondary"
                         data-toggle="modal"
                         data-target="#exampleModal"
                         style={{
@@ -146,68 +146,70 @@ export default function Student() {
                         Nhập điểm
                     </button>
                     <div
-                        class="modal fade"
+                        className="modal fade"
                         id="exampleModal"
-                        tabindex="-1"
+                        tabIndex="-1"
                         role="dialog"
                         aria-labelledby="exampleModalLabel"
                         aria-hidden="true"
                     >
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-body">
+                        <div className="modal-dialog" role="document">
+                            <div className="modal-content">
+                                <div className="modal-body">
                                     <form action="" method="POST" role="form">
-                                        <legend>Form title</legend>
+                                        <legend>Bảng nhập điểm</legend>
 
-                                        <div class="form-group">
-                                            <label for="">Final</label>
-                                            <input
-                                                name="Final"
-                                                type="number"
-                                                class="form-control"
-                                                id=""
-                                                placeholder="Input Final"
-                                                onChange={handleOnChange}
-                                                value={point.Final}
-                                            />
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="">Midterm</label>
+                                        <div className="form-group">
+                                            <label htmlFor="">Điểm miệng</label>
                                             <input
                                                 type="number"
-                                                class="form-control"
-                                                name="Midterm"
-                                                placeholder="Input Midterm"
-                                                value={point.Midterm}
-                                                onChange={handleOnChange}
-                                            />
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="">Oral_1</label>
-                                            <input
-                                                type="number"
-                                                class="form-control"
+                                                className="form-control"
                                                 name="Oral_1"
-                                                placeholder="Input Oral_1"
+                                                placeholder="Nhập điểm miệng"
                                                 value={point.Oral_1}
                                                 onChange={handleOnChange}
                                             />
                                         </div>
-                                        <div class="form-group">
-                                            <label for="">Quiz1</label>
+                                        <div className="form-group">
+                                            <label htmlFor="">
+                                                Điểm 15 phút
+                                            </label>
                                             <input
                                                 type="number"
-                                                class="form-control"
+                                                className="form-control"
                                                 name="Quiz1"
-                                                placeholder="Input Quiz1"
+                                                placeholder="Nhập điểm 15 phút"
                                                 value={point.Quiz1}
                                                 onChange={handleOnChange}
                                             />
                                         </div>
-                                        <div class="form-group">
+                                        <div className="form-group">
+                                            <label htmlFor="">Giữa kì</label>
+                                            <input
+                                                type="number"
+                                                className="form-control"
+                                                name="Midterm"
+                                                placeholder="Nhập điểm giữa kì"
+                                                value={point.Midterm}
+                                                onChange={handleOnChange}
+                                            />
+                                        </div>
+                                        <div className="form-group">
+                                            <label htmlFor="">Cuối kì</label>
+                                            <input
+                                                name="Final"
+                                                type="number"
+                                                className="form-control"
+                                                id=""
+                                                placeholder="Nhập điểm cuối kì"
+                                                onChange={handleOnChange}
+                                                value={point.Final}
+                                            />
+                                        </div>
+                                        <div className="form-group">
                                             <select
                                                 id="input"
-                                                class="form-control"
+                                                className="form-control"
                                                 required="required"
                                                 name="SubjectID"
                                                 onChange={handleOnChange}
@@ -229,39 +231,37 @@ export default function Student() {
                                         </div>
                                     </form>
                                 </div>
-                                <div class="modal-footer">
+                                <div className="modal-footer">
                                     <button
+                                        style={{ fontSize: 14 }}
                                         type="button"
-                                        class="btn btn-secondary"
+                                        className="btn btn-secondary"
                                         data-dismiss="modal"
                                     >
-                                        Close
+                                        Đóng
                                     </button>
                                     <button
+                                        style={{ fontSize: 14 }}
                                         onClick={handleSubmit}
                                         type="button"
-                                        class="btn btn-primary"
+                                        className="btn btn-primary"
                                     >
-                                        Create Point
+                                        Tạo bảng điểm
                                     </button>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <table class="table table-bordered table-hover p-5">
+                    <table className="table table-bordered table-striped table-hover p-5">
                         <thead>
                             <tr>
                                 <th>Môn</th>
-                                <th>Final</th>
-                                <th>Midterm</th>
-                                <th>Oral_1</th>
-                                <th>Oral_2</th>
-                                <th>Oral_3</th>
-                                <th>Quiz1</th>
-                                <th>Quiz2</th>
-                                <th>Quiz3</th>
-                                <th>TBM</th>
-                                <th>ACTIONS</th>
+                                <th colSpan="3">Điểm miệng</th>
+                                <th colSpan="3">Kiểm tra 15 phút</th>
+                                <th>Giữa kì</th>
+                                <th>Cuối kì</th>
+                                <th>Trung bình môn</th>
+                                <th>Hành động</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -274,19 +274,20 @@ export default function Student() {
                                         {subject?.points?.map((p) => {
                                             return (
                                                 <>
-                                                    <td>{p?.Final}</td>
-                                                    <td>{p?.Midterm}</td>
-                                                    <td>{p?.Oral_1}</td>
-                                                    <td>{p?.Oral_2}</td>
-                                                    <td>{p?.Oral_3}</td>
                                                     <td>{p?.Quiz1}</td>
                                                     <td>{p?.Quiz2}</td>
                                                     <td>{p?.Quiz3}</td>
+                                                    <td>{p?.Oral_1}</td>
+                                                    <td>{p?.Oral_2}</td>
+                                                    <td>{p?.Oral_3}</td>
+                                                    <td>{p?.Midterm}</td>
+
+                                                    <td>{p?.Final}</td>
                                                     <td>10</td>
                                                     <td>
                                                         <button
                                                             type="button"
-                                                            class="btn btn-success"
+                                                            className="btn btn-success"
                                                         >
                                                             UPDATE
                                                         </button>{" "}

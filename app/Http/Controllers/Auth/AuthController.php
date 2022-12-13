@@ -17,7 +17,7 @@ class AuthController extends Controller
 
         if ($Password->count() > 0) {
             if(Hash::check($request->PassWord, $Password[0]->PassWord)) {
-                return DB::table('Users')->where('UserName', $request->UserName)->get();
+                return User::where('UserName', $request->UserName)->get();
             } else {
                 return response()->json(['statusCode' => 400, 'msg' => 'Sai mật khẩu, mời nhập lại!']);
             }
@@ -29,6 +29,6 @@ class AuthController extends Controller
     public function resetPassword(Request $request) {
         return DB::table('Users')
                 ->where('UserName', $request->UserName)
-                ->update(['PassWord', bcrypt($request->PassWord)]);
+                ->update(['PassWord' => bcrypt($request->PassWord)]);
     }
 }

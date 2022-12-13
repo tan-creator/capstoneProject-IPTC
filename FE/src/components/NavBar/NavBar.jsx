@@ -1,7 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./NavBar.css";
 export default function NavBar() {
+    const [account, setAccount] = useState({});
     const handleOnClick = () => {
         alert("Bạn có muốn đăng xuất?");
     };
@@ -11,7 +12,10 @@ export default function NavBar() {
             const toggle = document.querySelector("#collapseExample");
             toggle.classList.remove("show");
         };
+        const user = JSON.parse(localStorage.getItem("account"));
+        setAccount({ ...user });
     }, []);
+
     return (
         <div>
             <div className="header">
@@ -27,10 +31,7 @@ export default function NavBar() {
                 <div className="header-right">
                     <div className="profile-div">
                         <img
-                            src={
-                                window.location.origin +
-                                "/img/profilepic@2x.png"
-                            }
+                            src={account.Images}
                             className="profile-pic-icon"
                             alt=""
                             type="button"
@@ -42,7 +43,7 @@ export default function NavBar() {
                         <img
                             className="vector-icon"
                             alt=""
-                            src="./img/vector.svg"
+                            src={window.location.origin + "/img/vector.svg"}
                         />
                     </div>
                     <img
@@ -69,16 +70,28 @@ export default function NavBar() {
                     <div
                         className=""
                         style={{
-                            width: "200px",
+                            width: "250px",
                             background: "rgba(255, 255, 255, 1)",
                             borderRadius: "6px",
-                            marginTop: 20,
-                            marginRight: 20,
+                            marginTop: 30,
+                            marginRight: 10,
+                            marginLeft: 10,
                             fontSize: "16px",
                             color: "#606060",
                             textAlign: "center",
                         }}
                     >
+                        <ul
+                            style={{
+                                borderBottom: "1px solid rgb(235, 228, 228)",
+                                paddingTop: 30,
+                            }}
+                        >
+                            Xin Chào
+                            <p>
+                                <strong>{account.Names}</strong>
+                            </p>
+                        </ul>
                         <a
                             href="/personal"
                             style={{

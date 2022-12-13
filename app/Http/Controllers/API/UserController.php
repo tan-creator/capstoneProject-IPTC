@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
@@ -18,7 +19,6 @@ class UserController extends Controller
     public function index()
     {
         return User::all();
-        
     }
   
     /**

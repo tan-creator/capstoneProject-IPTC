@@ -33,6 +33,7 @@ use App\Http\Controllers\API\CostController;
 
 Route::controller(StudentController::class)->group(function () {
     Route::get('student', 'index');
+    Route::get('student/{ClassID}', 'show');
     Route::post('student', 'store');
     Route::put('student/{id}', 'update');
     Route::delete('student/{id}', 'destroy'); 

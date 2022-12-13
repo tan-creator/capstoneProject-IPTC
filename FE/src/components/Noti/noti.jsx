@@ -5,16 +5,20 @@ import Sidebar from "../Layout/DefaultLayout/Sidebar/Sidebar";
 import { getNotification } from "./../../helpers/getUser";
 import "./noti.css";
 export default function noti() {
-    const [notis, set_notis] = useState([]);
+    // const [notis, set_notis] = useState([]);
+    const [account, setAccount] = useState({});
     useEffect(() => {
-        axios("http://127.0.0.1:8000/api/notification")
-            .then((response) => response.data)
-            .then((json) => {
-                console.log(json);
-                set_notis([...json]);
-            });
+        // axios("http://127.0.0.1:8000/api/notification")
+        //     .then((response) => response.data)
+        //     .then((json) => {
+        //         console.log(json);
+        //         set_notis([...json]);
+        //     });
+        const user = JSON.parse(localStorage.getItem("account"));
+        setAccount({ ...user });
     }, []);
-    // const notis = getNotification();
+    const notis = getNotification();
+
     return (
         <div>
             <NavBar />
@@ -28,6 +32,7 @@ export default function noti() {
                         </span>
                     </div>
                     {notis.map(function (noti) {
+                        //(noti?.ParentUserName == account?.UserName)
                         return (
                             <div className="box" key={noti.Phone}>
                                 <div className="box-profile">
