@@ -116,7 +116,15 @@ export default function Sidebar() {
                                     <a href="/forum">
                                         <i className="bx bx-heart icon" />
                                         <span className="text nav-text">
-                                            Diễn đàn
+                                            Forum
+                                        </span>
+                                    </a>
+                                </li>
+                                <li className="nav-link">
+                                    <a href="/schedule">
+                                        <i className="bx bx-wallet icon" />
+                                        <span className="text nav-text">
+                                            Schedule
                                         </span>
                                     </a>
                                 </li>

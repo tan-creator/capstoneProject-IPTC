@@ -12,7 +12,10 @@ import Dashboard from "../components/Dashboard/Dashboard";
 import NavBar from "../components/NavBar/NavBar";
 import Grade from "../components/Grade/Grade";
 import Student from "../components/Layout/DefaultLayout/Student/Student";
+
 import Checkpoint from "../components/Checkpoint/Checkpoint";
+
+import Schedule from "../components/Schedule/Schedule";
 // import Sidebar from "../components/Sidebar/Sidebar";
 const publicRoutes = [
     { path: "/", component: Login },
@@ -31,6 +34,7 @@ const publicRoutes = [
     { path: "/grade", component: Grade },
     { path: "/student/:id", component: Student },
     { path: "/checkpoint", component: Checkpoint },
+    { path: "/schedule", component: Schedule },
 ];
 
 const privateRoutes = [];
