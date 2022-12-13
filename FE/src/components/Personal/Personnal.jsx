@@ -36,7 +36,7 @@ export default function Personnal() {
 
                     <div className="info-basic">
                         <div className="info">
-                            <div className="txtcel1">Tên Học sinh:</div>
+                            <div className="txtcel1">Tên:</div>
                             <div className="txtcel2" id="txtName">
                                 <strong>{account.Names}</strong>
                             </div>
@@ -46,7 +46,7 @@ export default function Personnal() {
                             </div>
                             <div className="txtcel1">Vai trò:</div>
                             <div className="txtcel2" style={{}}>
-                                {account.Positions}
+                                {account.Role}
                             </div>
                             <div className="txtcel1">Lớp:</div>
                             <div className="txtcel2">5</div>

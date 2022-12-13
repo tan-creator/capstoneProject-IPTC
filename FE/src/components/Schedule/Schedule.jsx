@@ -9,7 +9,7 @@ import "./schedule.css"
 function Shedule () {
     const [subject, setSubject] = useState([]);
     const [user, setUser] = useState([]);
-    const [clas, setClass] = useState([]);
+    const [classes, setClass] = useState([]);
     const [student, setStudent] = useState([])
 
     useEffect(() => {
@@ -20,7 +20,12 @@ function Shedule () {
         const users = JSON.parse(localStorage.getItem("account"));
         setUser(users)
 
-        
+        fetch("http://127.0.0.1:8000/api/class")
+            .then (response => response.json())
+            .then(json => {
+                setClass(json)
+            })
+            .catch(error => console.log('error',error));
 
         fetch("http://127.0.0.1:8000/api/student")
             .then (response => response.json())
@@ -33,18 +38,6 @@ function Shedule () {
 
     function getSubject () {
         const arrLichHoc = [];
-        const obj = {
-            IdTeacher: "",
-            UserName: "",
-            Name: "",
-            SubjectName: "",
-            SubjectTime : "",
-            DateOfWeek: "",
-            SubjectID: "",
-            ClassID: "",
-            ClassName: "",
-            SchoolYear: ""
-        }
         var idCl = "";
 
         if (user.Role == "Teacher") {
@@ -53,9 +46,13 @@ function Shedule () {
                     arrLichHoc.push(sub);
                 }
             })
-            // arrLichHoc.map((arr) => {
-
-            // })
+            arrLichHoc.map((arr) => {
+                classes.map((cls) => {
+                    if (arr.ClassID === cls.ClassID) {
+                        arr.ClassName = cls.ClassName;
+                    }
+                })
+            })
         }
 
         if (user.Role == "Parent") {
@@ -167,6 +164,7 @@ function Shedule () {
                                                     <tr >
                                                         <div className="box-schedule" style={{backgroundColor:color}}>
                                                             <p>{data?.SubjectName}</p>
+                                                            <p>{data?.ClassName}</p>
                                                         </div>
                                                     </tr>
                                                 )
@@ -180,6 +178,7 @@ function Shedule () {
                                                     <tr >
                                                         <div className="box-schedule" style={{backgroundColor:color}}>
                                                             <p>{data?.SubjectName}</p>
+                                                            <p>{data?.ClassName}</p>
                                                         </div>
                                                     </tr>
                                                 )
@@ -192,6 +191,7 @@ function Shedule () {
                                                     <tr >
                                                         <div className="box-schedule" style={{backgroundColor:color}}>
                                                             <p>{data?.SubjectName}</p>
+                                                            <p>{data?.ClassName}</p>
                                                         </div>
                                                     </tr>
                                                 )
@@ -204,6 +204,7 @@ function Shedule () {
                                                     <tr >
                                                         <div className="box-schedule" style={{backgroundColor:color}}>
                                                             <p>{data?.SubjectName}</p>
+                                                            <p>{data?.ClassName}</p>
                                                         </div>
                                                     </tr>
                                                 )
@@ -216,6 +217,7 @@ function Shedule () {
                                                     <tr >
                                                         <div className="box-schedule" style={{backgroundColor:color}}>
                                                             <p>{data?.SubjectName}</p>
+                                                            <p>{data?.ClassName}</p>
                                                         </div>
                                                     </tr>
                                                 )
@@ -228,6 +230,7 @@ function Shedule () {
                                                     <tr >
                                                         <div className="box-schedule" style={{backgroundColor:color}}>
                                                             <p>{data?.SubjectName}</p>
+                                                            <p>{data?.ClassName}</p>
                                                         </div>
                                                     </tr>
                                                 )
@@ -240,6 +243,7 @@ function Shedule () {
                                                     <tr >
                                                         <div className="box-schedule" style={{backgroundColor:color}}>
                                                             <p>{data?.SubjectName}</p>
+                                                            <p>{data?.ClassName}</p>
                                                         </div>
                                                     </tr>
                                                 )
