@@ -3,9 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "./NavBar.css";
 export default function NavBar() {
     const [account, setAccount] = useState({});
-    const handleOnClick = () => {
-        alert("Bạn có muốn đăng xuất?");
-    };
+
     useEffect(() => {
         const body = document.querySelector("body");
         body.onclick = () => {
@@ -116,7 +114,6 @@ export default function NavBar() {
                             Đóng góp ý kiến
                         </ul>
                         <a
-                            onClick={handleOnClick}
                             href="/"
                             style={{
                                 textDecoration: "none",

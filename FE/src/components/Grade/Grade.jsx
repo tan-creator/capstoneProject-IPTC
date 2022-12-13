@@ -13,7 +13,47 @@ export default function Grade() {
         <div>
             <NavBar />
             <Sidebar />
-
+            {/* <div className="grade">
+                <div
+                    className="annouce"
+                    style={{
+                        marginTop: 50,
+                        marginBottom: 50,
+                    }}
+                >
+                    <span>
+                        <i className="bx bxs-notepad" />
+                        DANH SÁCH LỚP ĐANG DẠY
+                    </span>
+                </div>
+                <div
+                    class="btn-group"
+                    role="group"
+                    aria-label="Basic example"
+                    style={{
+                        width: 500,
+                        display: "flex",
+                        justifyContent: "center",
+                    }}
+                >
+                    <button
+                        type="button"
+                        class="btn btn-secondary"
+                        // onClick={handleClick}
+                    >
+                        6A
+                    </button>
+                    <button type="button" class="btn btn-secondary">
+                        6B
+                    </button>
+                    <button type="button" class="btn btn-secondary">
+                        6C
+                    </button>
+                    <button type="button" class="btn btn-secondary">
+                        6D
+                    </button>
+                </div>
+            </div> */}
             <div className="grade">
                 <div
                     className="annouce"

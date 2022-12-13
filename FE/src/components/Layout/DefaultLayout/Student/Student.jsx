@@ -14,7 +14,11 @@ export default function Student() {
         Final: "",
         Midterm: "",
         Quiz1: "",
+        Quiz2: "",
+        Quiz3: "",
         Oral_1: "",
+        Oral_2: "",
+        Oral_3: "",
         SubjectID: "",
     });
     const id = parseInt(useParams().id);
@@ -96,10 +100,6 @@ export default function Student() {
             const obj = {
                 ...point,
                 StudentID: id,
-                Oral_2: 6.5,
-                Oral_3: 8,
-                Quiz2: 0,
-                Quiz3: 0,
             };
             const result = await axios.post(
                 "http://127.0.0.1:8000/api/Point",
@@ -111,11 +111,6 @@ export default function Student() {
         } catch (error) {
             alert.error("Create Point Error: ");
         }
-        // .then(() => {
-        // })
-        // .catch(() => {
-        //     alert.error("Create Point Error: ");
-        // });
     };
     return (
         <div>
@@ -160,7 +155,9 @@ export default function Student() {
                                         <legend>Bảng nhập điểm</legend>
 
                                         <div className="form-group">
-                                            <label htmlFor="">Điểm miệng</label>
+                                            <label htmlFor="">
+                                                Điểm miệng Lần 1
+                                            </label>
                                             <input
                                                 type="number"
                                                 className="form-control"
@@ -172,7 +169,33 @@ export default function Student() {
                                         </div>
                                         <div className="form-group">
                                             <label htmlFor="">
-                                                Điểm 15 phút
+                                                Điểm miệng Lần 2
+                                            </label>
+                                            <input
+                                                type="number"
+                                                className="form-control"
+                                                name="Oral_2"
+                                                placeholder="Nhập điểm miệng"
+                                                value={point.Oral_2}
+                                                onChange={handleOnChange}
+                                            />
+                                        </div>
+                                        <div className="form-group">
+                                            <label htmlFor="">
+                                                Điểm miệng Lần 3
+                                            </label>
+                                            <input
+                                                type="number"
+                                                className="form-control"
+                                                name="Oral_3"
+                                                placeholder="Nhập điểm miệng"
+                                                value={point.Oral_3}
+                                                onChange={handleOnChange}
+                                            />
+                                        </div>
+                                        <div className="form-group">
+                                            <label htmlFor="">
+                                                Điểm 15 phút Lần 1
                                             </label>
                                             <input
                                                 type="number"
@@ -180,6 +203,32 @@ export default function Student() {
                                                 name="Quiz1"
                                                 placeholder="Nhập điểm 15 phút"
                                                 value={point.Quiz1}
+                                                onChange={handleOnChange}
+                                            />
+                                        </div>
+                                        <div className="form-group">
+                                            <label htmlFor="">
+                                                Điểm 15 phút Lần 2
+                                            </label>
+                                            <input
+                                                type="number"
+                                                className="form-control"
+                                                name="Quiz2"
+                                                placeholder="Nhập điểm 15 phút"
+                                                value={point.Quiz2}
+                                                onChange={handleOnChange}
+                                            />
+                                        </div>
+                                        <div className="form-group">
+                                            <label htmlFor="">
+                                                Điểm 15 phút Lần 3
+                                            </label>
+                                            <input
+                                                type="number"
+                                                className="form-control"
+                                                name="Quiz3"
+                                                placeholder="Nhập điểm 15 phút"
+                                                value={point.Quiz3}
                                                 onChange={handleOnChange}
                                             />
                                         </div>
@@ -281,9 +330,18 @@ export default function Student() {
                                                     <td>{p?.Oral_2}</td>
                                                     <td>{p?.Oral_3}</td>
                                                     <td>{p?.Midterm}</td>
-
                                                     <td>{p?.Final}</td>
-                                                    <td>10</td>
+                                                    <td>
+                                                        {(p?.Quiz1 +
+                                                            p?.Quiz2 +
+                                                            p?.Quiz3 +
+                                                            p?.Oral_1 +
+                                                            p?.Oral_2 +
+                                                            p?.Oral_3 +
+                                                            p?.Midterm +
+                                                            p?.Final) /
+                                                            8}
+                                                    </td>
                                                     <td>
                                                         <button
                                                             type="button"

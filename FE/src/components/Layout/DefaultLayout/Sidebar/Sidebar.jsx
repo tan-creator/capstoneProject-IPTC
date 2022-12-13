@@ -71,7 +71,7 @@ export default function Sidebar() {
                                     <a href="/dashboard">
                                         <i className="bx bx-home-alt icon" />
                                         <span className="text nav-text">
-                                            Dashboard
+                                            Trang chủ
                                         </span>
                                     </a>
                                 </li>
@@ -80,7 +80,7 @@ export default function Sidebar() {
                                     <a href="/chart">
                                         <i className="bx bx-bar-chart-alt-2 icon" />
                                         <span className="text nav-text">
-                                            Statistic
+                                            Thống kê
                                         </span>
                                     </a>
                                 </li>
@@ -88,7 +88,7 @@ export default function Sidebar() {
                                     <a href="/noti">
                                         <i className="bx bx-bell icon" />
                                         <span className="text nav-text">
-                                            Notifications
+                                            Thông báo
                                         </span>
                                     </a>
                                 </li>
@@ -97,7 +97,17 @@ export default function Sidebar() {
                                         <a href="/grade">
                                             <i className="bx bx-pie-chart-alt icon" />
                                             <span className="text nav-text">
-                                                Grade
+                                                Nhập điểm
+                                            </span>
+                                        </a>
+                                    </li>
+                                )}
+                                {account?.Role === "Parent" && (
+                                    <li className="nav-link">
+                                        <a href="/checkpoint">
+                                            <i className="bx bx-pie-chart-alt icon" />
+                                            <span className="text nav-text">
+                                                Xem điểm
                                             </span>
                                         </a>
                                     </li>
@@ -106,18 +116,20 @@ export default function Sidebar() {
                                     <a href="/forum">
                                         <i className="bx bx-heart icon" />
                                         <span className="text nav-text">
-                                            Forum
+                                            Diễn đàn
                                         </span>
                                     </a>
                                 </li>
-                                <li className="nav-link">
-                                    <a href="#">
-                                        <i className="bx bx-wallet icon" />
-                                        <span className="text nav-text">
-                                            Schedule
-                                        </span>
-                                    </a>
-                                </li>
+                                {account?.Role === "Teacher" && (
+                                    <li className="nav-link">
+                                        <a href="#">
+                                            <i className="bx bx-wallet icon" />
+                                            <span className="text nav-text">
+                                                Lịch dạy
+                                            </span>
+                                        </a>
+                                    </li>
+                                )}
                             </ul>
                         </div>
                         <div className="bottom-content">
@@ -125,7 +137,7 @@ export default function Sidebar() {
                                 <a href="/">
                                     <i className="bx bx-log-out icon" />
                                     <span className="text nav-text">
-                                        Logout
+                                        Đăng xuất
                                     </span>
                                 </a>
                             </li>
@@ -134,9 +146,7 @@ export default function Sidebar() {
                                     <i className="bx bx-moon icon moon" />
                                     <i className="bx bx-sun icon sun" />
                                 </div>
-                                <span className="mode-text text">
-                                    Dark mode
-                                </span>
+                                <span className="mode-text text">Đổi màu</span>
                                 <div className="toggle-switch">
                                     <span className="switch" />
                                 </div>
