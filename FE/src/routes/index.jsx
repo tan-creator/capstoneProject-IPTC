@@ -13,6 +13,8 @@ import NavBar from "../components/NavBar/NavBar";
 import Grade from "../components/Grade/Grade";
 import Student from "../components/Layout/DefaultLayout/Student/Student";
 import Schedule from "../components/Schedule/Schedule";
+import Form from "../components/Form/Form";
+import Cost from "../components/Cost/Cost";
 // import Sidebar from "../components/Sidebar/Sidebar";
 const publicRoutes = [
     { path: "/", component: Login },
@@ -30,7 +32,9 @@ const publicRoutes = [
     { path: "/navbar", component: NavBar },
     { path: "/grade", component: Grade },
     { path: "/student/:id", component: Student },
-    { path: "/schedule", component: Schedule}
+    { path: "/schedule", component: Schedule},
+    { path: "/form", component: Form},
+    { path: "/cost", component: Cost},
 ];
 
 const privateRoutes = [];

@@ -1,0 +1,44 @@
+.cost-content {
+    width: 1110px;
+    position: relative;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 30px;
+    min-height: 200px;
+    margin-top: 83px;
+    background-color: #fff;
+    margin-left: 19px;
+}
+
+p {
+    font-size: 14px;
+}
+
+.head-cost-content h2 {
+    margin: 0;
+    line-height: 45px;
+}
+
+.head-cost-content button {
+    margin: 0;
+    margin-left: 60px;
+    color: #fff;
+    padding: 10px;
+    font-size: 16px;
+    line-height: 20px;
+}
+
+label {
+    font-size: 16px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+/* input[type=number] {
+    -moz-appearance:textfield;
+    /* Firefox
+}  */

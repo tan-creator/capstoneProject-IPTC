@@ -20,8 +20,7 @@ export default function Grade() {
                     style={{
                         marginTop: 50,
                         marginBottom: 50,
-                    }}
-                >
+                    }}>
                     <span>
                         <i className="bx bxs-notepad" />
                         DANH SÁCH HỌC SINH

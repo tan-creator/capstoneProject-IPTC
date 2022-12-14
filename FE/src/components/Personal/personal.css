@@ -49,3 +49,11 @@
     line-height: 25px;
     color: #464646;
 }
+
+.form-update {
+    width: 400px;
+    height: 400px;
+    position: absolute;
+    top: 100px;
+    left: 200px;
+}

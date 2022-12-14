@@ -11,18 +11,20 @@ export default function Personnal() {
         axios("http://127.0.0.1:8000/api/student")
             .then((response) => response.data)
             .then((json) => {
-                console.log(json);
+                // console.log(json);
                 SetPerson([...json]);
             });
         axios("http://127.0.0.1:8000/api/user")
             .then((response) => response.data)
             .then((json) => {
-                console.log(json);
+                // console.log(json);
                 SetUser([...json]);
             });
         const user = JSON.parse(localStorage.getItem("account"));
         setAccount({ ...user });
     }, []);
+
+
 
     return (
         <div>
@@ -75,3 +77,4 @@ export default function Personnal() {
         </div>
     );
 }
+

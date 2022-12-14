@@ -112,9 +112,34 @@ export default function Sidebar() {
                                 </li>
                                 <li className="nav-link">
                                     <a href="/schedule">
+                                        <i className="bx bx-calendar-alt icon" />
+                                        {account?.Role === "Teacher" && (
+                                            <span className="text nav-text">
+                                                Lịch dạy
+                                            </span>
+                                        )}
+                                        {account?.Role === "Parent" && (
+                                            <span className="text nav-text">
+                                                Lịch học
+                                            </span>
+                                        )}
+                                    </a>
+                                </li>
+                                {account?.Role === "Parent" && (
+                                    <li className="nav-link">
+                                        <a href="/form">
+                                            <i className="bx bx-file-blank icon" />
+                                            <span className="text nav-text">
+                                                Đơn xin
+                                            </span>
+                                        </a>
+                                    </li>
+                                )}
+                                <li className="nav-link">
+                                    <a href="/cost">
                                         <i className="bx bx-wallet icon" />
                                         <span className="text nav-text">
-                                            Schedule
+                                            Chi tiêu
                                         </span>
                                     </a>
                                 </li>
