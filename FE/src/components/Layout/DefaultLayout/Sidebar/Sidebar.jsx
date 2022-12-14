@@ -123,7 +123,7 @@ export default function Sidebar() {
                                     <a href="/forum">
                                         <i className="bx bx-heart icon" />
                                         <span className="text nav-text">
-                                            Forum
+                                            Diễn đàn
                                         </span>
                                     </a>
                                 </li>

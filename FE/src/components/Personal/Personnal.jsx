@@ -30,7 +30,7 @@ export default function Personnal() {
 
                     <div className="info-basic">
                         <div className="info">
-                            <div className="txtcel1">Tên:</div>
+                            <div className="txtcel1">Tên Cha/Mẹ:</div>
                             <div className="txtcel2" id="txtName">
                                 <strong>{account.Names}</strong>
                             </div>
@@ -38,14 +38,17 @@ export default function Personnal() {
                             <div className="txtcel2" id="txtName">
                                 <strong>{account.UserName}</strong>
                             </div>
+                            <div className="txtcel1">Tên học sinh:</div>
+                            <div className="txtcel2">
+                                <span>{account?.children}</span>
+                            </div>
                             <div className="txtcel1">Vai trò:</div>
                             <div className="txtcel2" style={{}}>
                                 {account.Role}
                             </div>
                             <div className="txtcel1">Lớp:</div>
                             <div className="txtcel2">5</div>
-                            <div className="txtcel1">Giới tính:</div>
-                            <div className="txtcel2">Nam&nbsp;</div>
+
                             <div className="txtcel1">Bằng cấp:</div>
                             <div className="txtcel2">
                                 <span>{account.Degree}</span>
@@ -54,10 +57,7 @@ export default function Personnal() {
                             <div className="txtcel2">
                                 <span>{account.BirthDay}</span>
                             </div>
-                            <div className="txtcel1">Children:</div>
-                            <div className="txtcel2">
-                                <span>{account?.children}</span>
-                            </div>
+
                             <div className="txtcel1">Phone:</div>
                             <div className="txtcel2">{account.Phone}</div>
                         </div>
@@ -73,4 +73,3 @@ export default function Personnal() {
         </div>
     );
 }
-
