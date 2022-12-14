@@ -62,7 +62,7 @@ function Form () {
 
         return name;
     }
-    var nameTeacher = getNameTeacher();
+    // var nameTeacher = getNameTeacher();
 
     return (
         <div>
@@ -79,7 +79,7 @@ function Form () {
                                 <td colSpan={2}><label htmlFor="">Người gửi: {account.Names} </label></td>
                             </tr>
                             <tr>
-                                <td colSpan={2}><label htmlFor="">Người nhận: {nameTeacher}</label></td>
+                                <td colSpan={2}><label htmlFor="">Người nhận: </label></td>
                             </tr>
                             <tr>
                                 <td><label htmlFor="title">Title</label></td>

@@ -8,6 +8,8 @@ export default function Grade() {
     const [students, setStudent] = useState([]);
     const [classes, setClasses] = useState([]);
     useEffect(() => {
+        const studentList = JSON.parse(localStorage.getItem("students"));
+        setStudent([...studentList]);
         const account = JSON.parse(localStorage.getItem("account"));
         axios
             .get("http://127.0.0.1:8000/api/class")
