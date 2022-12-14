@@ -54,8 +54,7 @@ class PointController extends Controller
                 ->where([
                     ['StudentID', $StudentID],
                     ['SubjectID', $SubjectID]
-                ])
-                ->update($request->all());
+                ])->update($request->all());
     }
 
     /**

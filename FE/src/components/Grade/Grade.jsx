@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Sidebar from "../Layout/DefaultLayout/Sidebar/Sidebar";
@@ -5,15 +6,33 @@ import NavBar from "../NavBar/NavBar";
 import "./Grade.css";
 export default function Grade() {
     const [students, setStudent] = useState([]);
+    const [classes, setClasses] = useState([]);
     useEffect(() => {
-        const studentList = JSON.parse(localStorage.getItem("students"));
-        setStudent([...studentList]);
+        const account = JSON.parse(localStorage.getItem("account"));
+        axios
+            .get("http://127.0.0.1:8000/api/class")
+            .then((res) => res.data)
+            .then((data) => {
+                const classes = data.filter(
+                    (cl) => cl.TeacherClassUserName == account.UserName
+                );
+
+                setClasses([...classes]);
+            });
     }, []);
+    const handlePickClass = (classId) => {
+        const studentList = JSON.parse(localStorage.getItem("students"));
+
+        const findStudentByClassId = studentList.filter(
+            (student) => student.ClassID == classId
+        );
+        setStudent([...findStudentByClassId]);
+    };
     return (
         <div>
             <NavBar />
             <Sidebar />
-            {/* <div className="grade">
+            <div className="grade">
                 <div
                     className="annouce"
                     style={{
@@ -36,24 +55,19 @@ export default function Grade() {
                         justifyContent: "center",
                     }}
                 >
-                    <button
-                        type="button"
-                        class="btn btn-secondary"
-                        // onClick={handleClick}
-                    >
-                        6A
-                    </button>
-                    <button type="button" class="btn btn-secondary">
-                        6B
-                    </button>
-                    <button type="button" class="btn btn-secondary">
-                        6C
-                    </button>
-                    <button type="button" class="btn btn-secondary">
-                        6D
-                    </button>
+                    {classes.map((cl) => {
+                        return (
+                            <button
+                                onClick={() => handlePickClass(cl?.ClassID)}
+                                type="button"
+                                class="btn btn-secondary"
+                            >
+                                {cl?.ClassName}
+                            </button>
+                        );
+                    })}
                 </div>
-            </div> */}
+            </div>
             <div className="grade">
                 <div
                     className="annouce"
@@ -67,7 +81,7 @@ export default function Grade() {
                         DANH SÁCH HỌC SINH
                     </span>
                 </div>
-                <table className="table table-hover">
+                <table className="table table-hover" style={{ fontSize: 25 }}>
                     <thead>
                         <tr>
                             <th>Mã học sinh</th>

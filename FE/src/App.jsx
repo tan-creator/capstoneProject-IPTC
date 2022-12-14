@@ -46,7 +46,13 @@ export default function App() {
                             <Route
                                 key={index}
                                 path={route.path}
-                                element={<Page />}
+                                element={
+                                    route?.path == "/student/:id" ? (
+                                        <Page role={"teacher"} />
+                                    ) : (
+                                        <Page />
+                                    )
+                                }
                             />
                         );
                     })}

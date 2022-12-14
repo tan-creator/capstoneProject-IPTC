@@ -33,7 +33,7 @@ const publicRoutes = [
     { path: "/navbar", component: NavBar },
     { path: "/grade", component: Grade },
     { path: "/student/:id", component: Student },
-    { path: "/checkpoint", component: Checkpoint },
+    { path: "/checkpoint/:id", component: Checkpoint },
     { path: "/schedule", component: Schedule },
 ];
 

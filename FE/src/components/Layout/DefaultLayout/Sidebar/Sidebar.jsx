@@ -25,6 +25,11 @@ export default function Sidebar() {
         });
 
         const user = JSON.parse(localStorage.getItem("account"));
+        const students = JSON.parse(localStorage.getItem("students"));
+        const findStudent = students.find(
+            (student) => student?.ParentUserName == user?.UserName
+        );
+        user.StudentID = findStudent.StudentID;
         setAccount({ ...user });
     }, []);
 
@@ -104,7 +109,9 @@ export default function Sidebar() {
                                 )}
                                 {account?.Role === "Parent" && (
                                     <li className="nav-link">
-                                        <a href="/checkpoint">
+                                        <a
+                                            href={`/checkpoint/${account?.StudentID}`}
+                                        >
                                             <i className="bx bx-pie-chart-alt icon" />
                                             <span className="text nav-text">
                                                 Xem điểm
@@ -128,16 +135,6 @@ export default function Sidebar() {
                                         </span>
                                     </a>
                                 </li>
-                                {account?.Role === "Teacher" && (
-                                    <li className="nav-link">
-                                        <a href="#">
-                                            <i className="bx bx-wallet icon" />
-                                            <span className="text nav-text">
-                                                Lịch dạy
-                                            </span>
-                                        </a>
-                                    </li>
-                                )}
                             </ul>
                         </div>
                         <div className="bottom-content">
