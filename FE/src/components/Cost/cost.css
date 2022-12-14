@@ -38,7 +38,12 @@ input::-webkit-inner-spin-button {
     -webkit-appearance: none;
 }
 
-/* input[type=number] {
-    -moz-appearance:textfield;
-    /* Firefox
-}  */
+.cost-box {
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+.btn-delete-cost {
+    display: flex;
+    justify-content: space-between;
+}

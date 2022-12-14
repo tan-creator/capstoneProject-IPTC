@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import { useAlert } from "react-alert";
 import axios from "axios";
 import _ from "lodash";
-export default function Student() {
+export default function Student(props) {
     const alert = useAlert();
     const [subjects, setSubJect] = useState([]);
     const [isUpdate, setIsUpdate] = useState(false);
@@ -14,24 +14,47 @@ export default function Student() {
         Final: "",
         Midterm: "",
         Quiz1: "",
+        Quiz2: "",
+        Quiz3: "",
         Oral_1: "",
-        SubjectID: "",
+        Oral_2: "",
+        Oral_3: "",
     });
+    const account = JSON.parse(localStorage.getItem("account"));
     const id = parseInt(useParams().id);
     const getAllPoint = async () => {
         const result = await axios.get("http://127.0.0.1:8000/api/Points");
         const pointList = await result.data;
         return pointList;
     };
-
+    const clearState = () => {
+        setPoint({
+            Final: "",
+            Midterm: "",
+            Quiz1: "",
+            Quiz2: "",
+            Quiz3: "",
+            Oral_1: "",
+            Oral_2: "",
+            Oral_3: "",
+        });
+    };
     const handleSubject = async () => {
-        const subjectList = JSON.parse(localStorage.getItem("subjects"));
+        var subjectList = JSON.parse(localStorage.getItem("subjects"));
+        let findSubjectByUserName = [];
+        if (props.role === "teacher") {
+            findSubjectByUserName = subjectList.filter(
+                (sub) => sub?.TeacherSubjectUserName == account?.UserName
+            );
+        } else {
+            findSubjectByUserName = subjectList;
+        }
         const pointList = await getAllPoint();
         const findPointById = pointList.filter(
             (p) => p.StudentID === parseInt(id)
         );
         const newSubject = [];
-        subjectList.forEach((sub) => {
+        findSubjectByUserName.forEach((sub) => {
             if (newSubject.length == 0) {
                 newSubject.push(sub);
             } else {
@@ -43,7 +66,7 @@ export default function Student() {
                 }
             }
         });
-        const result = newSubject.reduce((prevState, currentState, index) => {
+        const result = newSubject.reduce((prevState, currentState) => {
             const findMachSubjectAndPoint = findPointById.filter((point) => {
                 if (point?.SubjectID === currentState?.SubjectID) {
                     return point;
@@ -57,10 +80,10 @@ export default function Student() {
         }, []);
         setSubJect([...result]);
     };
-    useEffect(async () => {
+    useEffect(() => {
         handleSubject();
     }, []);
-
+    console.log(subjects);
     const handleOnChange = (e) => {
         const name = e.target.name;
         const value = e.target.value;
@@ -93,30 +116,47 @@ export default function Student() {
     };
     const handleSubmit = async () => {
         try {
-            const obj = {
-                ...point,
-                StudentID: id,
-                Oral_2: 6.5,
-                Oral_3: 8,
-                Quiz2: 0,
-                Quiz3: 0,
-            };
-            const result = await axios.post(
-                "http://127.0.0.1:8000/api/Point",
-                obj
-            );
-            const r1 = result.data;
-            alert.success("Create Point Successfully: ");
-            handleSubject();
+            if (!isUpdate) {
+                const obj = {
+                    ...point,
+                    StudentID: id,
+                    SubjectID: subjects[0]?.SubjectID,
+                };
+                await axios.post("http://127.0.0.1:8000/api/Point", obj);
+
+                console.log(obj);
+                alert.success("Create Point Successfully: ");
+                handleSubject();
+                clearState();
+            } else {
+                await axios.put(
+                    `http://127.0.0.1:8000/api/Point/${id}-${subjects[0]?.SubjectID}`,
+                    { ...point }
+                );
+
+                alert.success("Update Point Successfully: ");
+                handleSubject();
+                clearState();
+                setIsUpdate(false);
+            }
         } catch (error) {
             alert.error("Create Point Error: ");
         }
-        // .then(() => {
-        // })
-        // .catch(() => {
-        //     alert.error("Create Point Error: ");
-        // });
     };
+    const handleUpdate = (point) => {
+        setPoint({
+            Final: point?.Final,
+            Midterm: point?.Midterm,
+            Quiz1: point?.Quiz1,
+            Quiz2: point?.Quiz2,
+            Quiz3: point?.Quiz3,
+            Oral_1: point?.Oral_1,
+            Oral_2: point?.Oral_2,
+            Oral_3: point?.Oral_3,
+        });
+        setIsUpdate(true);
+    };
+    console.log(subjects);
     return (
         <div>
             <NavBar />
@@ -160,7 +200,9 @@ export default function Student() {
                                         <legend>Bảng nhập điểm</legend>
 
                                         <div className="form-group">
-                                            <label htmlFor="">Điểm miệng</label>
+                                            <label htmlFor="">
+                                                Điểm miệng Lần 1
+                                            </label>
                                             <input
                                                 type="number"
                                                 className="form-control"
@@ -172,7 +214,33 @@ export default function Student() {
                                         </div>
                                         <div className="form-group">
                                             <label htmlFor="">
-                                                Điểm 15 phút
+                                                Điểm miệng Lần 2
+                                            </label>
+                                            <input
+                                                type="number"
+                                                className="form-control"
+                                                name="Oral_2"
+                                                placeholder="Nhập điểm miệng"
+                                                value={point.Oral_2}
+                                                onChange={handleOnChange}
+                                            />
+                                        </div>
+                                        <div className="form-group">
+                                            <label htmlFor="">
+                                                Điểm miệng Lần 3
+                                            </label>
+                                            <input
+                                                type="number"
+                                                className="form-control"
+                                                name="Oral_3"
+                                                placeholder="Nhập điểm miệng"
+                                                value={point.Oral_3}
+                                                onChange={handleOnChange}
+                                            />
+                                        </div>
+                                        <div className="form-group">
+                                            <label htmlFor="">
+                                                Điểm 15 phút Lần 1
                                             </label>
                                             <input
                                                 type="number"
@@ -180,6 +248,32 @@ export default function Student() {
                                                 name="Quiz1"
                                                 placeholder="Nhập điểm 15 phút"
                                                 value={point.Quiz1}
+                                                onChange={handleOnChange}
+                                            />
+                                        </div>
+                                        <div className="form-group">
+                                            <label htmlFor="">
+                                                Điểm 15 phút Lần 2
+                                            </label>
+                                            <input
+                                                type="number"
+                                                className="form-control"
+                                                name="Quiz2"
+                                                placeholder="Nhập điểm 15 phút"
+                                                value={point.Quiz2}
+                                                onChange={handleOnChange}
+                                            />
+                                        </div>
+                                        <div className="form-group">
+                                            <label htmlFor="">
+                                                Điểm 15 phút Lần 3
+                                            </label>
+                                            <input
+                                                type="number"
+                                                className="form-control"
+                                                name="Quiz3"
+                                                placeholder="Nhập điểm 15 phút"
+                                                value={point.Quiz3}
                                                 onChange={handleOnChange}
                                             />
                                         </div>
@@ -206,29 +300,6 @@ export default function Student() {
                                                 value={point.Final}
                                             />
                                         </div>
-                                        <div className="form-group">
-                                            <select
-                                                id="input"
-                                                className="form-control"
-                                                required="required"
-                                                name="SubjectID"
-                                                onChange={handleOnChange}
-                                            >
-                                                {subjects.map((subject) => {
-                                                    return (
-                                                        <option
-                                                            value={
-                                                                subject?.SubjectID
-                                                            }
-                                                        >
-                                                            {
-                                                                subject?.SubjectName
-                                                            }
-                                                        </option>
-                                                    );
-                                                })}
-                                            </select>
-                                        </div>
                                     </form>
                                 </div>
                                 <div className="modal-footer">
@@ -237,6 +308,7 @@ export default function Student() {
                                         type="button"
                                         className="btn btn-secondary"
                                         data-dismiss="modal"
+                                        onClick={() => setIsUpdate(false)}
                                     >
                                         Đóng
                                     </button>
@@ -244,9 +316,15 @@ export default function Student() {
                                         style={{ fontSize: 14 }}
                                         onClick={handleSubmit}
                                         type="button"
-                                        className="btn btn-primary"
+                                        className={
+                                            isUpdate
+                                                ? "btn btn-success"
+                                                : "btn btn-primary"
+                                        }
                                     >
-                                        Tạo bảng điểm
+                                        {isUpdate
+                                            ? "Update Bảng Điểm"
+                                            : "Tạo bảng điểm"}
                                     </button>
                                 </div>
                             </div>
@@ -254,17 +332,19 @@ export default function Student() {
                     </div>
                     <table className="table table-bordered table-striped table-hover p-5">
                         <thead>
-                            <tr>
+                            <tr style={{ textAlign: "center" }}>
                                 <th>Môn</th>
                                 <th colSpan="3">Điểm miệng</th>
                                 <th colSpan="3">Kiểm tra 15 phút</th>
                                 <th>Giữa kì</th>
                                 <th>Cuối kì</th>
-                                <th>Trung bình môn</th>
+                                <th style={{ whiteSpace: "nowrap" }}>
+                                    Trung bình môn
+                                </th>
                                 <th>Hành động</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody style={{ textAlign: "center" }}>
                             {subjects.map((subject) => {
                                 return (
                                     <tr>
@@ -281,13 +361,32 @@ export default function Student() {
                                                     <td>{p?.Oral_2}</td>
                                                     <td>{p?.Oral_3}</td>
                                                     <td>{p?.Midterm}</td>
-
                                                     <td>{p?.Final}</td>
-                                                    <td>10</td>
+                                                    <td
+                                                        style={{
+                                                            width: "150px",
+                                                            fontWeight: "bold",
+                                                        }}
+                                                    >
+                                                        {(p?.Quiz1 +
+                                                            p?.Quiz2 +
+                                                            p?.Quiz3 +
+                                                            p?.Oral_1 +
+                                                            p?.Oral_2 +
+                                                            p?.Oral_3 +
+                                                            p?.Midterm +
+                                                            p?.Final) /
+                                                            8}
+                                                    </td>
                                                     <td>
                                                         <button
                                                             type="button"
                                                             className="btn btn-success"
+                                                            data-toggle="modal"
+                                                            data-target="#exampleModal"
+                                                            onClick={() =>
+                                                                handleUpdate(p)
+                                                            }
                                                         >
                                                             UPDATE
                                                         </button>{" "}

@@ -8,7 +8,6 @@ function Form () {
     const [account, setAccount] = useState({})
     const [student, setStudent] = useState([])
     const [users, setUsers] = useState([])
-    const [nameTeacher, setNameTeacher] = useState([])
 
     useEffect(() => {
 
@@ -38,12 +37,10 @@ function Form () {
 
     }, []);
 
-
-
-    function get() {
-        const idCl = "";
-        const idTeacher = "";
-        const nameTeacher = "";
+    function getNameTeacher() {
+        const idCl = 0;
+        const idTeacher = 0;
+        const name = "";
 
         student.map((std) => {
             if(account.UserName === std.ParentUserName) {
@@ -59,22 +56,13 @@ function Form () {
 
         users.map((user) => {
             if(idTeacher == user.UserName){
-                nameTeacher = user.Names;
+                name = user.Names;
             }
         })
 
-        console.log("idCl: " + idCl);
-        console.log("idTeacher: " + idTeacher);
-        console.log("nameTeacher: " + nameTeacher);
-
-        return nameTeacher;
+        return name;
     }
-
-    useEffect(() => {
-        const name = get();
-        setNameTeacher(name)
-    }, []);
-
+    var nameTeacher = getNameTeacher();
 
     return (
         <div>
@@ -85,10 +73,13 @@ function Form () {
                     <form action="">
                         <table>
                             <tr>
-                                <td colSpan={2}><label htmlFor="">Nguoi gui: {account.Names} </label></td>
+                                <td colSpan={2}><h2>Đơn xin nghĩ học</h2></td>
                             </tr>
                             <tr>
-                                <td colSpan={2}><label htmlFor="">Nguoi nhan: {nameTeacher}</label></td>
+                                <td colSpan={2}><label htmlFor="">Người gửi: {account.Names} </label></td>
+                            </tr>
+                            <tr>
+                                <td colSpan={2}><label htmlFor="">Người nhận: {nameTeacher}</label></td>
                             </tr>
                             <tr>
                                 <td><label htmlFor="title">Title</label></td>

@@ -8,23 +8,15 @@ export default function Personnal() {
     const [users, SetUser] = useState([]);
     const [account, setAccount] = useState({});
     useEffect(() => {
-        axios("http://127.0.0.1:8000/api/student")
-            .then((response) => response.data)
-            .then((json) => {
-                // console.log(json);
-                SetPerson([...json]);
-            });
-        axios("http://127.0.0.1:8000/api/user")
-            .then((response) => response.data)
-            .then((json) => {
-                // console.log(json);
-                SetUser([...json]);
-            });
         const user = JSON.parse(localStorage.getItem("account"));
+        const students = JSON.parse(localStorage.getItem("students"));
+        const findStudent = students.find(
+            (student) => student?.ParentUserName == user?.UserName
+        );
+        user.children = findStudent?.StudentName;
         setAccount({ ...user });
     }, []);
-
-
+    console.log(account);
 
     return (
         <div>
@@ -61,6 +53,10 @@ export default function Personnal() {
                             <div className="txtcel1">Ngày sinh:</div>
                             <div className="txtcel2">
                                 <span>{account.BirthDay}</span>
+                            </div>
+                            <div className="txtcel1">Children:</div>
+                            <div className="txtcel2">
+                                <span>{account?.children}</span>
                             </div>
                             <div className="txtcel1">Phone:</div>
                             <div className="txtcel2">{account.Phone}</div>

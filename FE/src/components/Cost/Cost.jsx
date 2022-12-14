@@ -10,7 +10,6 @@ function Cost () {
     const [user, setUser] = useState({})
     const [student, setStudent] = useState([])
     const [bill, setBill] = useState({
-        CostID: "",
         ClassID: "",
         CostType: "",
         CostAmountMoney: "",
@@ -89,36 +88,63 @@ function Cost () {
 
     const handleSubmit = async () => {
         var idCl = "";
-
         if (user.Role == "Teacher") {
             classes.map((cls) => {
                 if (user.UserName === cls.TeacherClassUserName) { idCl = cls.ClassID }
             })
         }
+        bill.ClassID = idCl;
 
-        try {
-            bill.CostID = "4";
-            bill.ClassID = idCl;
-
-            console.log(bill);
-
-            useEffect (() => {
-                const requestOptions = {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(bill)
-                };
-                fetch('http://127.0.0.1:8000/api/cost', requestOptions)
-                    .then(response => response.json())
-                    .catch(error => {
-                        console.log('error',error)
-                    });
-            },[])
-            alertNav.success("Add cost Successfully: ");
+        if (!bill.CostType) {
+            alert("Loại chi tiêu đang trống")
+            return;
         }
-        catch (error) {
-            alertNav.error("Add cost Error: ");
+        if (!bill.CostAmountMoney) {
+            alert("Tổng tiền đang trống")
+            return;
         }
+        if (!bill.CostDescription) {
+            alert("Chi tiết đang trống")
+            return;
+        }
+
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json ; charset=UTF-8' },
+            body: JSON.stringify({...bill})
+        };
+        fetch('http://127.0.0.1:8000/api/cost', requestOptions)
+            .then((response)  => {
+                if (response.status == 200) {
+                    console.log(response);
+                    alertNav.success("Thêm thành công: ");
+                } else {
+                    alertNav.error("Thêm thất bại: ");
+                }
+            })
+            .catch(error => {
+                alertNav.error(error.toString());
+                console.log('error',error)
+            });
+    }
+
+    const handleDeleteCost =  (e) => {
+        const value = e.target.value;
+        console.log(value)
+
+        fetch(`http://127.0.0.1:8000/api/cost/${value}`, { method: 'DELETE' })
+            .then((response)  => {
+                if (response.status == 200) {
+                    console.log(response);
+                    alertNav.success("Xóa thành công: ");
+                } else {
+                    alertNav.error("Xóa thất bại: ");
+                }
+            })
+            .catch(error => {
+                alertNav.error(error.toString());
+                console.log('error',error)
+            });
     }
 
     return (
@@ -223,7 +249,17 @@ function Cost () {
                                 getCost().map((cost) => {
                                     return (
                                         <div key={cost.CostID} style={{borderTop:"1px solid #ccc",padding:"10px 0"}}>
-                                            <h3>{cost.CostType}</h3>
+                                            <div className="btn-delete-cost">
+                                                <h3>{cost.CostType}</h3>
+                                                {user?.Role === "Teacher" && (
+                                                    <button
+                                                    style={{ fontSize: 14 }}
+                                                    onClick={handleDeleteCost}
+                                                    type="button"
+                                                    value={cost.CostID}
+                                                    >Xóa</button>
+                                                )}
+                                            </div>
                                             <p>Chi tiết: </p>
                                             <p>{cost.CostDescription}</p>
                                             <p>Tổng cộng: </p>

@@ -16,7 +16,7 @@ export default function App() {
                 localStorage.setItem("points", JSON.stringify(json));
             });
 
-        fetch("http://127.0.0.1:8000/student")
+        fetch("http://127.0.0.1:8000/api/student")
             .then((response) => response.json())
             .then((json) => {
                 localStorage.setItem("students", JSON.stringify(json));
@@ -46,7 +46,13 @@ export default function App() {
                             <Route
                                 key={index}
                                 path={route.path}
-                                element={<Page />}
+                                element={
+                                    route?.path == "/student/:id" ? (
+                                        <Page role={"teacher"} />
+                                    ) : (
+                                        <Page />
+                                    )
+                                }
                             />
                         );
                     })}

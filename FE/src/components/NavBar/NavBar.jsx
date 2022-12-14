@@ -3,9 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "./NavBar.css";
 export default function NavBar() {
     const [account, setAccount] = useState({});
-    const handleOnClick = () => {
-        alert("Bạn có muốn đăng xuất?");
-    };
+
     useEffect(() => {
         const body = document.querySelector("body");
         body.onclick = () => {
@@ -116,14 +114,15 @@ export default function NavBar() {
                             Đóng góp ý kiến
                         </ul>
                         <a
-                            onClick={handleOnClick}
-                            href="/"
+                            href="#"
                             style={{
                                 textDecoration: "none",
                                 color: "#606060",
                             }}
                         >
                             <ul
+                                data-toggle="collapse"
+                                href="#logout"
                                 style={{
                                     borderBottom:
                                         "1px solid rgb(235, 228, 228)",
@@ -133,6 +132,13 @@ export default function NavBar() {
                             </ul>
                         </a>
                     </div>
+                </div>
+                <div
+                    className="collapse"
+                    id="logout"
+                    style={{ position: "absolute", top: "200px" }}
+                >
+                    <div className="card card-body">but</div>
                 </div>
             </div>
         </div>
