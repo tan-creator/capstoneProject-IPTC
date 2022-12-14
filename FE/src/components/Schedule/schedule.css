@@ -1,0 +1,66 @@
+.schedule-content {
+    width: 1210px;
+    position: relative;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 30px;
+    min-height: 200px;
+    margin-top: 83px;
+    background-color: #fff;
+    margin-left: 19px;
+}
+
+p {
+    margin: 0;
+}
+
+table th {
+    width: 110px;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.box-schedule {
+    width: 110px;
+    padding: 10px;
+    border-radius: 10px;
+    box-sizing: border-box;
+    margin: 10px;
+    height: 60px;
+    box-shadow: 5px 5px #ccc, -2px -2px #ccc;
+}
+.box-schedule p {
+    color: #fff;
+    font-size: 16px;
+    line-height: 20px;
+    text-align: center;
+}
+
+table td {
+    width: 120px;
+    font-size: 14px;
+}
+
+tbody tr td {
+    /* display: flex; */
+}
+
+.info-year {
+    display: flex;
+}
+
+.info-user p {
+    font-size: 16px;
+}
+.info-year p {
+    margin-right: 20px;
+    font-size: 16px;
+}
+
+.hour {
+    width: 100px;
+    line-height: 40px;
+    height: 60px;
+    margin: 10px;
+}

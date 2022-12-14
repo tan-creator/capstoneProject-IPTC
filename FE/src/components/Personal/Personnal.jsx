@@ -8,21 +8,15 @@ export default function Personnal() {
     const [users, SetUser] = useState([]);
     const [account, setAccount] = useState({});
     useEffect(() => {
-        axios("http://127.0.0.1:8000/api/student")
-            .then((response) => response.data)
-            .then((json) => {
-                console.log(json);
-                SetPerson([...json]);
-            });
-        axios("http://127.0.0.1:8000/api/user")
-            .then((response) => response.data)
-            .then((json) => {
-                console.log(json);
-                SetUser([...json]);
-            });
         const user = JSON.parse(localStorage.getItem("account"));
+        const students = JSON.parse(localStorage.getItem("students"));
+        const findStudent = students.find(
+            (student) => student?.ParentUserName == user?.UserName
+        );
+        user.children = findStudent?.StudentName;
         setAccount({ ...user });
     }, []);
+    console.log(account);
 
     return (
         <div>
@@ -36,7 +30,7 @@ export default function Personnal() {
 
                     <div className="info-basic">
                         <div className="info">
-                            <div className="txtcel1">Tên Học sinh:</div>
+                            <div className="txtcel1">Tên Cha/Mẹ:</div>
                             <div className="txtcel2" id="txtName">
                                 <strong>{account.Names}</strong>
                             </div>
@@ -44,14 +38,17 @@ export default function Personnal() {
                             <div className="txtcel2" id="txtName">
                                 <strong>{account.UserName}</strong>
                             </div>
+                            <div className="txtcel1">Tên học sinh:</div>
+                            <div className="txtcel2">
+                                <span>{account?.children}</span>
+                            </div>
                             <div className="txtcel1">Vai trò:</div>
                             <div className="txtcel2" style={{}}>
-                                {account.Positions}
+                                {account.Role}
                             </div>
                             <div className="txtcel1">Lớp:</div>
                             <div className="txtcel2">5</div>
-                            <div className="txtcel1">Giới tính:</div>
-                            <div className="txtcel2">Nam&nbsp;</div>
+
                             <div className="txtcel1">Bằng cấp:</div>
                             <div className="txtcel2">
                                 <span>{account.Degree}</span>
@@ -60,6 +57,7 @@ export default function Personnal() {
                             <div className="txtcel2">
                                 <span>{account.BirthDay}</span>
                             </div>
+
                             <div className="txtcel1">Phone:</div>
                             <div className="txtcel2">{account.Phone}</div>
                         </div>
