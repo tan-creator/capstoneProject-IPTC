@@ -1,5 +1,5 @@
 .schedule-content {
-    width: 1110px;
+    width: 1210px;
     position: relative;
     padding: 20px;
     display: grid;
@@ -11,7 +11,7 @@
     margin-left: 19px;
 }
 
-p{
+p {
     margin: 0;
 }
 
@@ -28,7 +28,7 @@ table th {
     box-sizing: border-box;
     margin: 10px;
     height: 60px;
-    box-shadow: 5px 5px #ccc,-2px -2px #ccc;
+    box-shadow: 5px 5px #ccc, -2px -2px #ccc;
 }
 .box-schedule p {
     color: #fff;

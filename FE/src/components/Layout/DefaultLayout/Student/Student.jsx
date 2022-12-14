@@ -365,6 +365,7 @@ export default function Student(props) {
                                                     <td
                                                         style={{
                                                             width: "150px",
+                                                            fontWeight: "bold",
                                                         }}
                                                     >
                                                         {(p?.Quiz1 +

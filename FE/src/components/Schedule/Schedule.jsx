@@ -121,16 +121,26 @@ function Shedule() {
             <div className="container">
                 <div className="Schedule">
                     <div className="schedule-content">
+                        <div className="annouce" style={{ paddingTop: 50 }}>
+                            <span>
+                                <i className="bx bxs-notepad" />
+                                LỊCH HỌC
+                            </span>
+                        </div>
                         <div className="info-user">
-                            <p>Ten: {user.Names}</p>
+                            <p>
+                                <strong>Tên :</strong> {user.Names}
+                            </p>
                         </div>
                         <div className="info-year">
-                            <p>Nam hoc:</p>
+                            <p>
+                                <strong>Năm học: </strong>2022-2023
+                            </p>
                         </div>
                         <div className="schedule-box">
                             <table>
                                 <thead>
-                                    <tr>
+                                    <tr style={{ textAlign: "center" }}>
                                         <th></th>
                                         <th>Thứ 2</th>
                                         <th>Thứ 3</th>
