@@ -15,6 +15,7 @@ use App\Http\Controllers\API\PointController;
 use App\Http\Controllers\API\RollCallController;
 use App\Http\Controllers\API\RiewviewLessionController;
 use App\Http\Controllers\API\CostController;
+use App\Http\Controllers\API\PermissionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,6 +38,14 @@ Route::controller(StudentController::class)->group(function () {
     Route::post('student', 'store');
     Route::put('student/{id}', 'update');
     Route::delete('student/{id}', 'destroy'); 
+});
+
+Route::controller(PermissionController::class)->group(function () {
+    Route::get('permission', 'index');
+    Route::get('permissionTeacher/{TeacherUsername}', 'showForTeacher');
+    Route::get('permissionParent/{ParentUsername}', 'showForParent');
+    Route::post('permission', 'store');
+    Route::delete('permission/{PermissionFormID}', 'destroy'); 
 });
 
 Route::controller(SubjectController::class)->group(function () {

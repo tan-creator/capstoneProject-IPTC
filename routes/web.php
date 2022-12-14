@@ -6,6 +6,7 @@ use App\Http\Controllers\API\StudentController;
 use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\API\CommentController;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\API\PermissionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +25,12 @@ Route::get('/', function () {
 // Route::get('/subject', [SubjectController::class, 'show']);
 Route::get('student', [StudentController::class, 'index']);
 Route::get('comment', [CommentController::class, 'index']);
+
+Route::controller(PermissionController::class)->group(function () {
+    Route::get('permission', 'index');
+    Route::get('permission/{Username}', 'show');
+    Route::post('permission', 'store');
+});
 
 
 
