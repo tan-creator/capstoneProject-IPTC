@@ -19,7 +19,7 @@ class AuthController extends Controller
         if ($Password->count() > 0) {
             if(Hash::check($request->PassWord, $Password[0]->PassWord)) {
                 $userInfo = User::where('UserName', $request->UserName)->get();
-                return UserResource::collection($userInfo);
+                return $userInfo;
             } else {
                 return response()->json(['statusCode' => 400, 'msg' => 'Sai mật khẩu, mời nhập lại!']);
             }

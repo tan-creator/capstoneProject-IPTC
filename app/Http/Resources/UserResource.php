@@ -16,7 +16,7 @@ class UserResource extends JsonResource
     public function toArray($request)
     {
         if ($this->Role === 'Parent') {
-            return [
+            return array(
                 'UserName' => $this->UserName,
                 'Role' => $this->Role,
                 'Names' => $this->Names,
@@ -27,9 +27,9 @@ class UserResource extends JsonResource
                 'BirthDay' => date('d-m-Y', strtotime($this->BirthDay)),
                 'Degree' => $this->Degree,
                 'MoreInfo' => DB::select('EXEC SELECT_CLASS_STUDENT_BYPARENT ? ', array($this->UserName)),
-            ];
+            );
         } else if ($this->Role === 'Teacher') {
-            return [
+            return array(
                 'UserName' => $this->UserName,
                 'Role' => $this->Role,
                 'Names' => $this->Names,
@@ -40,7 +40,7 @@ class UserResource extends JsonResource
                 'BirthDay' => date('d-m-Y', strtotime($this->BirthDay)),
                 'Degree' => $this->Degree,
                 'MoreInfo' => DB::select('EXEC SELECT_CLASS_BYTEACHER ? ', array($this->UserName)),
-            ];
+            );
         }
     }
 }
