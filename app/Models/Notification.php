@@ -19,4 +19,8 @@ class Notification extends Model
         'NotificationContent',
         'NotificationDate',
     ];
+
+    protected $casts = [
+        'NotificationDate' => 'date:d-m-Y',
+    ];
 }

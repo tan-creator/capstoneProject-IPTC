@@ -22,5 +22,3 @@ export const getPost = () => {
     const posts = JSON.parse(localStorage.getItem("posts"));
     return posts;
 };
-
-

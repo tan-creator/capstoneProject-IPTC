@@ -206,9 +206,9 @@ export default function Student(props) {
                                             <input
                                                 type="number"
                                                 className="form-control"
-                                                name="Oral_1"
+                                                name="Quiz1"
                                                 placeholder="Nhập điểm miệng"
-                                                value={point.Oral_1}
+                                                value={point.Quiz1}
                                                 onChange={handleOnChange}
                                             />
                                         </div>
@@ -219,9 +219,9 @@ export default function Student(props) {
                                             <input
                                                 type="number"
                                                 className="form-control"
-                                                name="Oral_2"
+                                                name="Quiz2"
                                                 placeholder="Nhập điểm miệng"
-                                                value={point.Oral_2}
+                                                value={point.Quiz2}
                                                 onChange={handleOnChange}
                                             />
                                         </div>
@@ -232,9 +232,9 @@ export default function Student(props) {
                                             <input
                                                 type="number"
                                                 className="form-control"
-                                                name="Oral_3"
+                                                name="Quiz3"
                                                 placeholder="Nhập điểm miệng"
-                                                value={point.Oral_3}
+                                                value={point.Quiz3}
                                                 onChange={handleOnChange}
                                             />
                                         </div>
@@ -245,9 +245,9 @@ export default function Student(props) {
                                             <input
                                                 type="number"
                                                 className="form-control"
-                                                name="Quiz1"
+                                                name="Oral_1"
                                                 placeholder="Nhập điểm 15 phút"
-                                                value={point.Quiz1}
+                                                value={point.Oral_1}
                                                 onChange={handleOnChange}
                                             />
                                         </div>
@@ -258,9 +258,9 @@ export default function Student(props) {
                                             <input
                                                 type="number"
                                                 className="form-control"
-                                                name="Quiz2"
+                                                name="Oral_2"
                                                 placeholder="Nhập điểm 15 phút"
-                                                value={point.Quiz2}
+                                                value={point.Oral_2}
                                                 onChange={handleOnChange}
                                             />
                                         </div>
@@ -271,9 +271,9 @@ export default function Student(props) {
                                             <input
                                                 type="number"
                                                 className="form-control"
-                                                name="Quiz3"
+                                                name="Oral_3"
                                                 placeholder="Nhập điểm 15 phút"
-                                                value={point.Quiz3}
+                                                value={point.Oral_3}
                                                 onChange={handleOnChange}
                                             />
                                         </div>
@@ -389,7 +389,7 @@ export default function Student(props) {
                                                             }
                                                         >
                                                             UPDATE
-                                                        </button>{" "}
+                                                        </button>
                                                     </td>
                                                 </>
                                             );
