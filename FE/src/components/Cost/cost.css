@@ -1,18 +1,27 @@
+.container {
+    height: auto;
+}
+
 .cost-content {
-    width: 1110px;
+    width: 1115px;
     position: relative;
     padding: 20px;
     display: grid;
     grid-template-columns: 1fr;
-    grid-gap: 30px;
     min-height: 200px;
     margin-top: 83px;
     background-color: #fff;
     margin-left: 19px;
+    overflow-x: hidden;
 }
 
 p {
     font-size: 14px;
+}
+
+.head-cost-content {
+    padding-bottom: 20px;
+    border-bottom: 1px solid #ccc;
 }
 
 .head-cost-content h2 {
@@ -40,10 +49,56 @@ input::-webkit-inner-spin-button {
 
 .cost-box {
     display: flex;
+}
+
+.cost-box-left {
+    display: flex;
     flex-direction: column-reverse;
+    width: 370px;
+    border-right: 1px solid #ccc;
+    overflow-y: scroll;
+    height: 445px;
+}
+
+.cost-box-right {
+    width: calc(100% - 370px);
+
+}
+
+.p-cost-description {
+    height: 40px;
+    line-height: 18px;
+    padding-right: 10px;
+    overflow: hidden;
 }
 
 .btn-delete-cost {
     display: flex;
     justify-content: space-between;
+}
+
+.btn-delete-cost button {
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    width: 75px;
+    margin-right: 5px;
+}
+
+.btn-delete-cost button,h3 {
+    margin: 0;
+}
+
+.h3-cost-type{
+    padding:0 5px;
+    line-height: 45px;
+    width: 290px;
+    overflow-x: hidden;
+}
+
+.h3-cost-type:hover {
+    cursor: pointer;
+    background-color: #f48023;
+    opacity: 0.8;
+    color: #fff;
 }

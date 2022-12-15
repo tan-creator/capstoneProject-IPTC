@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useLayoutEffect } from "react";
 import NavBar from "../NavBar/NavBar";
 import Sidebar from "../Layout/DefaultLayout/Sidebar/Sidebar";
 import { useAlert } from "react-alert";
@@ -15,6 +15,7 @@ function Cost () {
         CostAmountMoney: "",
         CostDescription: "",
     });
+    const [dataSend, setDataSend] = useState();
     const alertNav = useAlert();
 
     useEffect(() => {
@@ -147,6 +148,12 @@ function Cost () {
             });
     }
 
+    const handleGetCost = (data) => {
+        // const value = e.target.value;
+        // console.log(data)
+        setDataSend(data);
+    }
+
     return (
         <div>
             <NavBar />
@@ -245,34 +252,63 @@ function Cost () {
                             </div>
                         )}
                         <div className="cost-box">
-                            {
-                                getCost().map((cost) => {
-                                    return (
-                                        <div key={cost.CostID} style={{borderTop:"1px solid #ccc",padding:"10px 0"}}>
-                                            <div className="btn-delete-cost">
-                                                <h3>{cost.CostType}</h3>
-                                                {user?.Role === "Teacher" && (
-                                                    <button
-                                                    style={{ fontSize: 14 }}
-                                                    onClick={handleDeleteCost}
-                                                    type="button"
-                                                    value={cost.CostID}
-                                                    >Xóa</button>
-                                                )}
+                            <div className="cost-box-left">
+                                {
+                                    getCost().map((cost) => {
+                                        return (
+                                            <div key={cost.CostID} style={{borderTop:"1px solid #ccc",padding:"10px 0"}}>
+                                                <div className="btn-delete-cost">
+                                                    <h3
+                                                        className="h3-cost-type"
+                                                        onClick={() => handleGetCost(cost)}
+                                                        value={cost.CostID}
+                                                    >{cost.CostType}</h3>
+                                                    {user?.Role === "Teacher" && (
+                                                        <button
+                                                        style={{ fontSize: 14 }}
+                                                        onClick={handleDeleteCost}
+                                                        type="button"
+                                                        value={cost.CostID}
+                                                        >Xóa</button>
+                                                    )}
+                                                </div>
+                                                <p>Chi tiết: </p>
+                                                <p className="p-cost-description">{cost.CostDescription}</p>
+                                                <p>Tổng cộng: </p>
+                                                <p>{parseInt(cost.CostAmountMoney)}</p>
                                             </div>
-                                            <p>Chi tiết: </p>
-                                            <p>{cost.CostDescription}</p>
-                                            <p>Tổng cộng: </p>
-                                            <p>{parseInt(cost.CostAmountMoney)}</p>
-                                        </div>
-                                    )
-                                })
-                            }
+                                        )
+                                    })
+                                }
+                            </div>
+                            <div className="cost-box-right">
+                                <ShowCost data={dataSend}/>
+                            </div>
+
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    )
+}
+
+function ShowCost (props) {
+    const [getData, setGetData] = useState({});
+    useLayoutEffect(() => {
+        if (props.data !== getData) {
+            setGetData(props.data)
+        }
+    }, [props.data])
+
+    console.log(getData);
+
+    return (
+        <>
+            <p>{getData?.CostType}</p>
+            <p>{getData?.CostAmountMoney}</p>
+            <p>{getData?.CostDescription}</p>
+        </>
     )
 }
 
