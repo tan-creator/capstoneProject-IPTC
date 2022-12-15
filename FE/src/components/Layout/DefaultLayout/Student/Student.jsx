@@ -389,7 +389,7 @@ export default function Student(props) {
                                                             }
                                                         >
                                                             UPDATE
-                                                        </button>{" "}
+                                                        </button>
                                                     </td>
                                                 </>
                                             );

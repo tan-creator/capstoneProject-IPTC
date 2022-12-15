@@ -54,15 +54,15 @@ export default function Forum() {
                                 }}
                             >
                                 <div className="action1 first">
-                                    <i class="bx bxs-like "></i>
+                                    <i className="bx bxs-like "></i>
                                     <h5>29K</h5>
                                 </div>
                                 <div className="action1">
-                                    <i class="bx bxs-chat"></i>
+                                    <i className="bx bxs-chat"></i>
                                     <h5>1,4K Lượt thích</h5>
                                 </div>
                                 <div className="action1">
-                                    <i class="bx bxs-share"></i>
+                                    <i className="bx bxs-share"></i>
                                     <h5>118 Lượt chia sẻ</h5>
                                 </div>
                             </div>
@@ -72,7 +72,7 @@ export default function Forum() {
                                     <h4>Thích</h4>
                                 </div>
                                 <div className="action">
-                                    <i class="bx bx-chat"></i>
+                                    <i className="bx bx-chat"></i>
                                     <h4>Bình luận</h4>
                                 </div>
                                 <div className="action">
