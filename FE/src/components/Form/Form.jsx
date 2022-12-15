@@ -37,31 +37,31 @@ function Form () {
 
     }, []);
 
-    function getNameTeacher() {
-        const idCl = 0;
-        const idTeacher = 0;
-        const name = "";
+    // function getNameTeacher() {
+    //     const idCl = 0;
+    //     const idTeacher = 0;
+    //     const name = "";
 
-        student.map((std) => {
-            if(account.UserName === std.ParentUserName) {
-                idCl = std.ClassID;
-            }
-        })
+    //     student.map((std) => {
+    //         if(account.UserName === std.ParentUserName) {
+    //             idCl = std.ClassID;
+    //         }
+    //     })
 
-        classes.map((cls) => {
-            if(idCl == cls.ClassID){
-                idTeacher = cls.TeacherClassUserName;
-            }
-        })
+    //     classes.map((cls) => {
+    //         if(idCl == cls.ClassID){
+    //             idTeacher = cls.TeacherClassUserName;
+    //         }
+    //     })
 
-        users.map((user) => {
-            if(idTeacher == user.UserName){
-                name = user.Names;
-            }
-        })
+    //     users.map((user) => {
+    //         if(idTeacher == user.UserName){
+    //             name = user.Names;
+    //         }
+    //     })
 
-        return name;
-    }
+    //     return name;
+    // }
     // var nameTeacher = getNameTeacher();
 
     return (

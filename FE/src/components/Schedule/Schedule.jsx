@@ -9,13 +9,26 @@ function Shedule() {
     const [user, setUser] = useState([]);
     const [classes, setClass] = useState([]);
     const [student, setStudent] = useState([]);
+    const [persons, setPerson] = useState([])
 
     useEffect(() => {
-        const subjects = JSON.parse(localStorage.getItem("subjects"));
-        setSubject(subjects);
 
         const users = JSON.parse(localStorage.getItem("account"));
         setUser(users);
+
+        fetch("http://127.0.0.1:8000/api/user")
+            .then((response) => response.json())
+            .then((json) => {
+                setPerson(json);
+            })
+            .catch((error) => console.log("error", error));
+
+        fetch("http://127.0.0.1:8000/api/subject")
+            .then((response) => response.json())
+            .then((json) => {
+                setSubject(json);
+            })
+            .catch((error) => console.log("error", error));
 
         fetch("http://127.0.0.1:8000/api/class")
             .then((response) => response.json())
@@ -62,6 +75,13 @@ function Shedule() {
                     arrLichHoc.push(sub);
                 }
             });
+            persons.map((person) => {
+                arrLichHoc.map((arr) => {
+                    if (person.UserName == arr.TeacherSubjectUserName) {
+                        arr.Names = person.Names;
+                    }
+                })
+            })
         }
         return arrLichHoc;
     }
@@ -74,43 +94,44 @@ function Shedule() {
     const arrT7 = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
     const arrCN = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
 
-    function getLich(array, str) {
+    function getLich(array, str ) {
         getSubject().map((arr) => {
-            if (arr.DateOfWeek == str) {
-                if (arr.SubjectTime == "7:00-7:45") {
-                    array[0] = arr;
-                }
-                if (arr.SubjectTime == "7:50-8:35") {
-                    array[1] = arr;
-                }
-                if (arr.SubjectTime == "8:40-9:25") {
-                    array[2] = arr;
-                }
-                if (arr.SubjectTime == "9:40-10:25") {
-                    array[3] = arr;
-                }
-                if (arr.SubjectTime == "10:30-11:15") {
-                    array[4] = arr;
-                }
-                if (arr.SubjectTime == "13:00-13:45") {
-                    array[5] = arr;
-                }
-                if (arr.SubjectTime == "13:50-14:35") {
-                    array[6] = arr;
-                }
-                if (arr.SubjectTime == "14:40-15:25") {
-                    array[7] = arr;
-                }
-                if (arr.SubjectTime == "15:40-16:25") {
-                    array[8] = arr;
-                }
-                if (arr.SubjectTime == "16:30-17:15") {
-                    array[9] = arr;
-                }
+          if (arr.DateOfWeek.indexOf(str, 0) >= 0) {
+            if (arr.SubjectTime.indexOf("7:00-7:45",0) >= 0) {
+              array[0] = arr;
             }
-        });
+            if (arr.SubjectTime.indexOf("7:50-8:35",0) >= 0) {
+              array[1] = arr;
+            }
+            if (arr.SubjectTime.indexOf("8:40-9:25",0) >= 0) {
+              array[2] = arr;
+            }
+            if (arr.SubjectTime.indexOf("9:40-10:25",0) >= 0) {
+              array[3] = arr;
+            }
+            if (arr.SubjectTime.indexOf("10:30-11:15",0) >= 0) {
+              array[4] = arr;
+            }
+            if (arr.SubjectTime.indexOf("13:00-13:45",0) >= 0) {
+              array[5] = arr;
+            }
+            if (arr.SubjectTime.indexOf("13:50-14:35",0) >= 0) {
+              array[6] = arr;
+            }
+            if (arr.SubjectTime.indexOf("14:40-15:25",0) >= 0) {
+              array[7] = arr;
+            }
+            if (arr.SubjectTime.indexOf("15:40-16:25",0) >= 0) {
+              array[8] = arr;
+            }
+            if (arr.SubjectTime.indexOf("16:30-17:15",0) >= 0) {
+              array[9] = arr;
+            }
+          }
+        })
+        console.log(array);
         return array;
-    }
+      }
 
     return (
         <div>
@@ -119,11 +140,17 @@ function Shedule() {
             <div className="container">
                 <div className="Schedule">
                     <div className="schedule-content">
-                        <div className="annouce" style={{ paddingTop: 50 }}>
-                            <span>
-                                <i className="bx bxs-notepad" />
-                                LỊCH HỌC
-                            </span>
+                        <div className="annouce" style={{ paddingTop: 10 }}>
+                            {user.Role == "Parent" && (
+                                <span>
+                                    <i className="bx bxs-notepad" />LỊCH HỌC
+                                </span>
+                            )}
+                            {user.Role == "Teacher" && (
+                                <span>
+                                    <i className="bx bxs-notepad" />LỊCH DẠY
+                                </span>
+                            )}
                         </div>
                         <div className="info-user">
                             <p>
@@ -153,63 +180,61 @@ function Shedule() {
                                     <tr>
                                         <td>
                                             <tr>
-                                                <div className="hour">
-                                                    7:00 - 7:45
+                                                <div className="box-schedule">
+                                                    <p>7:00 - 7:45</p>
                                                 </div>
                                             </tr>
                                             <tr>
-                                                <div className="hour">
-                                                    7:50 - 8:35
+                                                <div className="box-schedule">
+                                                    <p>7:50 - 8:35</p>
                                                 </div>
                                             </tr>
                                             <tr>
-                                                <div className="hour">
-                                                    8:40 - 9:25
+                                                <div className="box-schedule">
+                                                    <p>8:40 - 9:25</p>
                                                 </div>
                                             </tr>
                                             <tr>
-                                                <div className="hour">
-                                                    9:40 - 10:25
+                                                <div className="box-schedule">
+                                                    <p>9:40 - 10:25</p>
                                                 </div>
                                             </tr>
                                             <tr>
-                                                <div className="hour">
-                                                    10:30 - 11:15
+                                                <div className="box-schedule">
+                                                    <p>0:30 - 11:15</p>1
                                                 </div>
                                             </tr>
                                             <tr>
-                                                <div className="hour">
-                                                    13:00 - 13:45
+                                                <div className="box-schedule">
+                                                    <p>13:00 - 13:45</p>
                                                 </div>
                                             </tr>
                                             <tr>
-                                                <div className="hour">
-                                                    13:50 - 14:35
+                                                <div className="box-schedule">
+                                                    <p>13:50 - 14:35</p>
                                                 </div>
                                             </tr>
                                             <tr>
-                                                <div className="hour">
-                                                    14:40 - 15:25
+                                                <div className="box-schedule">
+                                                    <p>14:40 - 15:25</p>
                                                 </div>
                                             </tr>
                                             <tr>
-                                                <div className="hour">
-                                                    15:40 - 16:25
+                                                <div className="box-schedule">
+                                                    <p>15:40 - 16:25</p>
                                                 </div>
                                             </tr>
                                             <tr>
-                                                <div className="hour">
-                                                    16:30 - 17:15
+                                                <div className="box-schedule">
+                                                    <p>16:30 - 17:15</p>
                                                 </div>
                                             </tr>
                                         </td>
                                         <td>
-                                            {getLich(arrT2, "Thứ 2").map(
+                                            {getLich(arrT2, "2").map(
                                                 (data) => {
-                                                    const color =
-                                                        data.SubjectTime
-                                                            ? "#f48023"
-                                                            : "#fff";
+                                                    const date = data.SubjectTime;
+                                                    const color = date ? "#f48023" : "#ccc";
                                                     return (
                                                         <tr>
                                                             <div
@@ -219,16 +244,9 @@ function Shedule() {
                                                                         color,
                                                                 }}
                                                             >
-                                                                <p>
-                                                                    {
-                                                                        data?.SubjectName
-                                                                    }
-                                                                </p>
-                                                                <p>
-                                                                    {
-                                                                        data?.ClassName
-                                                                    }
-                                                                </p>
+                                                                <p> { data?.SubjectName } </p>
+                                                                <p> { data?.ClassName } </p>
+                                                                <p> { data?.Names } </p>
                                                             </div>
                                                         </tr>
                                                     );
@@ -237,12 +255,10 @@ function Shedule() {
                                             <tr></tr>
                                         </td>
                                         <td>
-                                            {getLich(arrT3, "Thứ 3").map(
+                                            {getLich(arrT3, "3").map(
                                                 (data) => {
-                                                    const color =
-                                                        data.SubjectTime
-                                                            ? "#f48023"
-                                                            : "#fff";
+                                                    const date = data.SubjectTime;
+                                                    const color = date ? "#f48023" : "#ccc";
                                                     return (
                                                         <tr>
                                                             <div
@@ -262,6 +278,7 @@ function Shedule() {
                                                                         data?.ClassName
                                                                     }
                                                                 </p>
+                                                                <p> { data?.Names } </p>
                                                             </div>
                                                         </tr>
                                                     );
@@ -269,12 +286,10 @@ function Shedule() {
                                             )}
                                         </td>
                                         <td>
-                                            {getLich(arrT4, "Thứ 4").map(
+                                            {getLich(arrT4, "4").map(
                                                 (data) => {
-                                                    const color =
-                                                        data.SubjectTime
-                                                            ? "#f48023"
-                                                            : "#fff";
+                                                    const date = data.SubjectTime;
+                                                    const color = date ? "#f48023" : "#ccc";
                                                     return (
                                                         <tr>
                                                             <div
@@ -294,6 +309,7 @@ function Shedule() {
                                                                         data?.ClassName
                                                                     }
                                                                 </p>
+                                                                <p> { data?.Names } </p>
                                                             </div>
                                                         </tr>
                                                     );
@@ -301,12 +317,10 @@ function Shedule() {
                                             )}
                                         </td>
                                         <td>
-                                            {getLich(arrT5, "Thứ 5").map(
+                                            {getLich(arrT5, "5").map(
                                                 (data) => {
-                                                    const color =
-                                                        data.SubjectTime
-                                                            ? "#f48023"
-                                                            : "#fff";
+                                                    const date = data.SubjectTime;
+                                                    const color = date ? "#f48023" : "#ccc";
                                                     return (
                                                         <tr>
                                                             <div
@@ -326,6 +340,7 @@ function Shedule() {
                                                                         data?.ClassName
                                                                     }
                                                                 </p>
+                                                                <p> { data?.Names } </p>
                                                             </div>
                                                         </tr>
                                                     );
@@ -333,12 +348,10 @@ function Shedule() {
                                             )}
                                         </td>
                                         <td>
-                                            {getLich(arrT6, "Thứ 6").map(
+                                            {getLich(arrT6, "6").map(
                                                 (data) => {
-                                                    const color =
-                                                        data.SubjectTime
-                                                            ? "#f48023"
-                                                            : "#fff";
+                                                    const date = data.SubjectTime;
+                                                    const color = date ? "#f48023" : "#ccc";
                                                     return (
                                                         <tr>
                                                             <div
@@ -358,6 +371,7 @@ function Shedule() {
                                                                         data?.ClassName
                                                                     }
                                                                 </p>
+                                                                <p> { data?.Names } </p>
                                                             </div>
                                                         </tr>
                                                     );
@@ -365,12 +379,10 @@ function Shedule() {
                                             )}
                                         </td>
                                         <td>
-                                            {getLich(arrT7, "Thứ 7").map(
+                                            {getLich(arrT7, "7").map(
                                                 (data) => {
-                                                    const color =
-                                                        data.SubjectTime
-                                                            ? "#f48023"
-                                                            : "#fff";
+                                                    const date = data.SubjectTime;
+                                                    const color = date ? "#f48023" : "#ccc";
                                                     return (
                                                         <tr>
                                                             <div
@@ -390,6 +402,7 @@ function Shedule() {
                                                                         data?.ClassName
                                                                     }
                                                                 </p>
+                                                                <p> { data?.Names } </p>
                                                             </div>
                                                         </tr>
                                                     );
@@ -397,12 +410,10 @@ function Shedule() {
                                             )}
                                         </td>
                                         <td>
-                                            {getLich(arrCN, "Chủ Nhật").map(
+                                            {getLich(arrCN, "8").map(
                                                 (data) => {
-                                                    const color =
-                                                        data.SubjectTime
-                                                            ? "#f48023"
-                                                            : "#fff";
+                                                    const date = data.SubjectTime;
+                                                    const color = date ? "#f48023" : "#ccc";
                                                     return (
                                                         <tr>
                                                             <div
@@ -422,6 +433,7 @@ function Shedule() {
                                                                         data?.ClassName
                                                                     }
                                                                 </p>
+                                                                <p> { data?.Names } </p>
                                                             </div>
                                                         </tr>
                                                     );
