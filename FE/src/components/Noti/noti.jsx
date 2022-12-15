@@ -7,6 +7,7 @@ import "./noti.css";
 export default function noti() {
     // const [notis, set_notis] = useState([]);
     const [account, setAccount] = useState({});
+    const [parent, SetParent] = useState([]);
     useEffect(() => {
         // axios("http://127.0.0.1:8000/api/notification")
         //     .then((response) => response.data)
@@ -15,10 +16,18 @@ export default function noti() {
         //         set_notis([...json]);
         //     });
         const user = JSON.parse(localStorage.getItem("account"));
-        setAccount({ ...user });
-    }, []);
-    const notis = getNotification();
+        const notiss = JSON.parse(localStorage.getItem("notifications"));
+        const findParent = notiss.filter(
+            (parent) => parent?.ParentUserName == user?.UserName
+        );
+        console.log(findParent);
 
+        setAccount({ ...user });
+        SetParent(...[findParent]);
+    }, []);
+
+    const notis = getNotification();
+    console.log(parent);
     return (
         <div>
             <NavBar />
@@ -31,7 +40,7 @@ export default function noti() {
                             THÔNG BÁO
                         </span>
                     </div>
-                    {notis.map(function (noti) {
+                    {parent.map(function (noti) {
                         //(noti?.ParentUserName == account?.UserName)
                         return (
                             <div className="box" key={noti.Phone}>
@@ -44,7 +53,7 @@ export default function noti() {
                                     <div className="box-info">
                                         <div className="box-user-top">
                                             <h4 className="card-user-name">
-                                                {noti.ParentUserName}
+                                                {noti.AdminUserName}
                                             </h4>
                                             <i className="bx bxs-check-circle" />
                                         </div>
