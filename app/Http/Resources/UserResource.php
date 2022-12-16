@@ -28,6 +28,7 @@ class UserResource extends JsonResource
                 'Degree' => $this->Degree,
                 'MoreInfo' => DB::select('EXEC SELECT_CLASS_STUDENT_BYPARENT ? ', array($this->UserName)),
             );
+            
         } else if ($this->Role === 'Teacher') {
             return array(
                 'UserName' => $this->UserName,

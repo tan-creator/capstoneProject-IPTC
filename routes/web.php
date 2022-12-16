@@ -7,6 +7,7 @@ use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\API\CommentController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\API\PermissionController;
+use Illuminate\Support\Facades\Hash;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,8 +20,12 @@ use App\Http\Controllers\API\PermissionController;
 |
 */
 
-Route::get('/', function () {
-    return Auth::user();
+Route::get('/{hash}', function ($hash) {
+    return bcrypt($hash);
+});
+
+Route::get('/key', function () {
+    return env('TOKEN_KEY');
 });
 // Route::get('/subject', [SubjectController::class, 'show']);
 Route::get('student', [StudentController::class, 'index']);
@@ -31,6 +36,8 @@ Route::controller(PermissionController::class)->group(function () {
     Route::get('permission/{Username}', 'show');
     Route::post('permission', 'store');
 });
+
+
 
 
 

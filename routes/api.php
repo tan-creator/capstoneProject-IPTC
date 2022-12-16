@@ -2,6 +2,9 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+
+use App\Http\Controllers\Auth\AuthController;
+
 use App\Http\Controllers\API\SubjectController;
 use App\Http\Controllers\API\StudentController;
 use App\Http\Controllers\API\ClassController;
@@ -10,13 +13,13 @@ use App\Http\Controllers\API\PostController;
 use App\Http\Controllers\API\NotificationController;
 use App\Http\Controllers\API\CommentController;
 use App\Http\Controllers\API\LikesController;
-use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\API\PointController;
 use App\Http\Controllers\API\RollCallController;
 use App\Http\Controllers\API\RiewviewLessionController;
 use App\Http\Controllers\API\CostController;
 use App\Http\Controllers\API\PermissionController;
 
+use App\Http\Middleware\JWTMiddleware;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -136,4 +139,8 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('login', 'login');  
     Route::post('resetPassword', 'resetPassword');  
 });
+
+Route::post('/testJWT', function (Request $request){
+    print_r($request->all());
+})->middleware('jwt');
 
