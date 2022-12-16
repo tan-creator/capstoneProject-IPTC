@@ -103,7 +103,7 @@ function Shedule() {
             if (arr.SubjectTime.indexOf("7:50-8:35",0) >= 0) {
               array[1] = arr;
             }
-            if (arr.SubjectTime.indexOf("8:40-9:25",0) >= 0) {
+            if (arr.SubjectTime.indexOf("8:50-9:35",0) >= 0) {
               array[2] = arr;
             }
             if (arr.SubjectTime.indexOf("9:40-10:25",0) >= 0) {
@@ -191,7 +191,7 @@ function Shedule() {
                                             </tr>
                                             <tr>
                                                 <div className="box-schedule">
-                                                    <p>8:40 - 9:25</p>
+                                                    <p>8:50 - 9:35</p>
                                                 </div>
                                             </tr>
                                             <tr>
@@ -201,7 +201,7 @@ function Shedule() {
                                             </tr>
                                             <tr>
                                                 <div className="box-schedule">
-                                                    <p>0:30 - 11:15</p>1
+                                                    <p>10:30 - 11:15</p>
                                                 </div>
                                             </tr>
                                             <tr>

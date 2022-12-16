@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useLayoutEffect } from "react";
+import React, { useEffect, useState, useLayoutEffect, memo } from "react";
 import NavBar from "../NavBar/NavBar";
 import Sidebar from "../Layout/DefaultLayout/Sidebar/Sidebar";
 import { useAlert } from "react-alert";
@@ -14,19 +14,12 @@ function Cost () {
         CostType: "",
         CostAmountMoney: "",
         CostDescription: "",
+        CreateAt : ""
     });
     const [dataSend, setDataSend] = useState();
     const alertNav = useAlert();
 
     useEffect(() => {
-
-        fetch("http://127.0.0.1:8000/api/cost")
-            .then (response => response.json())
-            .then(json => {
-                setCosts(json)
-            })
-            .catch(error => console.log('error',error));
-
         fetch("http://127.0.0.1:8000/api/student")
             .then (response => response.json())
             .then(json => {
@@ -45,6 +38,15 @@ function Cost () {
         setUser({ ...users})
 
     }, []);
+
+    useLayoutEffect(() => {
+        fetch("http://127.0.0.1:8000/api/cost")
+            .then (response => response.json())
+            .then(json => {
+                setCosts(json)
+            })
+            .catch(error => console.log('error',error));
+    },[costs])
 
     function getCost () {
         const arrCost = [];
@@ -67,6 +69,15 @@ function Cost () {
                 if(cost.ClassID == idCl) { arrCost.push(cost); }
             })
         }
+
+        // Sắp xếp theo ngày và giờ
+        arrCost.sort(function (a, b) {
+            return a.CreateAt.localeCompare(b.CreateAt);
+        });
+        arrCost.reverse(function (a, b) {
+            return a.CreateAt.localeCompare(b.CreateAt);
+        });
+
         return arrCost
     }
 
@@ -88,6 +99,7 @@ function Cost () {
     }
 
     const handleSubmit = async () => {
+
         var idCl = "";
         if (user.Role == "Teacher") {
             classes.map((cls) => {
@@ -109,6 +121,10 @@ function Cost () {
             return;
         }
 
+        const today = new Date();
+        const time = today.getFullYear()+"-"+(today.getMonth()+1)+"-"+today.getDate()+" "+today.getHours()+":"+today.getMinutes()+":"+today.getSeconds();
+        bill.CreateAt  = time;
+
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json ; charset=UTF-8' },
@@ -117,14 +133,15 @@ function Cost () {
         fetch('http://127.0.0.1:8000/api/cost', requestOptions)
             .then((response)  => {
                 if (response.status == 200) {
-                    console.log(response);
+                    console.log("Thành công\n"+bill);
                     alertNav.success("Thêm thành công: ");
                 } else {
+                    console.log("Thất bại\n"+bill);
                     alertNav.error("Thêm thất bại: ");
                 }
             })
             .catch(error => {
-                alertNav.error(error.toString());
+                alertNav.error("Fetch thất bại: ");
                 console.log('error',error)
             });
     }
@@ -146,11 +163,10 @@ function Cost () {
                 alertNav.error(error.toString());
                 console.log('error',error)
             });
+
     }
 
     const handleGetCost = (data) => {
-        // const value = e.target.value;
-        // console.log(data)
         setDataSend(data);
     }
 
@@ -269,7 +285,9 @@ function Cost () {
                                                         onClick={handleDeleteCost}
                                                         type="button"
                                                         value={cost.CostID}
-                                                        >Xóa</button>
+                                                        >
+                                                            <i className="bx bx-trash-alt icon" />
+                                                        </button>
                                                     )}
                                                 </div>
                                                 <p>Chi tiết: </p>
@@ -293,14 +311,13 @@ function Cost () {
     )
 }
 
-function ShowCost (props) {
+const ShowCost = memo( (props) => {
     const [getData, setGetData] = useState({});
     useLayoutEffect(() => {
         if (props.data !== getData) {
             setGetData(props.data)
         }
     }, [props.data])
-
     console.log(getData);
 
     return (
@@ -310,6 +327,6 @@ function ShowCost (props) {
             <p>{getData?.CostDescription}</p>
         </>
     )
-}
+})
 
 export default Cost;

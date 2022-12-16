@@ -52,8 +52,8 @@ input::-webkit-inner-spin-button {
 }
 
 .cost-box-left {
-    display: flex;
-    flex-direction: column-reverse;
+    /* display: flex;
+    flex-direction: column-reverse; */
     width: 370px;
     border-right: 1px solid #ccc;
     overflow-y: scroll;
@@ -83,6 +83,23 @@ input::-webkit-inner-spin-button {
     padding: 10px 20px;
     width: 75px;
     margin-right: 5px;
+    background-color: #fff;
+}
+
+.btn-delete-cost button:hover {
+   background-color: #f48023;
+   cursor: pointer;
+}
+
+.btn-delete-cost button:hover i.bx.bx-trash-alt.icon::before {
+    color: #fff;
+}
+.bx-trash-alt {
+    padding: 0;
+}
+i.bx.bx-trash-alt.icon::before {
+    font-size: 25px;
+    color: #000;
 }
 
 .btn-delete-cost button,h3 {
