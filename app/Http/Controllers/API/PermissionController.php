@@ -18,7 +18,7 @@ class PermissionController extends Controller
      */
     public function index()
     {
-        return PermissionResource::collection(Permission::all());
+        return response()->json(PermissionResource::collection(Permission::all()), 200);
     }
 
     /**
@@ -46,7 +46,7 @@ class PermissionController extends Controller
             $studentIDarrs[] = $studentIDobj->StudentID;
         }
         $permissionByStudentID = Permission::where('StudentID', $studentIDarrs)->get();
-        return PermissionResource::collection($permissionByStudentID);
+        return response()->json(PermissionResource::collection($permissionByStudentID), 200);
     }
 
     /**
@@ -63,7 +63,7 @@ class PermissionController extends Controller
             $studentIDarrs[] = $studentIDobj->StudentID;
         }
         $permissionByStudentID = Permission::where('StudentID', $studentIDarrs)->get();
-        return PermissionResource::collection($permissionByStudentID);
+        return response()->json(PermissionResource::collection($permissionByStudentID), 200);
     }
 
     /**
