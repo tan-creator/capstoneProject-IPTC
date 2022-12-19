@@ -27,15 +27,22 @@ table th {
 }
 
 .box-schedule:nth-child(odd) {
-    background-color: #ccc;
+    background-color: #fff;
+}
+
+.box-schedule.hour p{
+    color: #000;
+    line-height: 90px;
 }
 
 .box-schedule {
-    width: 120px;
+    width: 110px;
     padding: 5px;
     box-sizing: border-box;
     height: 100px;
-    margin-bottom: 5px;
+    margin: 10px 0;
+    border-radius: 10px;
+    box-shadow: #ccc 5px 5px,  #ccc -2px -2px;
 }
 
 .box-schedule p {
@@ -49,7 +56,7 @@ table th {
 td {
     width: 120px;
     font-size: 14px;
-    padding-right: 5px;
+    padding-right: 15px;
 }
 
 tbody td:last-child {

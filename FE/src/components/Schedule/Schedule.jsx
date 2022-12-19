@@ -180,52 +180,52 @@ function Shedule() {
                                     <tr>
                                         <td>
                                             <tr>
-                                                <div className="box-schedule">
+                                                <div className="box-schedule hour">
                                                     <p>7:00 - 7:45</p>
                                                 </div>
                                             </tr>
                                             <tr>
-                                                <div className="box-schedule">
+                                                <div className="box-schedule hour">
                                                     <p>7:50 - 8:35</p>
                                                 </div>
                                             </tr>
                                             <tr>
-                                                <div className="box-schedule">
+                                                <div className="box-schedule hour">
                                                     <p>8:50 - 9:35</p>
                                                 </div>
                                             </tr>
                                             <tr>
-                                                <div className="box-schedule">
+                                                <div className="box-schedule hour">
                                                     <p>9:40 - 10:25</p>
                                                 </div>
                                             </tr>
                                             <tr>
-                                                <div className="box-schedule">
+                                                <div className="box-schedule hour">
                                                     <p>10:30 - 11:15</p>
                                                 </div>
                                             </tr>
                                             <tr>
-                                                <div className="box-schedule">
+                                                <div className="box-schedule hour">
                                                     <p>13:00 - 13:45</p>
                                                 </div>
                                             </tr>
                                             <tr>
-                                                <div className="box-schedule">
+                                                <div className="box-schedule hour">
                                                     <p>13:50 - 14:35</p>
                                                 </div>
                                             </tr>
                                             <tr>
-                                                <div className="box-schedule">
+                                                <div className="box-schedule hour">
                                                     <p>14:40 - 15:25</p>
                                                 </div>
                                             </tr>
                                             <tr>
-                                                <div className="box-schedule">
+                                                <div className="box-schedule hour">
                                                     <p>15:40 - 16:25</p>
                                                 </div>
                                             </tr>
                                             <tr>
-                                                <div className="box-schedule">
+                                                <div className="box-schedule hour">
                                                     <p>16:30 - 17:15</p>
                                                 </div>
                                             </tr>
@@ -234,7 +234,7 @@ function Shedule() {
                                             {getLich(arrT2, "2").map(
                                                 (data) => {
                                                     const date = data.SubjectTime;
-                                                    const color = date ? "#f48023" : "#ccc";
+                                                    const color = date ? "#f48023" : "#fff";
                                                     return (
                                                         <tr>
                                                             <div
@@ -258,7 +258,7 @@ function Shedule() {
                                             {getLich(arrT3, "3").map(
                                                 (data) => {
                                                     const date = data.SubjectTime;
-                                                    const color = date ? "#f48023" : "#ccc";
+                                                    const color = date ? "#f48023" : "#fff";
                                                     return (
                                                         <tr>
                                                             <div
@@ -289,7 +289,7 @@ function Shedule() {
                                             {getLich(arrT4, "4").map(
                                                 (data) => {
                                                     const date = data.SubjectTime;
-                                                    const color = date ? "#f48023" : "#ccc";
+                                                    const color = date ? "#f48023" : "#fff";
                                                     return (
                                                         <tr>
                                                             <div
@@ -320,7 +320,7 @@ function Shedule() {
                                             {getLich(arrT5, "5").map(
                                                 (data) => {
                                                     const date = data.SubjectTime;
-                                                    const color = date ? "#f48023" : "#ccc";
+                                                    const color = date ? "#f48023" : "#fff";
                                                     return (
                                                         <tr>
                                                             <div
@@ -351,7 +351,7 @@ function Shedule() {
                                             {getLich(arrT6, "6").map(
                                                 (data) => {
                                                     const date = data.SubjectTime;
-                                                    const color = date ? "#f48023" : "#ccc";
+                                                    const color = date ? "#f48023" : "#fff";
                                                     return (
                                                         <tr>
                                                             <div
@@ -382,7 +382,7 @@ function Shedule() {
                                             {getLich(arrT7, "7").map(
                                                 (data) => {
                                                     const date = data.SubjectTime;
-                                                    const color = date ? "#f48023" : "#ccc";
+                                                    const color = date ? "#f48023" : "#fff";
                                                     return (
                                                         <tr>
                                                             <div
@@ -413,7 +413,7 @@ function Shedule() {
                                             {getLich(arrCN, "8").map(
                                                 (data) => {
                                                     const date = data.SubjectTime;
-                                                    const color = date ? "#f48023" : "#ccc";
+                                                    const color = date ? "#f48023" : "#fff";
                                                     return (
                                                         <tr>
                                                             <div

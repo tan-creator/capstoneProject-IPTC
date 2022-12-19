@@ -7,7 +7,7 @@ import Statistic from "../components/Statistic/Statistic";
 import noti from "../components/Noti/noti";
 import App from "../components/Chart/App";
 import Forum from "../components/Forum/Forum";
-import Personnal from "../components/Personal/Personnal";
+import Personal from "../components/Personal/Personal";
 import Dashboard from "../components/Dashboard/Dashboard";
 import NavBar from "../components/NavBar/NavBar";
 import Grade from "../components/Grade/Grade";
@@ -31,7 +31,7 @@ const publicRoutes = [
     { path: "/noti", component: noti },
     { path: "/chart", component: App },
     { path: "/forum", component: Forum },
-    { path: "/personal", component: Personnal },
+    { path: "/personal", component: Personal},
     { path: "/dashboard", component: Dashboard },
     { path: "/navbar", component: NavBar },
     { path: "/grade", component: Grade },

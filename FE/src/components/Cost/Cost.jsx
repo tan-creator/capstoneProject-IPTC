@@ -292,8 +292,10 @@ function Cost () {
                                                 </div>
                                                 <p>Chi tiết: </p>
                                                 <p className="p-cost-description">{cost.CostDescription}</p>
-                                                <p>Tổng cộng: </p>
-                                                <p>{parseInt(cost.CostAmountMoney)}</p>
+                                                <div style={{display:'flex'}}>
+                                                    <p>Tổng tiền: </p>
+                                                    <p style={{paddingLeft:'10px'}}>{parseInt(cost.CostAmountMoney)}</p>
+                                                </div>
                                             </div>
                                         )
                                     })
@@ -321,10 +323,23 @@ const ShowCost = memo( (props) => {
     console.log(getData);
 
     return (
+
         <>
-            <p>{getData?.CostType}</p>
-            <p>{getData?.CostAmountMoney}</p>
-            <p>{getData?.CostDescription}</p>
+            {getData != null && (
+                <div className="box-show-cost">
+                    <h3>{getData?.CostType}</h3>
+                    <br/>
+                    <div>
+                        <p>Chi tiết: </p>
+                        <p>{getData?.CostDescription}</p>
+                    </div>
+                    <br/>
+                    <div style={{display:'flex'}}>
+                        <p>Tổng tiền: </p>
+                        <p style={{paddingLeft:'10px'}}>{getData?.CostAmountMoney}</p>
+                    </div>
+                </div>
+            )}
         </>
     )
 })

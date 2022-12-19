@@ -1,3 +1,7 @@
+html {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
 .container {
     height: auto;
 }
@@ -118,4 +122,19 @@ i.bx.bx-trash-alt.icon::before {
     background-color: #f48023;
     opacity: 0.8;
     color: #fff;
+}
+
+.box-show-cost {
+
+}
+.box-show-cost h3 {
+    background-color: rgb(204,204,204, 0.6) ;
+    padding: 0 10px;
+}
+.box-show-cost div {
+    padding: 0 10px;
+}
+.box-show-cost div:last-child {
+    border-top: 1px solid #ccc;
+    padding-top: 5px;
 }

@@ -36,44 +36,53 @@ function Form () {
     }, []);
 
     const [permission, setPermission] = useState([])
-    useEffect(() => {
+    // useEffect(() => {
+        // fetch("http://127.0.0.1:8000/api/permission")
+        //     .then (response => { response.json()
+        //     })
+        //     .then(json => {
+        //         setPermission(json)
+        //         console.log("permission:\n "+permission);
+        //     })
+        //     .catch(error => console.log('error',error));
+    // },[]);
+
+    const getPermission = async (e) => {
+        e.stopPropagation()
         fetch("http://127.0.0.1:8000/api/permission")
-            .then (response => {
-                if (response.status == 200){
-                    response.json()
-                }
-                else console.log("get ko dc");
+            .then (response => { response.json()
             })
             .then(json => {
                 setPermission(json)
                 console.log("permission:\n "+permission);
             })
             .catch(error => console.log('error',error));
-    },[]);
-
-    function getNameTeacher() {
-        const idCl = "";
-        const idTeacher = "";
-        const name = "";
-
-        student.map((std) => {
-            if(account.UserName === std.ParentUserName) {
-                idCl = std.ClassID;
-            }
-        })
-        classes.map((cls) => {
-            if(idCl === cls.ClassID){
-                idTeacher = cls.TeacherClassUserName;
-            }
-        })
-        users.map((user) => {
-            if(idTeacher === user.UserName){
-                name = user.Names;
-            }
-        })
-        return name;
+        console.log(permission);
     }
-    var nameTeacher = "getNameTeacher();"
+
+    // function getNameTeacher() {
+    //     const idCl = "";
+    //     const idTeacher = "";
+    //     const name = "";
+
+    //     student.map((std) => {
+    //         if(account.UserName === std.ParentUserName) {
+    //             idCl = std.ClassID;
+    //         }
+    //     })
+    //     classes.map((cls) => {
+    //         if(idCl === cls.ClassID){
+    //             idTeacher = cls.TeacherClassUserName;
+    //         }
+    //     })
+    //     users.map((user) => {
+    //         if(idTeacher === user.UserName){
+    //             name = user.Names;
+    //         }
+    //     })
+    //     return name;
+    // }
+    // var nameTeacher = "getNameTeacher();"
 
     return (
         <div>
@@ -81,6 +90,7 @@ function Form () {
             <Sidebar />
             <div className="container">
                 <div className="form-content">
+                <button onClick={getPermission}>test</button>
                     {account?.Role === "Parent" && (
                         <form action="">
                             <table>
@@ -101,7 +111,9 @@ function Form () {
                                     <td colSpan={2}><textarea name="" id="" cols="30" rows="4"></textarea></td>
                                 </tr>
                             </table>
+
                         </form>
+
                     )}
                     {account?.Role === "Teacher" && (
                         <div className="box-permission">
