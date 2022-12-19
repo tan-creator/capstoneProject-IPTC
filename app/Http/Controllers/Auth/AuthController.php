@@ -29,7 +29,8 @@ class AuthController extends Controller
                 ], env('TOKEN_KEY'), 'HS256');
 
                 $userInfo[0]->Token = $token;
-                return $userInfo;
+                // return $userInfo;
+                return response()->json(UserResource::collection($userInfo), 200);
             } else {
                 return response()->json(['statusCode' => 400, 'msg' => 'Sai mật khẩu, mời nhập lại!'], 400);
             }
