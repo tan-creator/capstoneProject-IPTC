@@ -25,11 +25,6 @@ export default function Sidebar() {
         });
 
         const user = JSON.parse(localStorage.getItem("account"));
-        const students = JSON.parse(localStorage.getItem("students"));
-        const findStudent = students.find(
-            (student) => student?.ParentUserName == user?.UserName
-        );
-        user.StudentID = findStudent.StudentID;
         setAccount({ ...user });
     }, []);
 
@@ -110,7 +105,7 @@ export default function Sidebar() {
                                 {account?.Role === "Parent" && (
                                     <li className="nav-link">
                                         <a
-                                            href={`/checkpoint/${account?.StudentID}`}
+                                            href={`/checkpoint/${account?.MoreInfo[0].StudentID}`}
                                         >
                                             <i className="bx bx-pie-chart-alt icon" />
                                             <span className="text nav-text">
