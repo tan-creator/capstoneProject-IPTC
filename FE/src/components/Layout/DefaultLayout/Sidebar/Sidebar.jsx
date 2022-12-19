@@ -81,14 +81,14 @@ export default function Sidebar() {
                                     </a>
                                 </li>
 
-                                <li className="nav-link">
+                                {/* <li className="nav-link">
                                     <a href="/chart">
                                         <i className="bx bx-bar-chart-alt-2 icon" />
                                         <span className="text nav-text">
                                             Thống kê
                                         </span>
                                     </a>
-                                </li>
+                                </li> */}
                                 <li className="nav-link">
                                     <a href="/noti">
                                         <i className="bx bx-bell icon" />

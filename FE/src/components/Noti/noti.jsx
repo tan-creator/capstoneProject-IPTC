@@ -31,7 +31,7 @@ export default function noti() {
     return (
         <div>
             <NavBar />
-            <div className="container">
+            <div className="container" style={{ height: "1440px" }}>
                 <Sidebar />
                 <div className="forum-content">
                     <div className="annouce">

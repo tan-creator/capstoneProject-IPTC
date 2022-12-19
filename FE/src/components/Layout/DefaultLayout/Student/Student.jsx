@@ -7,6 +7,7 @@ import axios from "axios";
 import _ from "lodash";
 export default function Student(props) {
     const alert = useAlert();
+
     const [subjects, setSubJect] = useState([]);
     const [isUpdate, setIsUpdate] = useState(false);
     const [allPoint, setAllPoint] = useState([]);
@@ -161,175 +162,205 @@ export default function Student(props) {
         <div>
             <NavBar />
             <Sidebar />
-            <div className="grade">
-                <div className="annouce" style={{ marginTop: "30px" }}>
+            <div className="grade" style={{ height: "1440px" }}>
+                <div
+                    className="annouce"
+                    style={{ marginTop: "30px", marginBottom: "50px" }}
+                >
                     <span>
                         <i className="bx bxs-notepad" />
                         BẢNG ĐIỂM
                     </span>
                 </div>
-                <div
-                    className="grade-table"
-                    style={{ fontSize: "16px", margin: 10 }}
-                >
-                    <button
-                        type="button"
-                        className="btn btn-secondary"
-                        data-toggle="modal"
-                        data-target="#exampleModal"
-                        style={{
-                            fontSize: 15,
-                            fontWeight: "600",
-                            marginBottom: 50,
-                        }}
-                    >
-                        Nhập điểm
-                    </button>
-                    <div
-                        className="modal fade"
-                        id="exampleModal"
-                        tabIndex="-1"
-                        role="dialog"
-                        aria-labelledby="exampleModalLabel"
-                        aria-hidden="true"
-                    >
-                        <div className="modal-dialog" role="document">
-                            <div className="modal-content">
-                                <div className="modal-body">
-                                    <form action="" method="POST" role="form">
-                                        <legend>Bảng nhập điểm</legend>
+                <div className="grade-table" style={{ margin: 10 }}>
+                    {account?.Role === "Teacher" && (
+                        <>
+                            <button
+                                type="button"
+                                className="btn btn-secondary"
+                                data-toggle="modal"
+                                data-target="#exampleModal"
+                                style={{
+                                    fontSize: 15,
+                                    fontWeight: "600",
+                                    marginBottom: 50,
+                                }}
+                            >
+                                Nhập điểm
+                            </button>
+                            <div
+                                className="modal fade"
+                                id="exampleModal"
+                                tabIndex="-1"
+                                role="dialog"
+                                aria-labelledby="exampleModalLabel"
+                                aria-hidden="true"
+                            >
+                                <div className="modal-dialog" role="document">
+                                    <div className="modal-content">
+                                        <div className="modal-body">
+                                            <form
+                                                action=""
+                                                method="POST"
+                                                role="form"
+                                            >
+                                                <legend>Bảng nhập điểm</legend>
 
-                                        <div className="form-group">
-                                            <label htmlFor="">
-                                                Điểm miệng Lần 1
-                                            </label>
-                                            <input
-                                                type="number"
-                                                className="form-control"
-                                                name="Quiz1"
-                                                placeholder="Nhập điểm miệng"
-                                                value={point.Quiz1}
-                                                onChange={handleOnChange}
-                                            />
+                                                <div className="form-group">
+                                                    <label htmlFor="">
+                                                        Điểm miệng Lần 1
+                                                    </label>
+                                                    <input
+                                                        type="number"
+                                                        className="form-control"
+                                                        name="Quiz1"
+                                                        placeholder="Nhập điểm miệng"
+                                                        value={point.Quiz1}
+                                                        onChange={
+                                                            handleOnChange
+                                                        }
+                                                    />
+                                                </div>
+                                                <div className="form-group">
+                                                    <label htmlFor="">
+                                                        Điểm miệng Lần 2
+                                                    </label>
+                                                    <input
+                                                        type="number"
+                                                        className="form-control"
+                                                        name="Quiz2"
+                                                        placeholder="Nhập điểm miệng"
+                                                        value={point.Quiz2}
+                                                        onChange={
+                                                            handleOnChange
+                                                        }
+                                                    />
+                                                </div>
+                                                <div className="form-group">
+                                                    <label htmlFor="">
+                                                        Điểm miệng Lần 3
+                                                    </label>
+                                                    <input
+                                                        type="number"
+                                                        className="form-control"
+                                                        name="Quiz3"
+                                                        placeholder="Nhập điểm miệng"
+                                                        value={point.Quiz3}
+                                                        onChange={
+                                                            handleOnChange
+                                                        }
+                                                    />
+                                                </div>
+                                                <div className="form-group">
+                                                    <label htmlFor="">
+                                                        Điểm 15 phút Lần 1
+                                                    </label>
+                                                    <input
+                                                        type="number"
+                                                        className="form-control"
+                                                        name="Oral_1"
+                                                        placeholder="Nhập điểm 15 phút"
+                                                        value={point.Oral_1}
+                                                        onChange={
+                                                            handleOnChange
+                                                        }
+                                                    />
+                                                </div>
+                                                <div className="form-group">
+                                                    <label htmlFor="">
+                                                        Điểm 15 phút Lần 2
+                                                    </label>
+                                                    <input
+                                                        type="number"
+                                                        className="form-control"
+                                                        name="Oral_2"
+                                                        placeholder="Nhập điểm 15 phút"
+                                                        value={point.Oral_2}
+                                                        onChange={
+                                                            handleOnChange
+                                                        }
+                                                    />
+                                                </div>
+                                                <div className="form-group">
+                                                    <label htmlFor="">
+                                                        Điểm 15 phút Lần 3
+                                                    </label>
+                                                    <input
+                                                        type="number"
+                                                        className="form-control"
+                                                        name="Oral_3"
+                                                        placeholder="Nhập điểm 15 phút"
+                                                        value={point.Oral_3}
+                                                        onChange={
+                                                            handleOnChange
+                                                        }
+                                                    />
+                                                </div>
+                                                <div className="form-group">
+                                                    <label htmlFor="">
+                                                        Giữa kì
+                                                    </label>
+                                                    <input
+                                                        type="number"
+                                                        className="form-control"
+                                                        name="Midterm"
+                                                        placeholder="Nhập điểm giữa kì"
+                                                        value={point.Midterm}
+                                                        onChange={
+                                                            handleOnChange
+                                                        }
+                                                    />
+                                                </div>
+                                                <div className="form-group">
+                                                    <label htmlFor="">
+                                                        Cuối kì
+                                                    </label>
+                                                    <input
+                                                        name="Final"
+                                                        type="number"
+                                                        className="form-control"
+                                                        id=""
+                                                        placeholder="Nhập điểm cuối kì"
+                                                        onChange={
+                                                            handleOnChange
+                                                        }
+                                                        value={point.Final}
+                                                    />
+                                                </div>
+                                            </form>
                                         </div>
-                                        <div className="form-group">
-                                            <label htmlFor="">
-                                                Điểm miệng Lần 2
-                                            </label>
-                                            <input
-                                                type="number"
-                                                className="form-control"
-                                                name="Quiz2"
-                                                placeholder="Nhập điểm miệng"
-                                                value={point.Quiz2}
-                                                onChange={handleOnChange}
-                                            />
+                                        <div className="modal-footer">
+                                            <button
+                                                style={{ fontSize: 14 }}
+                                                type="button"
+                                                className="btn btn-secondary"
+                                                data-dismiss="modal"
+                                                onClick={() =>
+                                                    setIsUpdate(false)
+                                                }
+                                            >
+                                                Đóng
+                                            </button>
+                                            <button
+                                                style={{ fontSize: 14 }}
+                                                onClick={handleSubmit}
+                                                type="button"
+                                                className={
+                                                    isUpdate
+                                                        ? "btn btn-success"
+                                                        : "btn btn-primary"
+                                                }
+                                            >
+                                                {isUpdate
+                                                    ? "Update Bảng Điểm"
+                                                    : "Tạo bảng điểm"}
+                                            </button>
                                         </div>
-                                        <div className="form-group">
-                                            <label htmlFor="">
-                                                Điểm miệng Lần 3
-                                            </label>
-                                            <input
-                                                type="number"
-                                                className="form-control"
-                                                name="Quiz3"
-                                                placeholder="Nhập điểm miệng"
-                                                value={point.Quiz3}
-                                                onChange={handleOnChange}
-                                            />
-                                        </div>
-                                        <div className="form-group">
-                                            <label htmlFor="">
-                                                Điểm 15 phút Lần 1
-                                            </label>
-                                            <input
-                                                type="number"
-                                                className="form-control"
-                                                name="Oral_1"
-                                                placeholder="Nhập điểm 15 phút"
-                                                value={point.Oral_1}
-                                                onChange={handleOnChange}
-                                            />
-                                        </div>
-                                        <div className="form-group">
-                                            <label htmlFor="">
-                                                Điểm 15 phút Lần 2
-                                            </label>
-                                            <input
-                                                type="number"
-                                                className="form-control"
-                                                name="Oral_2"
-                                                placeholder="Nhập điểm 15 phút"
-                                                value={point.Oral_2}
-                                                onChange={handleOnChange}
-                                            />
-                                        </div>
-                                        <div className="form-group">
-                                            <label htmlFor="">
-                                                Điểm 15 phút Lần 3
-                                            </label>
-                                            <input
-                                                type="number"
-                                                className="form-control"
-                                                name="Oral_3"
-                                                placeholder="Nhập điểm 15 phút"
-                                                value={point.Oral_3}
-                                                onChange={handleOnChange}
-                                            />
-                                        </div>
-                                        <div className="form-group">
-                                            <label htmlFor="">Giữa kì</label>
-                                            <input
-                                                type="number"
-                                                className="form-control"
-                                                name="Midterm"
-                                                placeholder="Nhập điểm giữa kì"
-                                                value={point.Midterm}
-                                                onChange={handleOnChange}
-                                            />
-                                        </div>
-                                        <div className="form-group">
-                                            <label htmlFor="">Cuối kì</label>
-                                            <input
-                                                name="Final"
-                                                type="number"
-                                                className="form-control"
-                                                id=""
-                                                placeholder="Nhập điểm cuối kì"
-                                                onChange={handleOnChange}
-                                                value={point.Final}
-                                            />
-                                        </div>
-                                    </form>
-                                </div>
-                                <div className="modal-footer">
-                                    <button
-                                        style={{ fontSize: 14 }}
-                                        type="button"
-                                        className="btn btn-secondary"
-                                        data-dismiss="modal"
-                                        onClick={() => setIsUpdate(false)}
-                                    >
-                                        Đóng
-                                    </button>
-                                    <button
-                                        style={{ fontSize: 14 }}
-                                        onClick={handleSubmit}
-                                        type="button"
-                                        className={
-                                            isUpdate
-                                                ? "btn btn-success"
-                                                : "btn btn-primary"
-                                        }
-                                    >
-                                        {isUpdate
-                                            ? "Update Bảng Điểm"
-                                            : "Tạo bảng điểm"}
-                                    </button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
+                        </>
+                    )}
                     <table className="table table-bordered table-striped table-hover p-5">
                         <thead>
                             <tr style={{ textAlign: "center" }}>
@@ -341,7 +372,9 @@ export default function Student(props) {
                                 <th style={{ whiteSpace: "nowrap" }}>
                                     Trung bình môn
                                 </th>
-                                <th>Hành động</th>
+                                {account?.Role === "Teacher" && (
+                                    <th>Hành động</th>
+                                )}
                             </tr>
                         </thead>
                         <tbody style={{ textAlign: "center" }}>
@@ -378,19 +411,24 @@ export default function Student(props) {
                                                             p?.Final) /
                                                             8}
                                                     </td>
-                                                    <td>
-                                                        <button
-                                                            type="button"
-                                                            className="btn btn-success"
-                                                            data-toggle="modal"
-                                                            data-target="#exampleModal"
-                                                            onClick={() =>
-                                                                handleUpdate(p)
-                                                            }
-                                                        >
-                                                            UPDATE
-                                                        </button>
-                                                    </td>
+                                                    {account?.Role ===
+                                                        "Teacher" && (
+                                                        <td>
+                                                            <button
+                                                                type="button"
+                                                                className="btn btn-success"
+                                                                data-toggle="modal"
+                                                                data-target="#exampleModal"
+                                                                onClick={() =>
+                                                                    handleUpdate(
+                                                                        p
+                                                                    )
+                                                                }
+                                                            >
+                                                                UPDATE
+                                                            </button>
+                                                        </td>
+                                                    )}
                                                 </>
                                             );
                                         })}
