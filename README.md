@@ -7,6 +7,58 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
+## Installation
+
+To installation this product, make sure you have PHP, <a href="https://learn.microsoft.com/en-us/sql/connect/php/download-drivers-php-sql-server?view=sql-server-ver16">sqlsvr for php</a>, <a href="https://getcomposer.org/">COMPOSER</a>, <a href="https://nodejs.org/en/">Node, NPM</a>, <a href="https://www.microsoft.com/en-us/sql-server/sql-server-downloads">SQL server</a>.
+
+Use `git clone` to clone source code:
+
+```bash
+git clone https://github.com/tan-creator/capstoneProject-IPTC.git
+```
+
+Go to /capstoneProject-IPTC by terminal and run:
+
+```bash
+Composer update
+```
+
+```bash
+cp .env.example .env
+```
+
+```bash
+npm i
+```
+
+```bash
+php artisan key:generate
+```
+
+```bash
+php artisan key:generate
+```
+
+Go to /capstoneProject-IPTC/FE by terminal and run:
+
+```bash
+npm i
+```
+
+## Run source code in localHost:
+
+Go to /capstoneProject-IPTC by terminal and run:
+
+```bash
+php artisan serve
+```
+
+Go to /capstoneProject-IPTC/FE by terminal and run:
+
+```bash
+npm run dev
+```
+
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
