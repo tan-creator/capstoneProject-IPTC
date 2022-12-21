@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import NavBar from "../NavBar/NavBar";
 import Sidebar from "../Layout/DefaultLayout/Sidebar/Sidebar";
 import "./Dashboard.css";
@@ -20,6 +20,12 @@ const cardVariants = {
     },
 };
 export default function Dashboard() {
+    const [account, setAccount] = useState({});
+
+    useEffect(() => {
+        const user = JSON.parse(localStorage.getItem("account"));
+        setAccount({ ...user });
+    }, []);
     return (
         <div>
             <NavBar />
@@ -58,67 +64,160 @@ export default function Dashboard() {
                         <p className="cate-feature">TÍNH NĂNG NỔI BẬT</p>
                         <div className="ul category__list">
                             {/* column 1 */}
-                            <li className="category__item">
-                                <img
-                                    src="./img/img1.png"
-                                    style={{ borderRadius: "5px" }}
-                                    alt=""
-                                    className="category_image"
-                                />
-                                <h3 className="category__name">
-                                    Xem lịch học{" "}
-                                </h3>
-                                <a href="#" className="category__details">
-                                    Xem tại đây
-                                    <i className="fas fa-long-arrow-alt-right" />
-                                </a>
-                            </li>
+                            {account?.Role === "Teacher" && (
+                                <li className="category__item">
+                                    <img
+                                        src="./img/img1.png"
+                                        style={{ borderRadius: "5px" }}
+                                        alt=""
+                                        className="category_image"
+                                    />
+                                    <h3 className="category__name">
+                                        Xem lịch dạy
+                                    </h3>
+                                    <a
+                                        href="/schedule"
+                                        className="category__details"
+                                    >
+                                        Xem tại đây
+                                    </a>
+                                </li>
+                            )}
+                            {account?.Role === "Parent" && (
+                                <li className="category__item">
+                                    <img
+                                        src="./img/img1.png"
+                                        style={{ borderRadius: "5px" }}
+                                        alt=""
+                                        className="category_image"
+                                    />
+                                    <h3 className="category__name">
+                                        Xem lịch học
+                                    </h3>
+                                    <a
+                                        href="/schedule"
+                                        className="category__details"
+                                    >
+                                        Xem tại đây
+                                    </a>
+                                </li>
+                            )}
                             {/* column 2 */}
-                            <li className="category__item">
-                                <img
-                                    src="./img/img2.png"
-                                    style={{ borderRadius: "5px" }}
-                                    alt=""
-                                    className="category_image"
-                                />
-                                <h3 className="category__name">Xem điểm </h3>
-                                <a href="#" className="category__details">
-                                    Xem tại đây
-                                    <i className="fas fa-long-arrow-alt-right" />
-                                </a>
-                            </li>
+                            {account?.Role === "Teacher" && (
+                                <li className="category__item">
+                                    <img
+                                        src="./img/img2.png"
+                                        style={{ borderRadius: "5px" }}
+                                        alt=""
+                                        className="category_image"
+                                    />
+                                    <h3 className="category__name">
+                                        Nhập điểm
+                                    </h3>
+                                    <a
+                                        href="/grade"
+                                        className="category__details"
+                                    >
+                                        Xem tại đây
+                                        <i className="fas fa-long-arrow-alt-right" />
+                                    </a>
+                                </li>
+                            )}
+                            {account?.Role === "Parent" && (
+                                <li className="category__item">
+                                    <img
+                                        src="./img/img2.png"
+                                        style={{ borderRadius: "5px" }}
+                                        alt=""
+                                        className="category_image"
+                                    />
+                                    <h3 className="category__name">
+                                        Xem điểm
+                                    </h3>
+                                    <a
+                                        href="/grade"
+                                        className="category__details"
+                                    >
+                                        Xem tại đây
+                                        <i className="fas fa-long-arrow-alt-right" />
+                                    </a>
+                                </li>
+                            )}
                             {/* column 3 */}
-                            <li className="category__item">
-                                <img
-                                    src="./img/img3.png"
-                                    style={{ borderRadius: "5px" }}
-                                    alt=""
-                                    className="category_image"
-                                />
-                                <h3 className="category__name">
-                                    Theo dõi tình hình học tập
-                                </h3>
-                                <a href="#" className="category__details">
-                                    Xem tại đây
-                                    <i className="fas fa-long-arrow-alt-right" />
-                                </a>
-                            </li>
+                            {account?.Role === "Teacher" && (
+                                <li className="category__item">
+                                    <img
+                                        src="./img/img3.png"
+                                        style={{ borderRadius: "5px" }}
+                                        alt=""
+                                        className="category_image"
+                                    />
+                                    <h3 className="category__name">
+                                        Thông báo
+                                    </h3>
+                                    <a
+                                        href="/noti"
+                                        className="category__details"
+                                    >
+                                        Xem tại đây
+                                        <i className="fas fa-long-arrow-alt-right" />
+                                    </a>
+                                </li>
+                            )}
+                            {account?.Role === "Parent" && (
+                                <li className="category__item">
+                                    <img
+                                        src="./img/img3.png"
+                                        style={{ borderRadius: "5px" }}
+                                        alt=""
+                                        className="category_image"
+                                    />
+                                    <h3 className="category__name">
+                                        Thông báo
+                                    </h3>
+                                    <a
+                                        href="/noti"
+                                        className="category__details"
+                                    >
+                                        Xem tại đây
+                                    </a>
+                                </li>
+                            )}
                             {/* column 4 */}
-                            <li className="category__item">
-                                <img
-                                    src="./img/img4.png"
-                                    style={{ borderRadius: "5px" }}
-                                    alt=""
-                                    className="category_image"
-                                />
-                                <h3 className="category__name">
-                                    Các khoản thu chi
-                                </h3>
-                                <a href="#" className="category__details">
-                                    Xem tại đây{" "}
-                                    <i className="fas fa-long-arrow-alt-right" />
-                                </a>
-                            </li>
+                            {account?.Role === "Teacher" && (
+                                <li className="category__item">
+                                    <img
+                                        src="./img/img4.png"
+                                        style={{ borderRadius: "5px" }}
+                                        alt=""
+                                        className="category_image"
+                                    />
+                                    <h3 className="category__name">Diễn đàn</h3>
+                                    <a
+                                        href="/forum"
+                                        className="category__details"
+                                    >
+                                        Xem tại đây
+                                    </a>
+                                </li>
+                            )}
+                            {account?.Role === "Parent" && (
+                                <li className="category__item">
+                                    <img
+                                        src="./img/img4.png"
+                                        style={{ borderRadius: "5px" }}
+                                        alt=""
+                                        className="category_image"
+                                    />
+                                    <h3 className="category__name">Diễn đàn</h3>
+                                    <a
+                                        href="/forum"
+                                        className="category__details"
+                                    >
+                                        Xem tại đây
+                                    </a>
+                                </li>
+                            )}
                         </div>
                     </section>
                 </motion.div>
