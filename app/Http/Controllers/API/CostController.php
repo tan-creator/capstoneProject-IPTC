@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Cost;
 use Illuminate\Support\Facades\DB;
 
+use function PHPUnit\Framework\isEmpty;
+
 class CostController extends Controller
 {
     /**
@@ -27,8 +29,11 @@ class CostController extends Controller
      */
     public function store(Request $request)
     {
-        //DB::unprepared('SET IDENTITY_INSERT Cost ON;');
-        return DB::table('Cost')->insert($request->all());
+        DB::unprepared('SET IDENTITY_INSERT Cost ON;');
+        
+        if (Cost::create($request->all())) {
+            return response()->json(['status' => 200, 'message' => 'Inserted successfully'], 200);
+        }
     }
 
     /**

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Post;
 use Illuminate\Support\Facades\DB;
 use App\Http\Resources\PostResource;
+use Exception;
 
 class PostController extends Controller
 {
@@ -17,9 +18,13 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = PostResource::collection(Post::all());
-        return $posts;
-        // return Post::all();
+        try {
+            $posts = PostResource::collection(Post::all());
+            return response()->json($posts, 200);
+        }
+        catch (Exception $e) {
+            return response()->json(['status' => 404, 'msg' => 'Not Found'], 404);
+        }
     }
 
     /**

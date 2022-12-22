@@ -17,5 +17,13 @@ class Cost extends Model
         'CostType',
         'CostAmountMoney',
         'CostDescription',
+        'CreateAt',
     ];
+
+    /**
+     * Indicates if the model should be timestamped.
+     *
+     * @var bool
+     */
+    public $timestamps = false;
 }

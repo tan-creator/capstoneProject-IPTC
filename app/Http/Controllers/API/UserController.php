@@ -31,6 +31,8 @@ class UserController extends Controller
     {
         //DB::unprepared('SET IDENTITY_INSERT Users ON;');
         return DB::table('Users')->insert($request->all());
+        
+        //return User::create($request->all());
     }
 
     /**

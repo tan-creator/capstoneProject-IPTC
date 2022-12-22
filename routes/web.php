@@ -20,22 +20,22 @@ use Illuminate\Support\Facades\Hash;
 |
 */
 
-Route::get('/{hash}', function ($hash) {
+Route::get('/hash/{hash}', function ($hash) {
     return bcrypt($hash);
 });
 
-Route::get('/key', function () {
-    return env('TOKEN_KEY');
-});
+// Route::get('/key', function () {
+//     return env('TOKEN_KEY');
+// });
 // Route::get('/subject', [SubjectController::class, 'show']);
-Route::get('student', [StudentController::class, 'index']);
-Route::get('comment', [CommentController::class, 'index']);
+// Route::get('student', [StudentController::class, 'index']);
+// Route::get('comment', [CommentController::class, 'index']);
 
-Route::controller(PermissionController::class)->group(function () {
-    Route::get('permission', 'index');
-    Route::get('permission/{Username}', 'show');
-    Route::post('permission', 'store');
-});
+// Route::controller(PermissionController::class)->group(function () {
+//     Route::get('permission', 'index');
+//     Route::get('permission/{Username}', 'show');
+//     Route::post('permission', 'store');
+// });
 
 
 
