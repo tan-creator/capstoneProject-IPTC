@@ -124,7 +124,7 @@ function Shedule() {
                     array[1] = arr
                 }
             }
-            if (arr.time == "8:50-9:35") {
+            if (arr.time == "8:40-9:25") {
                 if (arr.date == str) {
                     array[2] = arr
                 }
@@ -227,7 +227,7 @@ function Shedule() {
                                             </tr>
                                             <tr>
                                                 <div className="box-schedule hour">
-                                                    <p>8:50 - 9:35</p>
+                                                    <p>8:40 - 9:25</p>
                                                 </div>
                                             </tr>
                                             <tr>
