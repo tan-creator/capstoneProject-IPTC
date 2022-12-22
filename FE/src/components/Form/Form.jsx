@@ -36,19 +36,7 @@ function Form () {
     }, []);
 
     const [permission, setPermission] = useState([])
-    // useEffect(() => {
-        // fetch("http://127.0.0.1:8000/api/permission")
-        //     .then (response => { response.json()
-        //     })
-        //     .then(json => {
-        //         setPermission(json)
-        //         console.log("permission:\n "+permission);
-        //     })
-        //     .catch(error => console.log('error',error));
-    // },[]);
-
-    const getPermission = async (e) => {
-        e.stopPropagation()
+    useEffect(() => {
         fetch("http://127.0.0.1:8000/api/permission")
             .then (response => { response.json()
             })
@@ -57,8 +45,20 @@ function Form () {
                 console.log("permission:\n "+permission);
             })
             .catch(error => console.log('error',error));
-        console.log(permission);
-    }
+    },[]);
+
+    // const getPermission = async (e) => {
+    //     e.stopPropagation()
+    //     fetch("http://127.0.0.1:8000/api/permission")
+    //         .then (response => { response.json()
+    //         })
+    //         .then(json => {
+    //             setPermission(json)
+    //             console.log("permission:\n "+permission);
+    //         })
+    //         .catch(error => console.log('error',error));
+    //     console.log(permission);
+    // }
 
     // function getNameTeacher() {
     //     const idCl = "";
@@ -90,7 +90,7 @@ function Form () {
             <Sidebar />
             <div className="container">
                 <div className="form-content">
-                <button onClick={getPermission}>test</button>
+                {/* <button onClick={getPermission}>test</button> */}
                     {account?.Role === "Parent" && (
                         <form action="">
                             <table>

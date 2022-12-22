@@ -83,8 +83,26 @@ function Shedule() {
                 })
             })
         }
+        console.log(arrLichHoc);
         return arrLichHoc;
     }
+
+    const listLichHoc = []
+    getSubject().map((obj) => {
+        const time = []
+        const date = []
+        time.push(...obj.SubjectTime.split(" "))
+        date.push(...obj.DateOfWeek.split(" "))
+        for ( var i = 0; i < time.length; i++) {
+            listLichHoc.push({
+                time: time[i],
+                date: date[i],
+                ClassName : obj.ClassName,
+                Names : obj.Names,
+                SubjectName : obj.SubjectName
+            })
+        }
+    })
 
     const arrT2 = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
     const arrT3 = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
@@ -95,39 +113,57 @@ function Shedule() {
     const arrCN = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
 
     function getLich(array, str ) {
-        getSubject().map((arr) => {
-          if (arr.DateOfWeek.indexOf(str, 0) >= 0) {
-            if (arr.SubjectTime.indexOf("7:00-7:45",0) >= 0) {
-              array[0] = arr;
+        listLichHoc.map((arr) => {
+            if (arr.time == "7:00-7:45") {
+                if (arr.date == str) {
+                    array[0] = arr
+                }
             }
-            if (arr.SubjectTime.indexOf("7:50-8:35",0) >= 0) {
-              array[1] = arr;
+            if (arr.time == "7:50-8:35") {
+                if (arr.date == str) {
+                    array[1] = arr
+                }
             }
-            if (arr.SubjectTime.indexOf("8:50-9:35",0) >= 0) {
-              array[2] = arr;
+            if (arr.time == "8:50-9:35") {
+                if (arr.date == str) {
+                    array[2] = arr
+                }
             }
-            if (arr.SubjectTime.indexOf("9:40-10:25",0) >= 0) {
-              array[3] = arr;
+            if (arr.time == "9:40-10:25") {
+                if (arr.date == str) {
+                    array[3] = arr
+                }
             }
-            if (arr.SubjectTime.indexOf("10:30-11:15",0) >= 0) {
-              array[4] = arr;
+            if (arr.time == "10:30-11:15") {
+                if (arr.date == str) {
+                    array[4] = arr
+                }
             }
-            if (arr.SubjectTime.indexOf("13:00-13:45",0) >= 0) {
-              array[5] = arr;
+            if (arr.time == "13:00-13:45") {
+                if (arr.date == str) {
+                    array[5] = arr
+                }
             }
-            if (arr.SubjectTime.indexOf("13:50-14:35",0) >= 0) {
-              array[6] = arr;
+            if (arr.time == "13:50-14:35") {
+                if (arr.date == str) {
+                    array[6] = arr
+                }
             }
-            if (arr.SubjectTime.indexOf("14:40-15:25",0) >= 0) {
-              array[7] = arr;
+            if (arr.time == "14:40-15:25") {
+                if (arr.date == str) {
+                    array[7] = arr
+                }
             }
-            if (arr.SubjectTime.indexOf("15:40-16:25",0) >= 0) {
-              array[8] = arr;
+            if (arr.time == "15:40-16:25") {
+                if (arr.date == str) {
+                    array[8] = arr
+                }
             }
-            if (arr.SubjectTime.indexOf("16:30-17:15",0) >= 0) {
-              array[9] = arr;
+            if (arr.time == "16:30-17:15") {
+                if (arr.date == str) {
+                    array[9] = arr
+                }
             }
-          }
         })
         console.log(array);
         return array;
@@ -233,8 +269,8 @@ function Shedule() {
                                         <td>
                                             {getLich(arrT2, "2").map(
                                                 (data) => {
-                                                    const date = data.SubjectTime;
-                                                    const color = date ? "#f48023" : "#fff";
+                                                    // const date = data.SubjectTime;
+                                                    const color = data.time ? "#f48023" : "#fff";
                                                     return (
                                                         <tr>
                                                             <div
@@ -257,8 +293,7 @@ function Shedule() {
                                         <td>
                                             {getLich(arrT3, "3").map(
                                                 (data) => {
-                                                    const date = data.SubjectTime;
-                                                    const color = date ? "#f48023" : "#fff";
+                                                    const color = data.time ? "#f48023" : "#fff";
                                                     return (
                                                         <tr>
                                                             <div
@@ -288,8 +323,7 @@ function Shedule() {
                                         <td>
                                             {getLich(arrT4, "4").map(
                                                 (data) => {
-                                                    const date = data.SubjectTime;
-                                                    const color = date ? "#f48023" : "#fff";
+                                                    const color = data.time ? "#f48023" : "#fff";
                                                     return (
                                                         <tr>
                                                             <div
@@ -319,8 +353,7 @@ function Shedule() {
                                         <td>
                                             {getLich(arrT5, "5").map(
                                                 (data) => {
-                                                    const date = data.SubjectTime;
-                                                    const color = date ? "#f48023" : "#fff";
+                                                    const color = data.time ? "#f48023" : "#fff";
                                                     return (
                                                         <tr>
                                                             <div
@@ -350,8 +383,7 @@ function Shedule() {
                                         <td>
                                             {getLich(arrT6, "6").map(
                                                 (data) => {
-                                                    const date = data.SubjectTime;
-                                                    const color = date ? "#f48023" : "#fff";
+                                                    const color = data.time ? "#f48023" : "#fff";
                                                     return (
                                                         <tr>
                                                             <div
@@ -381,8 +413,7 @@ function Shedule() {
                                         <td>
                                             {getLich(arrT7, "7").map(
                                                 (data) => {
-                                                    const date = data.SubjectTime;
-                                                    const color = date ? "#f48023" : "#fff";
+                                                    const color = data.time ? "#f48023" : "#fff";
                                                     return (
                                                         <tr>
                                                             <div
@@ -412,8 +443,7 @@ function Shedule() {
                                         <td>
                                             {getLich(arrCN, "8").map(
                                                 (data) => {
-                                                    const date = data.SubjectTime;
-                                                    const color = date ? "#f48023" : "#fff";
+                                                    const color = data.time ? "#f48023" : "#fff";
                                                     return (
                                                         <tr>
                                                             <div
