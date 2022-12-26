@@ -7,7 +7,7 @@ html {
 }
 
 .cost-content {
-    width: 1115px;
+    width: calc(100% - 260px);
     position: relative;
     padding: 20px;
     display: grid;
@@ -15,8 +15,9 @@ html {
     min-height: 200px;
     margin-top: 83px;
     background-color: #fff;
-    margin-left: 19px;
+    margin-left: -9px;
     overflow-x: hidden;
+    left: 260px;
 }
 
 p {
@@ -61,7 +62,7 @@ input::-webkit-inner-spin-button {
     width: 370px;
     border-right: 1px solid #ccc;
     overflow-y: scroll;
-    height: 445px;
+    height: 520px;
 }
 
 .cost-box-right {
