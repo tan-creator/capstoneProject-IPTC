@@ -26,7 +26,7 @@ class PostRequest extends FormRequest
     public function rules()
     {
         return [
-            'PostID' => 'required',
+            'PostID' => 'nullable',
             'UserName' => 'required',
             'Content' => 'nullable|max:4000',
             'PostImage' => 'nullable|max:400',
@@ -42,7 +42,6 @@ class PostRequest extends FormRequest
     public function messages()
     {
         return [
-            'PostID.required' => ':attribute is required',
             'UserName.required' => ':attribute is required',
             'Content.max' => ':attribute is maximum 4000 characters long',
             'PostImage.max' => ':attribute is maximum 40 characters long',

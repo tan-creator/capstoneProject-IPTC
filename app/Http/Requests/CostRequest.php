@@ -27,7 +27,7 @@ class CostRequest extends FormRequest
     public function rules()
     {
         return [
-            'CostID' => 'required',
+            'CostID' => 'nullable',
             'ClassID' => 'required',
             'CostType' => 'required|max:40',
             'CostAmountMoney' => 'required',
@@ -44,7 +44,6 @@ class CostRequest extends FormRequest
     public function messages()
     {
         return [
-            'CostID.required' => ':attribute is required',
             'ClassID.required' => ':attribute is required',
             'CostType.required' => ':attribute is required',
             'CostAmountMoney.required' => ':attribute is required',
