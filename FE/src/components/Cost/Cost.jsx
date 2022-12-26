@@ -174,7 +174,6 @@ function Cost () {
         <div>
             <NavBar />
             <Sidebar />
-            <div className="container">
                 <div className="cost">
                     <div className="cost-content">
                         {user?.Role === "Parent" && (
@@ -304,11 +303,9 @@ function Cost () {
                             <div className="cost-box-right">
                                 <ShowCost data={dataSend}/>
                             </div>
-
                         </div>
                     </div>
                 </div>
-            </div>
         </div>
     )
 }
@@ -323,7 +320,6 @@ const ShowCost = memo( (props) => {
     console.log(getData);
 
     return (
-
         <>
             {getData != null && (
                 <div className="box-show-cost">
