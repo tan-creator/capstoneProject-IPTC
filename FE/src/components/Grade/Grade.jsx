@@ -62,7 +62,7 @@ export default function Grade() {
                             <button
                                 onClick={() => handlePickClass(cl?.ClassID)}
                                 type="button"
-                                class="btn btn-secondary"
+                                className="btn btn-secondary"
                             >
                                 {cl?.ClassName}
                             </button>

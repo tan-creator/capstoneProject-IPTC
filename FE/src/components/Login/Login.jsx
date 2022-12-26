@@ -34,7 +34,6 @@ export default function Login(props) {
             }
         );
         const user = await result.data;
-        console.log(user);
         const { statusCode, msg } = user;
         localStorage.setItem("account", JSON.stringify(user[0]));
         if (statusCode === 400) {
@@ -93,9 +92,7 @@ export default function Login(props) {
                                 />
                                 <span className="form-message" />
                             </div>
-                            <a href="#" className="forget-pass">
-                                Quên mật khẩu
-                            </a>
+
                             <button
                                 onClick={handleSubmit}
                                 className="form-submit"

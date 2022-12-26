@@ -95,15 +95,26 @@ export default function Forum() {
                                         marginRight: "20px",
                                     }}
                                 />
-                                <div className="form-group">
-                                    <input
-                                        type="text"
-                                        className="form-control"
-                                        name=""
-                                        placeholder="Viết bình luận: "
-                                        style={{ width: "400px" }}
-                                    />
-                                </div>
+
+                                <form
+                                    action=""
+                                    method="POST"
+                                    role="form"
+                                    onSubmit={(e) => {
+                                        e.preventDefault();
+                                        console.log(e.target[0].value);
+                                    }}
+                                >
+                                    <div className="form-group">
+                                        <input
+                                            type="text"
+                                            className="form-control"
+                                            name=""
+                                            placeholder="Viết bình luận: "
+                                            style={{ width: "400px" }}
+                                        />
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     ))}
