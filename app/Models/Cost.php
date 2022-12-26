@@ -26,4 +26,8 @@ class Cost extends Model
      * @var bool
      */
     public $timestamps = false;
+
+    protected $casts = [
+        'CreateAt' => 'date:d-m-Y H:i:s',
+    ];
 }

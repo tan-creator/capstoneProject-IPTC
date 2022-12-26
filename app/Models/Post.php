@@ -16,5 +16,13 @@ class Post extends Model
         'UserName',
         'Content',
         'PostImage',
+        'PostDay'
     ];
+
+    /**
+     * Indicates if the model should be timestamped.
+     *
+     * @var bool
+     */
+    public $timestamps = false;
 }
