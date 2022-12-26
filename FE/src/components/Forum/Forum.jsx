@@ -6,15 +6,16 @@ import "./Forum.css";
 
 export default function Forum() {
     const posts = getPost();
-
+    const handleOnclick = () => {};
     return (
         <div>
             <NavBar />
             <div className="container">
                 <Sidebar />
                 <div className="forum-content" style={{ width: "800px" }}>
-                    {posts.data.map((post) => (
+                    {posts.map((post) => (
                         <div className="box" key={post.PostID}>
+                            {console.log(post)}
                             <div className="box-profile">
                                 <img
                                     className="box-img-avatar"
@@ -66,19 +67,54 @@ export default function Forum() {
                                     <h5>118 Lượt chia sẻ</h5>
                                 </div>
                             </div>
-                            <div className="box-icon">
+                            <div
+                                className="box-icon"
+                                style={{ marginBottom: 20 }}
+                            >
                                 <div className="action">
                                     <i className="bx bx-like"></i>
                                     <h4>Thích</h4>
                                 </div>
                                 <div className="action">
                                     <i className="bx bx-chat"></i>
-                                    <h4>Bình luận</h4>
+                                    <h4 onClick={handleOnclick}>Bình luận</h4>
                                 </div>
                                 <div className="action">
                                     <i className="bx bx-share"></i>
                                     <h4>Chia sẻ</h4>
                                 </div>
+                            </div>
+                            <div className="box-comment">
+                                <img
+                                    className="box-img-avatar"
+                                    src="./img/avatar.svg"
+                                    alt=""
+                                    style={{
+                                        width: 40,
+                                        height: 40,
+                                        marginRight: "20px",
+                                    }}
+                                />
+
+                                <form
+                                    action=""
+                                    method="POST"
+                                    role="form"
+                                    onSubmit={(e) => {
+                                        e.preventDefault();
+                                        console.log(e.target[0].value);
+                                    }}
+                                >
+                                    <div className="form-group">
+                                        <input
+                                            type="text"
+                                            className="form-control"
+                                            name=""
+                                            placeholder="Viết bình luận: "
+                                            style={{ width: "400px" }}
+                                        />
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     ))}

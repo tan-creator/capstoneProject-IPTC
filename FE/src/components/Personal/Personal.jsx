@@ -26,12 +26,9 @@ export default function Personnal() {
     };
     const handleSubmit = async (e) => {
         const value = e.target.value;
-        const requestOptions = {
-            method: "PUT",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(dataUpdate),
-        };
-        fetch(`http://127.0.0.1:8000/api/user/${value}`, requestOptions)
+
+        await axios
+            .put(`http://127.0.0.1:8000/api/user/${value}`, { ...dataUpdate })
             .then((response) => {
                 if (response.status == 200) {
                     console.log("Thành công\n");
@@ -45,6 +42,13 @@ export default function Personnal() {
                 alert.error("Fetch thất bại: ");
                 console.log("error", error);
             });
+    };
+    const handleUpdate = () => {
+        setDataUpdate({
+            Names: dataUpdate.Names,
+            BirthDay: dataUpdate.BirthDay,
+            Phone: dataUpdate.Phone,
+        });
     };
     useEffect(() => {
         const user = JSON.parse(localStorage.getItem("account"));
@@ -132,11 +136,9 @@ export default function Personnal() {
                                             color: "#fff",
                                             fontWeight: "bold",
                                         }}
-                                        onClick={(e) => {
-                                            console.log(e.target.value);
-                                        }}
+                                        onClick={() => handleUpdate()}
                                     >
-                                        Cập nhật thông tin
+                                        UPDATE
                                     </button>
                                     <div
                                         className="modal fade"
@@ -220,10 +222,10 @@ export default function Personnal() {
                                                     </button>
                                                     <button
                                                         style={{ fontSize: 14 }}
-                                                        onClick={handleSubmit}
                                                         type="button"
                                                         className="btn btn-primary"
                                                         value={account.UserName}
+                                                        onClick={handleSubmit}
                                                     >
                                                         Cập nhập
                                                     </button>
