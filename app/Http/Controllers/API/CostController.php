@@ -27,7 +27,6 @@ class CostController extends Controller
      */
     public function store(CostRequest $request)
     {   
-        DB::unprepared('SET IDENTITY_INSERT Cost ON;');
         if (Cost::create($request->all())) {
             return response()->json(['status' => 200, 'msg' => 'Inserted successfully'], 200);
         }
