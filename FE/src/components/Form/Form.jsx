@@ -216,7 +216,7 @@ const ShowPermission = memo( (props) => {
                                         <h3>Đơn xin nghĩ học</h3>
                                         <h3>Thời gian : {per?.PermissionDay}</h3>
                                     </div>
-                                    <p>Kính gửi cô/thầy,</p>
+                                    <p>Kính gửi giáo viên {per.TeacherName},</p>
                                     <p>Tôi là : {account.Names} </p>
                                     <p>Phụ huynh em : {per?.StudentName}</p>
                                     <p>Nội dung : {per?.PermissionContent}</p>
