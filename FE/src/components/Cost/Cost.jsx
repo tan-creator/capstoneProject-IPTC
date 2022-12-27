@@ -125,6 +125,7 @@ function Cost () {
         const time = today.getFullYear()+"-"+(today.getMonth()+1)+"-"+today.getDate()+" "+today.getHours()+":"+today.getMinutes()+":"+today.getSeconds();
         bill.CreateAt  = time;
 
+        console.log(bill);
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json ; charset=UTF-8' },
