@@ -45,7 +45,11 @@ Route::prefix('post')->controller(App\Http\Controllers\API\PostController::class
     Route::get('/', 'index'); 
     Route::post('/', 'store');
     Route::put('/{PostID}', 'update');
-    Route::delete('/{PostID}', 'destroy');   
+    Route::delete('/{PostID}', 'destroy');  
+    Route::post('/like', 'like'); 
+    Route::post('/dislike', 'dislike');
+    Route::post('comment', 'comment'); 
+    Route::post('removeComment', 'removeComment'); 
 });
 
 Route::prefix('notification')->controller(App\Http\Controllers\API\NotificationController::class)->group(function () {
@@ -53,13 +57,6 @@ Route::prefix('notification')->controller(App\Http\Controllers\API\NotificationC
     Route::post('/', 'store');
     Route::put('/{id}', 'update');
     Route::delete('/{id}', 'destroy');    
-});
-
-Route::prefix('comment')->controller(App\Http\Controllers\API\CommentController::class)->group(function () {
-    Route::get('/', 'index');
-    Route::post('/', 'store');
-    Route::put('/{id}', 'update');
-    Route::delete('/{id}', 'destroy');
 });
 
 Route::prefix('Point')->controller(App\Http\Controllers\API\PointController::class)->group(function () {
@@ -76,6 +73,13 @@ Route::prefix('Lesson')->controller(App\Http\Controllers\API\RiewviewLessionCont
     Route::post('/', 'store');
     Route::put('/{LessonID}', 'update');
     Route::delete('/{LessonID}', 'destroy');
+});
+
+Route::prefix('comment')->controller(App\Http\Controllers\API\CommentController::class)->group(function () {
+    Route::get('/', 'index');
+    Route::post('/', 'store');
+    Route::put('/{id}', 'update');
+    Route::delete('/{id}', 'destroy');
 });
 
 Route::prefix('like')->controller(App\Http\Controllers\API\LikesController::class)->group(function () {

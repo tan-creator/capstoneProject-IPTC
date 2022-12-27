@@ -33,9 +33,12 @@ class PostController extends Controller
      */
     public function store(PostRequest $request)
     {
-        DB::unprepared('SET IDENTITY_INSERT Post ON;');
-        if (Post::create($request->all())) {
-            return response()->json(['status' => 200, 'msg' => 'Inserted successfully'], 200);
+        try {
+            Post::create($request->all());
+            return response()->json(['status' => 200, 'msg' => 'Posted successfully'], 200);
+        }
+        catch (Exception $e) {
+            return response()->json(['status' => 400, 'msg' => 'Post failed! Something were wrong!'], 400);
         }
     }
 
@@ -46,14 +49,14 @@ class PostController extends Controller
      * @param  int  $PostID
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $PostID)
+    public function update(PostRequest $request, $PostID)
     {
         try {
             if (!Post::Where('PostID', $PostID)) {
                 return response()->json(['status' => 400, 'msg' => 'Can not find this post'], 400);
             }
             Post::Where('PostID', $PostID)->update(array($request));
-            return response()->json(['status' => '200', 'msg' => 'Updated successfully'], 200);
+            return response()->json(['status' => 200, 'msg' => 'Updated successfully'], 200);
         }
         catch (Exception $e) {
             return response()->json(['status' => 400, 'msg' => 'Could not update this post'], 400);
@@ -68,8 +71,94 @@ class PostController extends Controller
      */
     public function destroy($PostID)
     {
-        if (Post::where('PostID', $PostID)->delete()) {
-            return response()->json(['status' => 200, 'msg' => 'Deleted successfully'], 200);
+        try {
+            Post::where('PostID', $PostID)->delete();
+            return response()->json(['status' => 200, 'msg' => 'Removed post successfully'], 200);
+        }
+        catch (Exception $e) {
+            return response()->json(['status' => 400, 'msg' => 'Remove failed! Something were wrong!'], 400);
+        }
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function like(Request $request)
+    {
+        try {
+            Like::create($request->all());
+            return response()->json(['status' => 200, 'msg' => 'Liked successfully'], 200);
+        }
+        catch (Exception $e) {
+            return response()->json(['status' => 400, 'msg' => 'Like failed! Something were wrong!'], 400);
+        }
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function dislike(Request $request)
+    {
+        try {
+            $Liked = Like::where('PostID', $request->PostID)
+                     ->where('PersonUserName', $request->PersonUserName)
+                     ->get('LikeID')[0]->LikeID; // Take Like ID by Post ID and Username
+            if ($Liked) {
+                Like::where('LikeID', $Liked)->delete();
+                return response()->json(['status' => 200, 'msg' => 'Disliked successfully'], 200);
+            } else {
+                return response()->json(['status' => 400, 'msg' => 'You did not like this post yet!'], 400);
+            }
+        }
+        catch (Exception $e) {
+            return response()->json(['status' => 400, 'msg' => 'Dislike failed! Something were wrong!'], 400);
+        }
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function comment(Request $request)
+    {
+        try {
+            Comment::create($request->all());
+            return response()->json(['status' => 200, 'msg' => 'Commented successfully'], 200);
+        }
+        catch (Exception $e) {
+            return response()->json(['status' => 400, 'msg' => 'Comment failed! Something were wrong!'], 400);
+        }
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function removeComment(Request $request)
+    {
+        try {
+            $Commented = Comment::where('PostID', $request->PostID)
+                     ->where('PersonUserName', $request->PersonUserName)
+                     ->get('CommentID')[0]->CommentID; // Take Like ID by Post ID and Username
+            if ($Commented) {
+                Comment::where('CommentID', $Commented)->delete();
+                return response()->json(['status' => 200, 'msg' => 'Removed comment successfully'], 200);
+            } else {
+                return response()->json(['status' => 400, 'msg' => 'This comment was not available'], 400);
+            }
+        }
+        catch (Exception $e) {
+            return response()->json(['status' => 400, 'msg' => 'Remove failed! Something were wrong!'], 400);
         }
     }
 }
