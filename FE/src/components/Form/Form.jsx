@@ -3,14 +3,15 @@ import { useAlert } from "react-alert";
 import NavBar from "../NavBar/NavBar";
 import Sidebar from "../Layout/DefaultLayout/Sidebar/Sidebar";
 import "./form.css"
+import { Spin , Collapse , Typography } from "antd";
 
 function Form () {
     const [classes, setClass] = useState([]);
     const [users, setUser] = useState([])
-
     const [account, setAccount] = useState({})
     const [student, setStudent] = useState([])
     const [permission, setPermission] = useState([])
+    const [isLoading, setIsLoading] = useState(true)
     const alertNav = useAlert();
 
     useEffect(() => {
@@ -43,6 +44,7 @@ function Form () {
             .then (response =>  response.json())
             .then(json => {
                 setPermission(json)
+                setIsLoading(false)
                 console.log(permission);
             })
             .catch(error => console.log('error',error));
@@ -92,6 +94,24 @@ function Form () {
         return name;
     }
     const studentName = getStudentName();
+
+    function getUserName () {
+        permission.map((per) => {
+            student.map((std) => {
+                if(per.StudentName == std.StudentName) {
+                    per.ParentUserName = std.ParentUserName;
+                }
+            })
+        })
+        permission.map((per) => {
+            users.map((user) => {
+                if(user.UserName = per.ParentUserName) {
+                    per.Names = user.Names;
+                }
+            })
+        })
+    }
+    getUserName();
 
     const handleOnChange = (e) => {
         const name = e.target.name;
@@ -182,9 +202,8 @@ function Form () {
                                 onClick={handleSubmit}
                             >Gửi</button>
                         </form>
-
                     )}
-                    <ShowPermission permission={permission} studentName={studentName} account={account}/>
+                    <ShowPermission permission={permission} studentName={studentName} account={account} isLoading={isLoading}/>
                 </div>
             </div>
         </div>
@@ -192,13 +211,24 @@ function Form () {
 }
 
 const ShowPermission = memo( (props) => {
+    const [isLoading, setIsLoading] = useState(true)
     const [permission, setPermission] = useState([]);
+    const {Panel} = Collapse
     useLayoutEffect(() => {
         if (props.permission !== permission) {
             setPermission(props.permission)
+            setIsLoading(props.isLoading)
         }
+        console.log(isLoading);
     }, [props.permission])
     console.log(permission);
+
+    const renderHeader = (time) => (
+        <div style={{display: 'flex',justifyContent:"space-between"}}>
+            <span>Đơn xin nghĩ học</span>
+            <span>{time}</span>
+        </div>
+    );
 
     let account = props.account;
     return (
@@ -207,23 +237,25 @@ const ShowPermission = memo( (props) => {
                 <div className="box-permission" style={{height:" 600px",marginLeft:" 10px",borderLeft:" 1px solid #ccc",paddingLeft: "10px",overflowY: "scroll"}}>
                     <h2>Đơn đã gửi</h2>
                     <hr />
+                    <div>
+                        <div className="ant-spin-loading">{isLoading && <Spin/>}</div>
+                    </div>
                     {
                         permission.map((per) => {
                             if (per.StudentName == props.studentName)
                             return (
                                 <div key={per.PermissionFormID} className="item-permission">
-                                    <div className="head-item-permission">
-                                        <h3>Đơn xin nghĩ học</h3>
-                                        <h3>Thời gian : {per?.PermissionDay}</h3>
-                                    </div>
-                                    <p>Kính gửi giáo viên {per.TeacherName},</p>
-                                    <p>Tôi là : {account.Names} </p>
-                                    <p>Phụ huynh em : {per?.StudentName}</p>
-                                    <p>Nội dung : {per?.PermissionContent}</p>
-                                    <div className="footer-item-permission">
-                                        <h3>Chữ ký phụ huynh</h3>
-                                        <p>{account.Names}</p>
-                                    </div>
+                                    <Collapse defaultActiveKey={['1']}>
+                                        <Panel header={renderHeader(per?.PermissionDay)} key={per.PermissionFormID}>
+                                            <p>Kính gửi giáo viên {per.TeacherName},</p>
+                                            <p>Tôi là phụ huynh em : {per?.StudentName}</p>
+                                            <p>Nội dung : {per?.PermissionContent}</p>
+                                            <div className="footer-item-permission">
+                                                <h2>Chữ ký phụ huynh</h2>
+                                                <p>{per.Names}</p>
+                                            </div>
+                                        </Panel>
+                                    </Collapse>
                                 </div>
                             )
                         })
@@ -234,23 +266,25 @@ const ShowPermission = memo( (props) => {
                 <div className="box-permission">
                     <h2>Đơn được gửi tới</h2>
                     <hr />
+                    <div>
+                        <div className="ant-spin-loading">{isLoading && <Spin/>}</div>
+                    </div>
                     {
                         permission.map((per) => {
                             if (per.TeacherName == account.Names)
                             return (
                                 <div key={per.PermissionFormID} className="item-permission">
-                                    <div className="head-item-permission">
-                                        <h3>Đơn xin nghĩ học</h3>
-                                        <h3>Thời gian : {per?.PermissionDay}</h3>
-                                    </div>
-                                    <p>Kính gửi cô/thầy,</p>
-                                    <p>Tôi là : {account.Names} </p>
-                                    <p>Phụ huynh em : {per?.StudentName}</p>
-                                    <p>Nội dung : {per?.PermissionContent}</p>
-                                    <div className="footer-item-permission">
-                                        <h3>Chữ ký phụ huynh</h3>
-                                        <p>{account.Names}</p>
-                                    </div>
+                                    <Collapse defaultActiveKey={['1']}>
+                                        <Panel header={renderHeader(per?.PermissionDay)} key={per.PermissionFormID}>
+                                            <p>Kính gửi giáo viên {per.TeacherName},</p>
+                                            <p>Tôi là phụ huynh em : {per?.StudentName}</p>
+                                            <p>Nội dung : {per?.PermissionContent}</p>
+                                            <div className="footer-item-permission">
+                                                <h2>Chữ ký phụ huynh</h2>
+                                                <p>{per.Names}</p>
+                                            </div>
+                                        </Panel>
+                                    </Collapse>
                                 </div>
                             )
                         })
@@ -263,3 +297,5 @@ const ShowPermission = memo( (props) => {
 })
 
 export default Form;
+
+

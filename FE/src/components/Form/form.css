@@ -36,24 +36,19 @@ textarea {
     opacity: 1;
 }
 
-/* .box-permission {
-    height: 600px;
-    margin-left: 10px;
-    border-left: 1px solid #ccc;
-    padding-left: 10px;
-    overflow-y: scroll;
-} */
+.ant-spin-loading {
+    padding-top: 10px;
+    width: 100px;
+    margin: 0 auto;
+}
 
 .item-permission {
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    padding: 10px;
     margin-bottom: 10px;
 }
 
 
 .item-permission p {
-    font-size: 16px;
+    font-size: 18px;
 }
 .head-item-permission {
     display:flex;
@@ -62,6 +57,14 @@ textarea {
 }
 
 .footer-item-permission {
-    margin-top: 10px;
+    margin-top: 20px;
+}
+
+.time-item {
+    float: right;
+}
+
+.ant-collapse-header {
+    font-size: 20px;
 }
 
