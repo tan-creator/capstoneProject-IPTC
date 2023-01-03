@@ -24,7 +24,7 @@ export default function Student(props) {
     const account = JSON.parse(localStorage.getItem("account"));
     const id = parseInt(useParams().id);
     const getAllPoint = async () => {
-        const result = await axios.get("http://127.0.0.1:8000/api/Points");
+        const result = await axios.get("http://127.0.0.1:8000/api/Point/all");
         const pointList = await result.data;
         return pointList;
     };

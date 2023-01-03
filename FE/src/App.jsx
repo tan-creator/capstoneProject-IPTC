@@ -10,11 +10,11 @@ export default function App() {
             .then((json) => {
                 localStorage.setItem("users", JSON.stringify(json));
             });
-        fetch("http://127.0.0.1:8000/api/Points")
-            .then((response) => response.json())
-            .then((json) => {
-                localStorage.setItem("points", JSON.stringify(json));
-            });
+        // fetch("http://127.0.0.1:8000/api/Point/all")
+        //     .then((response) => response.json())
+        //     .then((json) => {
+        //         localStorage.setItem("points", JSON.stringify(json));
+        //     });
 
         fetch("http://127.0.0.1:8000/api/student")
             .then((response) => response.json())
