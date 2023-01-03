@@ -114,7 +114,7 @@ export default function NavBar() {
                             Đóng góp ý kiến
                         </ul>
                         <a
-                            href="#"
+                            href="/"
                             style={{
                                 textDecoration: "none",
                                 color: "#606060",
@@ -137,9 +137,7 @@ export default function NavBar() {
                     className="collapse"
                     id="logout"
                     style={{ position: "absolute", top: "200px" }}
-                >
-                    <div className="card card-body">but</div>
-                </div>
+                ></div>
             </div>
         </div>
     );
