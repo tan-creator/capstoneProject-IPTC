@@ -51,7 +51,6 @@ export default function Personnal() {
             Phone: dataUpdate?.Phone,
         });
     };
-    console.log(handleUpdate);
     useEffect(() => {
         const user = JSON.parse(localStorage.getItem("account"));
         setAccount({ ...user });

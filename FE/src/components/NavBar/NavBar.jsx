@@ -13,7 +13,10 @@ export default function NavBar() {
         const user = JSON.parse(localStorage.getItem("account"));
         setAccount({ ...user });
     }, []);
-
+    let navigate = useNavigate();
+    const handleOnClick = () => {
+        navigate("/noti");
+    };
     return (
         <div>
             <div className="header">
@@ -48,6 +51,8 @@ export default function NavBar() {
                         className="notificatios-icon"
                         alt=""
                         src={window.location.origin + "/img/notificatios.svg"}
+                        onClick={handleOnClick}
+                        type="button"
                     />
                     <div className="button-div">
                         <img
