@@ -51,6 +51,7 @@ export default function Personnal() {
         });
     };
     useEffect(() => {
+        
         const user = JSON.parse(localStorage.getItem("account"));
         setAccount({ ...user });
     }, []);
