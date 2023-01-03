@@ -42,6 +42,7 @@ export default function Student(props) {
     };
     const handleSubject = async () => {
         var subjectList = JSON.parse(localStorage.getItem("subjects"));
+        console.log(subjectList);
         let findSubjectByUserName = [];
         if (props.role === "teacher") {
             findSubjectByUserName = subjectList.filter(
