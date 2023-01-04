@@ -1,0 +1,51 @@
+.chat-content {
+    width: 1200px;
+    position: relative;
+    padding: 20px;
+    min-height: 200px;
+    margin-top: 90px;
+    background-color: #fff;
+    margin-left: 10px;
+    border-radius: 10px;
+}
+
+.box-rooms {
+    height: calc(100% - 57.1px);
+}
+.ant-collapse-content-box {
+    padding: 0 !important;
+}
+.box-rooms-list {
+    height: 468.48px;
+}
+
+.rooms-list {
+    height: 428px;
+    overflow-y: auto;
+}
+.rooms-list .ant-typography{
+    width: 260px;
+    padding: 10px ;
+    display: flex !important;
+}
+.ant-typography:hover {
+    background-color: #f0f2f5;
+    border-radius: 10px;
+}
+
+.room-name {
+    font-size: 18px;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    height: 32px;
+    width: calc(100% - 32px);
+    padding-left: 5px;
+}
+
+.ant-btn {
+    align-items: center !important;
+}
+.btn-add-room:hover {
+    background-color: #f0f2f5 !important;
+    align-items: center;
+}

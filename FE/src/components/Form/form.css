@@ -68,3 +68,11 @@ textarea {
     font-size: 20px;
 }
 
+#form-input {
+    width: 50%;
+}
+
+inPut[date] {
+    width:200px;
+}
+

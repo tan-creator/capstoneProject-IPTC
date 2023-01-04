@@ -83,7 +83,7 @@ function Shedule() {
                 })
             })
         }
-        console.log(arrLichHoc);
+        console.log("Lich hoc:\n" + arrLichHoc);
         return arrLichHoc;
     }
 
@@ -93,13 +93,13 @@ function Shedule() {
         const date = []
         time.push(...obj.SubjectTime.split(" "))
         date.push(...obj.DateOfWeek.split(" "))
-        for ( var i = 0; i < time.length; i++) {
+        for (var i = 0; i < time.length; i++) {
             listLichHoc.push({
                 time: time[i],
                 date: date[i],
-                ClassName : obj.ClassName,
-                Names : obj.Names,
-                SubjectName : obj.SubjectName
+                ClassName: obj.ClassName,
+                Names: obj.Names,
+                SubjectName: obj.SubjectName
             })
         }
     })
@@ -112,7 +112,7 @@ function Shedule() {
     const arrT7 = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
     const arrCN = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
 
-    function getLich(array, str ) {
+    function getLich(array, str) {
         listLichHoc.map((arr) => {
             if (arr.time == "7:00-7:45") {
                 if (arr.date == str) {
@@ -167,7 +167,7 @@ function Shedule() {
         })
         console.log(array);
         return array;
-      }
+    }
 
     return (
         <div>
@@ -280,9 +280,9 @@ function Shedule() {
                                                                         color,
                                                                 }}
                                                             >
-                                                                <p> { data?.SubjectName } </p>
-                                                                <p> { data?.ClassName } </p>
-                                                                <p> { data?.Names } </p>
+                                                                <p> {data?.SubjectName} </p>
+                                                                <p> {data?.ClassName} </p>
+                                                                <p> {data?.Names} </p>
                                                             </div>
                                                         </tr>
                                                     );
@@ -313,7 +313,7 @@ function Shedule() {
                                                                         data?.ClassName
                                                                     }
                                                                 </p>
-                                                                <p> { data?.Names } </p>
+                                                                <p> {data?.Names} </p>
                                                             </div>
                                                         </tr>
                                                     );
@@ -343,7 +343,7 @@ function Shedule() {
                                                                         data?.ClassName
                                                                     }
                                                                 </p>
-                                                                <p> { data?.Names } </p>
+                                                                <p> {data?.Names} </p>
                                                             </div>
                                                         </tr>
                                                     );
@@ -373,7 +373,7 @@ function Shedule() {
                                                                         data?.ClassName
                                                                     }
                                                                 </p>
-                                                                <p> { data?.Names } </p>
+                                                                <p> {data?.Names} </p>
                                                             </div>
                                                         </tr>
                                                     );
@@ -403,7 +403,7 @@ function Shedule() {
                                                                         data?.ClassName
                                                                     }
                                                                 </p>
-                                                                <p> { data?.Names } </p>
+                                                                <p> {data?.Names} </p>
                                                             </div>
                                                         </tr>
                                                     );
@@ -433,7 +433,7 @@ function Shedule() {
                                                                         data?.ClassName
                                                                     }
                                                                 </p>
-                                                                <p> { data?.Names } </p>
+                                                                <p> {data?.Names} </p>
                                                             </div>
                                                         </tr>
                                                     );
@@ -463,7 +463,7 @@ function Shedule() {
                                                                         data?.ClassName
                                                                     }
                                                                 </p>
-                                                                <p> { data?.Names } </p>
+                                                                <p> {data?.Names} </p>
                                                             </div>
                                                         </tr>
                                                     );

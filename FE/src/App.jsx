@@ -36,7 +36,11 @@ export default function App() {
             .then((json) => {
                 localStorage.setItem("classes", JSON.stringify(json));
             });
+<<<<<<< HEAD
+            fetch("http://127.0.0.1:8000/api/subject")
+=======
         fetch("http://127.0.0.1:8000/api/subject")
+>>>>>>> d884be8f1cbf3eaf8b14025f0510145829151f50
             .then((response) => response.json())
             .then((json) => {
                 localStorage.setItem("subjects", JSON.stringify(json));

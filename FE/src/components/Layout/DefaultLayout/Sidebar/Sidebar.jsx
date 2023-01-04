@@ -153,6 +153,14 @@ export default function Sidebar() {
                                         </span>
                                     </a>
                                 </li>
+                                {/* <li className="nav-link">
+                                    <a href="/chat">
+                                        <i className='bx bx-message-rounded-dots icon'></i>
+                                        <span className="text nav-text">
+                                            Nhắn tin
+                                        </span>
+                                    </a>
+                                </li> */}
                             </ul>
                         </div>
                         <div className="bottom-content">
