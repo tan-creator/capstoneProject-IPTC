@@ -42,12 +42,13 @@ export default function Personnal() {
                 alert.error("Fetch thất bại: ");
                 console.log("error", error);
             });
+        console.log(dataUpdate);
     };
-    const handleUpdate = () => {
+    const handleUpdate = (dataUpdate) => {
         setDataUpdate({
-            Names: dataUpdate.Names,
-            BirthDay: dataUpdate.BirthDay,
-            Phone: dataUpdate.Phone,
+            Names: dataUpdate?.Names,
+            BirthDay: dataUpdate?.BirthDay,
+            Phone: dataUpdate?.Phone,
         });
     };
     useEffect(() => {

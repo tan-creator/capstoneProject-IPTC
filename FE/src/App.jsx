@@ -36,6 +36,11 @@ export default function App() {
             .then((json) => {
                 localStorage.setItem("classes", JSON.stringify(json));
             });
+        fetch("http://127.0.0.1:8000/api/subject")
+            .then((response) => response.json())
+            .then((json) => {
+                localStorage.setItem("subjects", JSON.stringify(json));
+            });
     };
     useEffect(() => {
         getApi();
