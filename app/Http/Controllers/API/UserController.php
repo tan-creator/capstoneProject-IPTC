@@ -4,7 +4,6 @@ namespace App\Http\Controllers\API;
 
 use Exception;
 use App\Models\User;
-use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
 use App\Http\Requests\UserRequest;
 use App\Http\Controllers\Controller;
@@ -56,11 +55,11 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\UserRequest  $request
+     * @param  \Illuminate\Http\Request  $request
      * @param  int  $UserName
      * @return \Illuminate\Http\Response
      */
-    public function update(UserRequest $request, $UserName)
+    public function update(Request $request, $UserName)
     {     
         try {
             if (empty(User::Where('UserName', $UserName)->first())) {

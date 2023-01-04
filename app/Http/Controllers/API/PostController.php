@@ -64,7 +64,7 @@ class PostController extends Controller
      * @param  int  $PostID
      * @return \Illuminate\Http\Response
      */
-    public function update(PostRequest $request, $PostID)
+    public function update(Request $request, $PostID)
     {
         try {
             //$post = json_decode(json_encode(Post::Where('PostID', $PostID)->first()),true);

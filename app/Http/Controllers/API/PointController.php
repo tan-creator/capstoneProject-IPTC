@@ -79,11 +79,11 @@ class PointController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\PointRequest  $request
+     * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(PointRequest $request, $StudentID, $SubjectID)
+    public function update(Request $request, $StudentID, $SubjectID)
     {
         try {
             if (empty(Point::where([['StudentID', $StudentID],['SubjectID', $SubjectID]])->first())) {

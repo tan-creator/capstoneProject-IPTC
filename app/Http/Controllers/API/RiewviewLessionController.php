@@ -79,11 +79,11 @@ class RiewviewLessionController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\ReviewRequest  $request
+     * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ReviewRequest $request, $LessonID)
+    public function update(Request $request, $LessonID)
     {
         try {
             if (empty(ReviewLesson::where('LessonID', $LessonID)->first())) {
