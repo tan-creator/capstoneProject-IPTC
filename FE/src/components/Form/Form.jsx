@@ -3,9 +3,9 @@ import { useAlert } from "react-alert";
 import NavBar from "../NavBar/NavBar";
 import Sidebar from "../Layout/DefaultLayout/Sidebar/Sidebar";
 import "./form.css"
-import { Spin , Collapse , Typography } from "antd";
+import { Spin, Collapse, Typography } from "antd";
 
-function Form () {
+function Form() {
     const [classes, setClass] = useState([]);
     const [users, setUser] = useState([])
     const [account, setAccount] = useState({})
@@ -16,43 +16,43 @@ function Form () {
 
     useEffect(() => {
         fetch("http://127.0.0.1:8000/api/student")
-            .then (response => response.json())
+            .then(response => response.json())
             .then(json => {
                 setStudent(json)
             })
-            .catch(error => console.log('error',error));
+            .catch(error => console.log('error', error));
 
         fetch("http://127.0.0.1:8000/api/class")
-            .then (response => response.json())
+            .then(response => response.json())
             .then(json => {
                 setClass(json)
             })
-            .catch(error => console.log('error',error));
+            .catch(error => console.log('error', error));
 
         fetch("http://127.0.0.1:8000/api/user")
-            .then (response => response.json())
+            .then(response => response.json())
             .then(json => {
                 setUser(json)
             })
-            .catch(error => console.log('error',error));
+            .catch(error => console.log('error', error));
 
         const users = JSON.parse(localStorage.getItem("account"));
-        setAccount({ ...users})
+        setAccount({ ...users })
         console.log("Thong tin account\n" + account);
 
         fetch("http://127.0.0.1:8000/api/permission")
-            .then (response =>  response.json())
+            .then(response => response.json())
             .then(json => {
                 setPermission(json)
                 setIsLoading(false)
                 console.log(permission);
             })
-            .catch(error => console.log('error',error));
-    },[]);
+            .catch(error => console.log('error', error));
+    }, []);
 
     const [form, setForm] = useState({
-        StudentID : "",
-        PermissionDay : "",
+        StudentID: "",
+        PermissionDay: "",
         PermissionContent: ""
     })
 
@@ -61,19 +61,19 @@ function Form () {
         let idTeacher = "";
         let teacherClassName = ""
         student.map((std) => {
-            if(account.UserName == std.ParentUserName) {
+            if (account.UserName == std.ParentUserName) {
                 idClass = std.ClassID;
             }
         })
 
         classes.map((cls) => {
-            if(cls.ClassID == idClass) {
+            if (cls.ClassID == idClass) {
                 idTeacher = cls.TeacherClassUserName;
             }
         })
 
         users.map((user) => {
-            if(user.UserName == idTeacher) {
+            if (user.UserName == idTeacher) {
                 teacherClassName = user.Names;
             }
         })
@@ -86,7 +86,7 @@ function Form () {
     function getStudentName() {
         let name = "";
         student.map((std) => {
-            if(account.UserName == std.ParentUserName) {
+            if (account.UserName == std.ParentUserName) {
                 name = std.StudentName;
                 studentID = std.StudentID
             }
@@ -95,17 +95,17 @@ function Form () {
     }
     const studentName = getStudentName();
 
-    function getUserName () {
+    function getUserName() {
         permission.map((per) => {
             student.map((std) => {
-                if(per.StudentName == std.StudentName) {
+                if (per.StudentName == std.StudentName) {
                     per.ParentUserName = std.ParentUserName;
                 }
             })
         })
         permission.map((per) => {
             users.map((user) => {
-                if(user.UserName = per.ParentUserName) {
+                if (user.UserName = per.ParentUserName) {
                     per.Names = user.Names;
                 }
             })
@@ -142,21 +142,21 @@ function Form () {
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json ; charset=UTF-8' },
-            body: JSON.stringify({...form})
+            body: JSON.stringify({ ...form })
         };
         fetch('http://127.0.0.1:8000/api/permission', requestOptions)
-            .then((response)  => {
+            .then((response) => {
                 if (response.status == 200) {
-                    console.log("Thành công\n"+form);
+                    console.log("Thành công\n" + form);
                     alertNav.success("Gửi thành công: ");
                 } else {
-                    console.log("Thất bại\n"+form);
+                    console.log("Thất bại\n" + form);
                     alertNav.error("Gửi thất bại: ");
                 }
             })
             .catch(error => {
                 alertNav.error("Fetch thất bại: ");
-                console.log('error',error)
+                console.log('error', error)
             });
 
     }
@@ -167,38 +167,51 @@ function Form () {
             <NavBar />
             <Sidebar />
             <div className="container">
-                <div className="form-content" style={{display:styleDisplay}}>
+                <div className="form-content" style={{ display: styleDisplay }}>
                     {account?.Role === "Parent" && (
                         <form id="form-input" action="POST">
-                            <table>
+                            <table style={{ width: "100%" }}>
                                 <thead>
-                                    <tr>
-                                        <h2>Đơn xin nghĩ học</h2>
+                                    <tr style={{ backgroundColor: "#f2f6fc" }}>
+                                        <h2
+                                            style={{ paddingTop: "10px", paddingLeft: "10px" }}
+                                        >Đơn xin nghĩ học</h2>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <label htmlFor="">Người gửi: {account.Names} </label>
+                                    <tr style={{ borderBottom: "1px solid #ccc" }}>
+                                        <label
+                                            style={{ height: "30px", marginTop: 10 }}
+                                        >Người gửi : {account.Names} </label>
                                     </tr>
-                                    <tr>
-                                        <label htmlFor="">Người nhận: {teacherName}</label>
+                                    <tr style={{ borderBottom: "1px solid #ccc" }}>
+                                        <label
+                                            style={{ height: "30px", marginTop: 10 }}
+                                        >Người nhận : {teacherName}</label>
                                     </tr>
-                                    <tr>
-                                        <label>Ngày nghĩ: </label>
+                                    <tr style={{ borderBottom: "1px solid #ccc" }}>
+                                        <label
+                                            style={{ height: "30px", marginTop: 10, marginRight: 10 }}
+                                        >Ngày nghĩ : </label>
                                         <input
+                                            style={{ width: "200px", height: 30, marginBottom: 10, fontSize: 16 }}
                                             type="date"
                                             name="PermissionDay"
                                             value={form.PermissionDay}
                                             onChange={handleOnChange}
                                         ></input>
                                     </tr>
-                                    <tr>
-                                        <label htmlFor="">Nội dung:</label>
-                                        <textarea id="" cols="90" rows="20"
+                                    <tr style={{ borderBottom: "1px solid #ccc" }}>
+                                        <label
+                                            for="textarea-form"
+                                            style={{ height: "30px", marginTop: 10 }}
+                                        >Nội dung :</label>
+                                        <textarea id="textarea-form" cols="90" rows="10"
                                             type="text"
                                             name="PermissionContent"
                                             value={form.PermissionContent}
                                             onChange={handleOnChange}
+                                            style={{ fontSize: 16, border: "none" }}
                                         ></textarea>
                                     </tr>
                                 </tbody>
@@ -212,17 +225,17 @@ function Form () {
                             >Gửi</button>
                         </form>
                     )}
-                    <ShowPermission permission={permission} studentName={studentName} account={account} isLoading={isLoading}/>
+                    <ShowPermission permission={permission} studentName={studentName} account={account} isLoading={isLoading} />
                 </div>
             </div>
         </div>
     )
 }
 
-const ShowPermission = memo( (props) => {
+const ShowPermission = memo((props) => {
     const [isLoading, setIsLoading] = useState(true)
     const [permission, setPermission] = useState([]);
-    const {Panel} = Collapse
+    const { Panel } = Collapse
     useLayoutEffect(() => {
         if (props.permission !== permission) {
             setPermission(props.permission)
@@ -232,20 +245,20 @@ const ShowPermission = memo( (props) => {
     }, [props.permission])
 
     let account = props.account;
-    const arrPerTeacher = permission.filter( (per) => {
+    const arrPerTeacher = permission.filter((per) => {
         return per.TeacherName == account.Names;
     })
     console.log(arrPerTeacher);
 
-    const arrPerParent = permission.filter( (per) => {
+    const arrPerParent = permission.filter((per) => {
         return per.StudentName == props.studentName;
     })
     console.log(arrPerParent);
 
     const renderHeader = (time) => (
-        <div style={{display: 'flex',justifyContent:"space-between"}}>
+        <div style={{ display: 'flex', justifyContent: "space-between" }}>
             <span>Đơn xin nghĩ học</span>
-            <span>{time}</span>
+
         </div>
     );
 
@@ -254,31 +267,31 @@ const ShowPermission = memo( (props) => {
     return (
         <>
             {account?.Role == "Parent" && (
-                <div className="box-permission" style={{width:widthBox, height:" 600px",marginLeft:" 10px",borderLeft:" 1px solid #ccc",paddingLeft: "10px",overflowY: "scroll"}}>
+                <div className="box-permission" style={{ width: widthBox, height: " 600px", marginLeft: " 10px", borderLeft: " 1px solid #ccc", paddingLeft: "10px", overflowY: "scroll" }}>
                     <h2>Đơn đã gửi</h2>
                     <hr />
                     <div>
-                        <div className="ant-spin-loading">{isLoading && <Spin/>}</div>
+                        <div className="ant-spin-loading">{isLoading && <Spin />}</div>
                     </div>
                     {arrPerParent.length == 0 && !isLoading && (<h3>Không có đơn nào được gửi đi</h3>)}
                     {
-                        permission.map((per) => {
+                        arrPerParent.map((per) => {
                             if (per.StudentName == props.studentName)
-                            return (
-                                <div key={per.PermissionFormID} className="item-permission">
-                                    <Collapse defaultActiveKey={['1']}>
-                                        <Panel header={renderHeader(per?.PermissionDay)} key={per.PermissionFormID}>
-                                            <p>Kính gửi giáo viên {per.TeacherName},</p>
-                                            <p>Tôi là phụ huynh em : {per?.StudentName}</p>
-                                            <p>Nội dung : {per?.PermissionContent}</p>
-                                            <div className="footer-item-permission">
-                                                <h2>Chữ ký phụ huynh</h2>
-                                                <p>{per.Names}</p>
-                                            </div>
-                                        </Panel>
-                                    </Collapse>
-                                </div>
-                            )
+                                return (
+                                    <div key={per.PermissionFormID} className="item-permission">
+                                        <Collapse defaultActiveKey={['1']}>
+                                            <Panel header={renderHeader(per?.PermissionDay)} key={per.PermissionFormID}>
+                                                <p>Kính gửi giáo viên {per.TeacherName},</p>
+                                                <p>Tôi là phụ huynh em : {per?.StudentName}</p>
+                                                <p>Nội dung : {per?.PermissionContent}</p>
+                                                <div className="footer-item-permission">
+                                                    <h2>Chữ ký phụ huynh</h2>
+                                                    <p>{per.Names}</p>
+                                                </div>
+                                            </Panel>
+                                        </Collapse>
+                                    </div>
+                                )
                         })
                     }
                 </div>
@@ -288,27 +301,27 @@ const ShowPermission = memo( (props) => {
                     <h2>Đơn được gửi tới</h2>
                     <hr />
                     <div>
-                        <div className="ant-spin-loading">{isLoading && <Spin/>}</div>
+                        <div className="ant-spin-loading">{isLoading && <Spin />}</div>
                     </div>
-                    {arrPerParent.length == 0 && !isLoading && (<h3>Không có đơn nào được gửi tới</h3>)}
+                    {arrPerTeacher.length == 0 && !isLoading && (<h3>Không có đơn nào được gửi tới</h3>)}
                     {
-                        permission.map((per) => {
+                        arrPerTeacher.map((per) => {
                             if (per.TeacherName == account.Names)
-                            return (
-                                <div key={per.PermissionFormID} className="item-permission">
-                                    <Collapse defaultActiveKey={['1']}>
-                                        <Panel header={renderHeader(per?.PermissionDay)} key={per.PermissionFormID}>
-                                            <p>Kính gửi giáo viên {per.TeacherName},</p>
-                                            <p>Tôi là phụ huynh em : {per?.StudentName}</p>
-                                            <p>Nội dung : {per?.PermissionContent}</p>
-                                            <div className="footer-item-permission">
-                                                <h2>Chữ ký phụ huynh</h2>
-                                                <p>{per.Names}</p>
-                                            </div>
-                                        </Panel>
-                                    </Collapse>
-                                </div>
-                            )
+                                return (
+                                    <div key={per.PermissionFormID} className="item-permission">
+                                        <Collapse defaultActiveKey={['1']}>
+                                            <Panel header={renderHeader(per?.PermissionDay)} key={per.PermissionFormID}>
+                                                <p>Kính gửi giáo viên {per.TeacherName},</p>
+                                                <p>Tôi là phụ huynh em : {per?.StudentName}</p>
+                                                <p>Nội dung : {per?.PermissionContent}</p>
+                                                <div className="footer-item-permission">
+                                                    <h2>Chữ ký phụ huynh</h2>
+                                                    <p>{per.Names}</p>
+                                                </div>
+                                            </Panel>
+                                        </Collapse>
+                                    </div>
+                                )
                         })
                     }
                 </div>

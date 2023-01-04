@@ -321,10 +321,10 @@ const FunctionPost = memo(({ PostID, UserName, UserIMG }) => {
                     method="POST"
                     role="form"
                 >
-                    <div className="form-group">
+                    <div className="form-group-comment">
                         <input
                             type="text"
-                            className="form-control"
+                            className="form-control-comment"
                             name="CommentContent"
                             value={cmtSend.CommentContent}
                             onChange={handleOnChange}
