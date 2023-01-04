@@ -128,10 +128,10 @@ function Form () {
     const handleSubmit = async () => {
 
         form.StudentID = studentID;
-        const today = new Date();
-        const time = today.getFullYear()+"-"+(today.getMonth()+1)+"-"+today.getDate();
+        // const today = new Date();
+        // const time = today.getFullYear()+"-"+(today.getMonth()+1)+"-"+today.getDate();
         // +" "+today.getHours()+":"+today.getMinutes()+":"+today.getSeconds()
-        form.PermissionDay  = time;
+        // form.PermissionDay  = time;
 
         console.log(form);
 
@@ -169,7 +169,7 @@ function Form () {
             <div className="container">
                 <div className="form-content" style={{display:styleDisplay}}>
                     {account?.Role === "Parent" && (
-                        <form action="POST">
+                        <form id="form-input" action="POST">
                             <table>
                                 <thead>
                                     <tr>
@@ -182,6 +182,15 @@ function Form () {
                                     </tr>
                                     <tr>
                                         <label htmlFor="">Người nhận: {teacherName}</label>
+                                    </tr>
+                                    <tr>
+                                        <label>Ngày nghĩ: </label>
+                                        <input
+                                            type="date"
+                                            name="PermissionDay"
+                                            value={form.PermissionDay}
+                                            onChange={handleOnChange}
+                                        ></input>
                                     </tr>
                                     <tr>
                                         <label htmlFor="">Nội dung:</label>
@@ -221,7 +230,17 @@ const ShowPermission = memo( (props) => {
         }
         console.log(isLoading);
     }, [props.permission])
-    console.log(permission);
+
+    let account = props.account;
+    const arrPerTeacher = permission.filter( (per) => {
+        return per.TeacherName == account.Names;
+    })
+    console.log(arrPerTeacher);
+
+    const arrPerParent = permission.filter( (per) => {
+        return per.StudentName == props.studentName;
+    })
+    console.log(arrPerParent);
 
     const renderHeader = (time) => (
         <div style={{display: 'flex',justifyContent:"space-between"}}>
@@ -230,16 +249,18 @@ const ShowPermission = memo( (props) => {
         </div>
     );
 
-    let account = props.account;
+    const widthBox = account?.Role == "Parent" ? "50%" : "100%";
+
     return (
         <>
             {account?.Role == "Parent" && (
-                <div className="box-permission" style={{height:" 600px",marginLeft:" 10px",borderLeft:" 1px solid #ccc",paddingLeft: "10px",overflowY: "scroll"}}>
+                <div className="box-permission" style={{width:widthBox, height:" 600px",marginLeft:" 10px",borderLeft:" 1px solid #ccc",paddingLeft: "10px",overflowY: "scroll"}}>
                     <h2>Đơn đã gửi</h2>
                     <hr />
                     <div>
                         <div className="ant-spin-loading">{isLoading && <Spin/>}</div>
                     </div>
+                    {arrPerParent.length == 0 && !isLoading && (<h3>Không có đơn nào được gửi đi</h3>)}
                     {
                         permission.map((per) => {
                             if (per.StudentName == props.studentName)
@@ -269,6 +290,7 @@ const ShowPermission = memo( (props) => {
                     <div>
                         <div className="ant-spin-loading">{isLoading && <Spin/>}</div>
                     </div>
+                    {arrPerParent.length == 0 && !isLoading && (<h3>Không có đơn nào được gửi tới</h3>)}
                     {
                         permission.map((per) => {
                             if (per.TeacherName == account.Names)

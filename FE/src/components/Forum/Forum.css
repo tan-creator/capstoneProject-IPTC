@@ -1,24 +1,57 @@
+.container {
+    background-color: #f0f2f5;
+}
+.box-post {
+    position: relative;
+    background-color: #fff;
+    padding: 10px 0;
+    width: 100%;
+    box-shadow: 0 7px 25px rgb(0 0 0 / 8%);
+    border-radius: 10px;
+}
+
+.box-profile {
+    padding: 0 20px;
+}
+
+.box-post-header {
+    display: flex;
+}
+
+.box-content {
+    padding: 0 20px 10px 20px;
+    font-size: 15px;
+}
+
 .box-forum {
     display: flex;
     flex-direction: column;
 }
 .format-icon {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-around;
     padding-bottom: 10px;
 }
-.first {
-    padding-right: 400px;
+.box-post-header-avatar {
+    width: 60px;
+    height: 60px;
+    margin-right: "20px";
+    border-radius: 50px;
+    background-color: #ccc;
+    border:  1px solid #ccc;
 }
 .box-icon {
+    padding: 5px 0;
     display: flex;
     justify-content: space-around;
+    width: 100%;
 }
 .action1 {
     font-family: "Poppins", sans-serif;
     display: flex;
     font-size: 20px;
     padding-top: 15px;
+    margin: 0 20px;
 }
 
 .action1 i {
@@ -33,7 +66,6 @@
     font-family: "Poppins", sans-serif;
     display: flex;
     font-size: 20px;
-    padding-top: 15px;
 }
 
 .action i {
@@ -45,14 +77,44 @@
 }
 .action:hover {
     background-color: #dfdddd;
+    cursor: pointer;
 }
 .action {
     font-family: "Poppins", sans-serif;
     border-radius: 7px;
     display: flex;
     font-size: 20px;
-    padding: 10px;
+    padding: 5px 60px;
+    width: 36%;
+    text-align: center;
 }
 .box-comment {
     display: flex;
+    padding: 0 20px 10px 20px;
+    width: 100%;
+}
+
+.box-img-avatar{
+    width: 40px;
+    height: 40px;
+    margin-right: 20px;
+    border-radius: 50px;
+    background-color: #ccc;
+    border:  1px solid #ccc;
+}
+
+.form-comment {
+    width: calc(100% - 60px);
+}
+
+.form-group{
+    margin-bottom: 0;
+    width: 100%;
+}
+
+.form-control {
+    width: 100% !important;
+    border: none;
+    border-radius: 50px;
+    background-color: #f0f2f5;
 }
