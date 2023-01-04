@@ -1,12 +1,11 @@
 import React from "react";
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect, useLayoutEffect, memo } from "react";
+import { useAlert } from "react-alert";
 import Sidebar from "../Layout/DefaultLayout/Sidebar/Sidebar";
 import NavBar from "../NavBar/NavBar";
 import { getPost } from "./../../helpers/getUser";
 import { Spin } from "antd";
 import "./Forum.css";
-import { useLayoutEffect } from "react";
 
 export default function Forum() {
     const [account, setAccount] = useState({})
@@ -83,61 +82,7 @@ export default function Forum() {
                                             />
                                         </div>
                                     </div>
-                                    <div
-                                        className="format-icon"
-                                        style={{
-                                            borderBottom:
-                                                "1px solid rgb(235, 228, 228)",
-                                        }}
-                                    >
-                                        {/* <Like likes={post.Likes.length} /> */}
-                                        <div className="action1 first" >
-                                            <i className="bx bxs-like "></i>
-                                            <h4>{post.Likes.length}</h4>
-                                        </div>
-                                        {/* <Comment comment={post} /> */}
-                                        <div className="action1 first">
-                                            <i className="bx bxs-chat "></i>
-                                            <h4>{post.Comments.length}</h4>
-                                        </div>
-                                    </div>
-                                    <div
-                                        className="box-icon"
-                                    >
-                                        <FunctionLike post={post} UserName={account.UserName} />
-                                        <div className="action" onClick={() => { handleGetPostId(post) }}>
-                                            <i className="bx bx-chat"></i>
-                                            <h4 >Bình luận</h4>
-                                        </div>
-                                    </div>
-                                    <FunctionComment data={dataSend} />
-                                    <div className="box-comment">
-                                        <img
-                                            className="box-img-avatar"
-                                            src={account.Images}
-                                            alt=""
-                                        />
-                                        <form
-                                            className="form-comment"
-                                            action=""
-                                            method="POST"
-                                            role="form"
-                                            onSubmit={(e) => {
-                                                e.preventDefault();
-                                                console.log(e.target[0].value);
-                                            }}
-                                        >
-                                            <div className="form-group">
-                                                <input
-                                                    type="text"
-                                                    className="form-control"
-                                                    name=""
-                                                    placeholder="Viết bình luận: "
-                                                    style={{ width: "400px" }}
-                                                />
-                                            </div>
-                                        </form>
-                                    </div>
+                                    <FunctionPost PostID={post.PostID} UserName={account.UserName} UserIMG={account.Images} />
                                 </>
                             }
                         </div>
@@ -148,130 +93,252 @@ export default function Forum() {
     );
 }
 
-function Like(props) {
-    // const [posts, setPosts] = useState()
-    // const [likes, setLikes] = useState(0)
-
-    // useLayoutEffect(() => {
-
-    // }, [props.PostID])
-
-    return (
-        <div className="action1 first">
-            <i className="bx bxs-like "></i>
-            <h5>{props.likes}</h5>
-        </div>
-    )
-}
-
-function Comment(props) {
-    const [data, setData] = useState(props.comment)
+const FunctionPost = memo(({ PostID, UserName, UserIMG }) => {
+    const [posts, setPosts] = useState([]);
+    const [active, setActive] = useState(false)
+    const [cmtSend, setCmtSend] = useState({
+        PostID: "",
+        CommentContent: "",
+        PersonUserName: "",
+    })
+    const alertNav = useAlert();
 
     useLayoutEffect(() => {
-        if (props.comment != data) {
-            setData(props.comment)
-        }
-    }, [props.comment])
+        fetch(`http://127.0.0.1:8000/api/post`)
+            .then(response => response.json())
+            .then(json => {
+                setPosts(json)
+            })
+            .catch(error => console.log('error', error));
+    }, [posts])
 
-    return (
-        <div className="action1 first">
-            <i className="bx bxs-chat "></i>
-            <h4>{data.Comments.length}</h4>
-        </div>
-    )
-}
-
-function FunctionLike({ post, UserName }) {
-    const [styleIconLike, setStyleIconLike] = useState("bx bx-like")
-    const [styleH4Like, setStyleH4Like] = useState(false)
-
-    useLayoutEffect(() => {
-        post.Likes.map((like) => {
-            if (like.PersonUserName == UserName) {
-                setStyleIconLike("bx bxs-like");
-                setStyleH4Like(true)
+    function getPost() {
+        let obj = {}
+        posts.map((post) => {
+            if (post.PostID == PostID) {
+                obj = { ...post };
             }
         })
-    }, [post])
+        return obj;
+    }
 
-    const onHandleLike = () => {
-        post.Likes.map((like) => {
-            if (like.PersonUserName == UserName) {
-                setActive(true)
+    function Like({ likes }) {
+        return (
+            <div className="action1 first">
+                <i className="bx bxs-like "></i>
+                <h5>{likes}</h5>
+            </div>
+        )
+    }
+
+    function Comment({ comments }) {
+        return (
+            <div className="action1 first">
+                <i className="bx bxs-chat "></i>
+                <h4>{comments}</h4>
+            </div>
+        )
+    }
+
+    function FunctionLike({ post, UserName }) {
+        const [styleIconLike, setStyleIconLike] = useState("bx bx-like")
+        const [styleH4Like, setStyleH4Like] = useState(false)
+
+        useLayoutEffect(() => {
+            post.Likes?.map((like) => {
+                if (like.PersonUserName == UserName) {
+                    setStyleIconLike("bx bxs-like");
+                    setStyleH4Like(true)
+                }
+            })
+        }, [post])
+
+        const onHandleLike = () => {
+            let dataSend = {
+                PostID: post.PostID,
+                PersonUserName: UserName,
             }
-        })
-        let dataSend = {
-            PostID: post.PostID,
-            PersonUserName: UserName,
+            if (styleH4Like) {
+                console.log(dataSend);
+                const requestOptions = {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json ; charset=UTF-8' },
+                    body: JSON.stringify({ ...dataSend })
+                };
+                fetch(`http://127.0.0.1:8000/api/post/dislike`, requestOptions)
+                    .then((response) => {
+                        if (response.status == 200) {
+                            console.log("ok dislike");
+                            setStyleIconLike("bx bx-like")
+                            setStyleH4Like(false)
+                        } else {
+                            console.log("not ok dislike");
+                        }
+                    })
+                    .catch(error => {
+                        console.log('error', error)
+                        alertNav.error("Bỏ thích thất bại");
+                    });
+            }
+            if (!styleH4Like) {
+                console.log(dataSend);
+                const requestOptions = {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json ; charset=UTF-8' },
+                    body: JSON.stringify({ ...dataSend })
+                };
+                fetch(`http://127.0.0.1:8000/api/post/like`, requestOptions)
+                    .then((response) => {
+                        if (response.status == 200) {
+                            console.log("ok like");
+                            setStyleIconLike("bx bxs-like")
+                            setStyleH4Like(true)
+                        } else {
+                            console.log("not ok like");
+                            alertNav.error("Thích thất bại");
+                        }
+                    })
+                    .catch(error => {
+                        console.log('error', error)
+                    });
+            }
         }
-        if (styleH4Like) {
-            console.log(dataSend);
-            const requestOptions = {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json ; charset=UTF-8' },
-                body: JSON.stringify({ ...dataSend })
+
+        return (
+            <div className="action" onClick={onHandleLike}>
+                <i className={styleIconLike}></i>
+                <h4>{styleH4Like ? "Đã thích" : "Thích"}</h4>
+            </div>
+        )
+    }
+
+    const FunctionComment = memo(({ post }) => {
+        const [postComment, setPostComment] = useState({})
+        const [isLoading, setIsLoading] = useState(true)
+
+        useLayoutEffect(() => {
+            if (post !== postComment) {
+                setPostComment(post)
+            }
+        }, [post])
+
+        return (
+            <div key={post.PostID}>
+                {
+                    postComment.Comments?.map((cmt) => {
+                        return (
+                            <div key={cmt.CommentID}>
+                                <div>
+                                    <img src={cmt?.Images}></img>
+                                </div>
+                                <div>
+                                    <p>{cmt?.Names}</p>
+                                    <p>{cmt?.CommentContent}</p>
+                                </div>
+                            </div>
+                        )
+                    })
+                }
+            </div>
+        )
+    })
+
+    const handleOnChange = (e) => {
+        const name = e.target.name;
+        const value = e.target.value;
+        setCmtSend((prevState) => {
+            return {
+                ...prevState,
+                [name]: value,
             };
-            fetch(`http://127.0.0.1:8000/api/post/dislike`, requestOptions)
-                .then((response) => {
-                    if (response.status == 200) {
-                        console.log("ok dislike");
-                        setStyleIconLike("bx bx-like")
-                        setStyleH4Like(false)
-                    } else {
-                        console.log("not ok dislike");
-                    }
-                })
-                .catch(error => {
-                    console.log('error', error)
-                });
+        });
+    }
+
+    const onHandleComment = (UserName, id) => {
+        cmtSend.PostID = id;
+        cmtSend.PersonUserName = UserName;
+        if (!cmtSend.CommentContent) {
+            alert("Nội dung đang trống")
+            return;
         }
-        if (!styleH4Like) {
-            console.log(dataSend);
-            const requestOptions = {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json ; charset=UTF-8' },
-                body: JSON.stringify({ ...dataSend })
-            };
-            fetch(`http://127.0.0.1:8000/api/post/like`, requestOptions)
-                .then((response) => {
-                    if (response.status == 200) {
-                        console.log("ok like");
-                        setStyleIconLike("bx bxs-like")
-                        setStyleH4Like(true)
-                    } else {
-                        console.log("not ok like");
-                    }
-                })
-                .catch(error => {
-                    console.log('error', error)
-                });
-        }
+        console.log(cmtSend);
+
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json ; charset=UTF-8' },
+            body: JSON.stringify({ ...cmtSend })
+        };
+        fetch(`http://127.0.0.1:8000/api/post/comment`, requestOptions)
+            .then((response) => {
+                if (response.status == 200) {
+                    console.log("ok");
+                    alertNav.success("Đã bình luận");
+                } else {
+                    console.log("not ok");
+                    alertNav.error("Không thể bình luận");
+                }
+            })
+            .catch(error => {
+                console.log('error', error)
+                alertNav.error("Bỏ thích thất bại");
+            });
     }
 
     return (
-        <div className="action" onClick={onHandleLike}>
-            <i className={styleIconLike}></i>
-            <h4>{styleH4Like ? "Đã thích" : "Thích"}</h4>
-        </div>
-    )
-}
-
-function FunctionComment({ post }) {
-
-    console.log(post);
-    return (
-        <div>
-            {/* {
-                post.Comments.map((cmt) => {
-                    return (
-                        <div>
-                            <p>cmt.PersonUserName</p>
-                            <p>cmt.CommentContent</p>
+        <>
+            <div
+                className="format-icon"
+                style={{
+                    borderBottom:
+                        "1px solid rgb(235, 228, 228)",
+                }}
+            >
+                <Like likes={getPost().Likes?.length} />
+                <Comment comments={getPost().Comments?.length} />
+            </div>
+            <div
+                className="box-icon"
+            >
+                <FunctionLike post={getPost()} UserName={UserName} />
+                <div className="action"
+                    onClick={() => {
+                        active ? setActive(false) : setActive(true)
+                    }}>
+                    <i className="bx bx-chat"></i>
+                    <h4 >Bình luận</h4>
+                </div>
+            </div>
+            {active && <FunctionComment post={getPost()} />}
+            <div className="box-comment">
+                <img
+                    className="box-img-avatar"
+                    src={UserIMG}
+                    alt=""
+                />
+                <form
+                    className="form-comment"
+                    action=""
+                    method="POST"
+                    role="form"
+                >
+                    <div className="form-group">
+                        <input
+                            type="text"
+                            className="form-control"
+                            name="CommentContent"
+                            value={cmtSend.CommentContent}
+                            onChange={handleOnChange}
+                            placeholder="Viết bình luận: "
+                            style={{ width: "400px" }}
+                        />
+                        <div
+                            className="btn-comment"
+                            onClick={() => { onHandleComment(UserName, getPost().PostID) }}
+                        >Gửi
                         </div>
-                    )
-                })
-            } */}
-        </div>
-
+                    </div>
+                </form>
+            </div>
+        </>
     )
-}
+})
