@@ -6,21 +6,27 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Resources\UserResource;
 use \Firebase\JWT\JWT;
+use Exception;
 
 class AuthController extends Controller
 {
+    /**
+     * Check if username and password are correct, user will log in
+     * @param  \Illuminate\Http\Request  $request
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function login(Request $request) {
-        $Password = DB::table('Users')->select('PassWord')->where('UserName', $request->UserName)->get();
+        $Password = User::select('PassWord')
+                        ->where('UserName', $request->UserName)
+                        ->get();
 
         if ($Password->count() > 0) {
-            if(Hash::check($request->PassWord, $Password[0]->PassWord)) {
+            if(Hash::check($request->PassWord, $Password->PassWord)) {
                 $userInfo = User::where('UserName', $request->UserName)->get();
-                //$result = UserResource::collection($userInfo);
                 $token = JWT::encode([
                     'Username' => $userInfo[0]->UserName,
                     'Name' => $userInfo[0]->Names,
@@ -32,16 +38,51 @@ class AuthController extends Controller
                 // return $userInfo;
                 return response()->json(UserResource::collection($userInfo), 200);
             } else {
-                return response()->json(['statusCode' => 400, 'msg' => 'Sai mật khẩu, mời nhập lại!'], 400);
+                return response()->json([
+                    'statusCode' => 400, 
+                    'msg' => 'Sai mật khẩu, mời nhập lại!'], 
+                400);
             }
         } else {
-            return response()->json(['statusCode' => 400, 'msg' => 'Tài khoản không tồn tại !'], 400);
+            return response()->json([
+                'statusCode' => 400, 
+                'msg' => 'Tài khoản không tồn tại !'], 
+            400);
         }
     }
 
     public function resetPassword(Request $request) {
-        return DB::table('Users')
-                ->where('UserName', $request->UserName)
-                ->update(['PassWord' => bcrypt($request->PassWord)]);
+        try {
+            $CurPassword = User::select('PassWord')
+                                ->Where('UserName', $request->UserName)
+                                ->first()->PassWord;
+
+            if (!Hash::check($request->oldPassword, $CurPassword)) {
+                return response()->json([
+                    'statusCode' => 401, 
+                    'msg' => 'Sai mật khẩu! Mời nhập lại!'], 
+                401); 
+            }
+            if ($request->newPassword !== $request->verifyPassword) { 
+                return response()->json([
+                    'statusCode' => 400, 
+                    'msg' => 'Mật khẩu mới và mật khẩu xác thực phải giống nhau!'], 
+                400);
+            }
+
+            User::where('UserName', $request->UserName)
+                ->update(['PassWord' => bcrypt($request->newPassword)]);
+
+            return response()->json([
+                'statusCode' => 200, 
+                'msg' => 'Thay đổi thành công'], 
+            200);
+        }
+        catch (Exception $e) {
+            return response()->json([
+                'statusCode' => 400, 
+                'msg' => 'Kiểm tra lại input của bạn'], 
+            400);
+        }
     }
 }
