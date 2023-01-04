@@ -4,7 +4,7 @@ namespace App\Http\Controllers\API;
 
 use Exception;
 use App\Http\Controllers\Controller;
-// use Illuminate\Http\Request;
+use Illuminate\Http\Request;
 use App\Models\Student;
 use App\Http\Requests\StudentRequest;
 
@@ -82,11 +82,11 @@ class StudentController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\StudentRequest  $request
+     * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(StudentRequest $request, $id)
+    public function update(Request $request, $id)
     {
         try {
             if (empty(Student::where('StudentID', $id)->first())) {

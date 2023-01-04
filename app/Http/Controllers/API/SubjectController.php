@@ -6,6 +6,7 @@ use Exception;
 use App\Http\Controllers\Controller;
 use App\Models\Subject;
 use App\Http\Requests\SubjectRequest;
+use Illuminate\Http\Request;
 
 class SubjectController extends Controller
 {
@@ -54,11 +55,11 @@ class SubjectController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\SubjectRequest  $request
+     * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(SubjectRequest $request, $id)
+    public function update(Request $request, $id)
     {
         try {
             if (empty(Subject::where('SubjectID', $id)->first())) {
