@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use Exception;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Notification;
@@ -17,7 +18,15 @@ class NotificationController extends Controller
      */
     public function index()
     {
-        return Notification::all();
+        try {
+            return response()->json(Notification::all(), 200);
+        }
+        catch (Exception $e) {
+            return response()->json([
+                'status' => 400, 
+                'msg' => $e,
+            ], 400);
+        } 
     }
 
     /**
@@ -28,8 +37,19 @@ class NotificationController extends Controller
      */
     public function store(Request $request)
     {
-        DB::unprepared('SET IDENTITY_INSERT Notification ON;');
-        return DB::table('Notification')->insert($request->all());
+        try {
+            Notification::create($request->all());
+            return response()->json([
+                'status' => 200, 
+                'msg' => 'Created successfully!'
+            ], 200);
+        }
+        catch (Exception $e) {
+            return response()->json([
+                'status' => 400, 
+                'msg' => $e,
+            ], 400);
+        }
     }
 
     /**
@@ -40,19 +60,21 @@ class NotificationController extends Controller
      */
     public function show($id)
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        return DB::table('Notification')->where('NotificationID', $id)->update($request->all());
+        try {
+            if (empty(Notification::where('NotificationID', $id)->first())) {
+                return response()->json([
+                    'status' => 400, 
+                    'msg' => 'Can not find this notification',
+                ], 400);
+            }
+            return response()->json(Notification::where('NotificationID', $id)->get(), 200);
+        }
+        catch (Exception $e) {
+            return response()->json([
+                'status' => 400, 
+                'msg' => $e,
+            ], 400);
+        }
     }
 
     /**
@@ -64,5 +86,18 @@ class NotificationController extends Controller
     public function destroy($id)
     {
         return DB::table('Notification')->where('NotificationID', $id)->delete();
+        try {
+            Notification::where('NotificationID', $id)->delete();
+            return response()->json([
+                'status' => 200, 
+                'msg' => 'Removed successfully'
+            ], 200);
+        }
+        catch (Exception $e) {
+            return response()->json([
+                'status' => 400, 
+                'msg' => $e,
+            ], 400);
+        }
     }
 }

@@ -2,13 +2,13 @@
 
 namespace App\Providers;
 
-use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Arr;
 
-class AppServiceProvider extends ServiceProvider
+class HelperServiceProvider extends ServiceProvider
 {
     /**
-     * Register any application services.
+     * Register services.
      *
      * @return void
      */
@@ -18,12 +18,12 @@ class AppServiceProvider extends ServiceProvider
     }
 
     /**
-     * Bootstrap any application services.
+     * Bootstrap services.
      *
      * @return void
      */
     public function boot()
     {
-        JsonResource::withoutWrapping();
+        //
     }
 }

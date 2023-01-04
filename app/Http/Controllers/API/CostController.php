@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Http\Controllers\Controller;
+use Exception;
 use App\Models\Cost;
-use Illuminate\Support\Facades\DB;
 use App\Http\Requests\CostRequest;
+use App\Http\Controllers\Controller;
 
 class CostController extends Controller
 {
@@ -16,7 +16,22 @@ class CostController extends Controller
      */
     public function index()
     {
-        return Cost::all();
+        try {
+            $costs = Cost::all();
+            if (!$costs) {
+                return response()->json([
+                    'status' => 400, 
+                    'msg' => 'Nothing here!'
+                ], 200);
+            }
+            return response()->json($costs, 200);
+        }
+        catch (Exception $e) {
+            return response()->json([
+                'status' => 400, 
+                'msg' => 'Can not get data! Make sure you have permission to get this data!'
+            ], 400);
+        }
     }
 
     /**
@@ -27,8 +42,44 @@ class CostController extends Controller
      */
     public function store(CostRequest $request)
     {   
-        if (Cost::create($request->all())) {
-            return response()->json(['status' => 200, 'msg' => 'Inserted successfully'], 200);
+        try {
+            Cost::create($request->all());
+            return response()->json([
+                'status' => 200, 
+                'msg' => 'Saved successfully'
+            ], 200);
+        }
+        catch (Exception $e) {
+            return response()->json([
+                'status' => 400, 
+                'msg' => 'Save failed! Something were wrong with data!'
+            ], 400);
+        }
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($ClassID)
+    {
+        try {
+            $costsByClassId = Cost::where('ClassID', $ClassID)->get();
+            if (!$costsByClassId) {
+                return response()->json([
+                    'status' => 400, 
+                    'msg' => 'Nothing here!'
+                ], 200);
+            }
+            return response()->json($costsByClassId, 200);
+        }
+        catch (Exception $e) {
+            return response()->json([
+                'status' => 400, 
+                'msg' => 'Can not get data! Make sure your classID is true!'
+            ], 400);
         }
     }
 
@@ -40,8 +91,18 @@ class CostController extends Controller
      */
     public function destroy($CostID)
     {
-        if(Cost::where('CostID', $CostID)->delete()) {
-            return response()->json(['status' => 200, 'msg' => 'Deleted successfully'], 200);
+        try {
+            Cost::where('CostID', $CostID)->delete();
+            return response()->json([
+                'status' => 200, 
+                'msg' => 'Deleted successfully'
+            ], 200);
+        }
+        catch (Exception $e) {
+            return response()->json([
+                'status' => 400, 
+                'msg' => 'Post failed! Make sure your CostID is true!'
+            ], 400);
         }
     }
 }

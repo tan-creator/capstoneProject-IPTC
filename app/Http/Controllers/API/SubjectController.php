@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers\API;
 
+use Exception;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\Subject;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Arr;
+use App\Http\Requests\SubjectRequest;
 
 class SubjectController extends Controller
 {
@@ -17,42 +16,74 @@ class SubjectController extends Controller
      */
     public function index()
     {
-        return Subject::all();
+        try {
+            $subjects = Subject::all();
+            return response()->json($subjects, 200);
+        }
+        catch (Exception $e) {
+            return response()->json([
+                'status' => 400, 
+                'msg' => $e,
+            ], 400);
+        }
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\SubjectRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SubjectRequest $request)
     {
-        DB::unprepared('SET IDENTITY_INSERT Subject ON;');
-        return DB::table('Subject')->insert($request->all());
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
+        try {
+            Subject::create($request->all());
+            return response()->json([
+                'status' => 200, 
+                'msg' => 'Created successfully!'
+            ], 200);
+        }
+        catch (Exception $e) {
+            return response()->json([
+                'status' => 400, 
+                'msg' => $e,
+            ], 400);
+        }
+    }    
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\SubjectRequest  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(SubjectRequest $request, $id)
     {
-        return DB::table('Subject')->where('SubjectID', $id)->update($request->all());
+        try {
+            if (empty(Subject::where('SubjectID', $id)->first())) {
+                return response()->json([
+                    'status' => 400, 
+                    'msg' => 'Can not find this subject'
+                ], 400);
+            }
+            Subject::where('SubjectID', $id)
+                   ->update($request->except(
+                        'SubjectID', 
+                        'TeacherSubjectUserName', 
+                        'ClassID'
+                    ));   
+            return response()->json([
+                'status' => 200, 
+                'msg' => 'Updated successfully'
+            ], 200);
+        }
+        catch (Exception $e) {
+            return response()->json([
+                'status' => 400, 
+                'msg' => $e,
+            ], 400);
+        }
     }
 
     /**
@@ -63,6 +94,18 @@ class SubjectController extends Controller
      */
     public function destroy($id)
     {
-        return DB::table('Subject')->where('SubjectID', $id)->delete();
+        try {
+            Subject::where('SubjectID', $id)->delete();
+            return response()->json([
+                'status' => 200, 
+                'msg' => 'Removed user successfully'
+            ], 200);
+        }
+        catch (Exception $e) {
+            return response()->json([
+                'status' => 400, 
+                'msg' => $e,
+            ], 400);
+        }
     }
 }

@@ -16,4 +16,11 @@ class ReviewLesson extends Model
         'LessonContents',
         'SubjectID',
     ];
+
+    /**
+     * Indicates if the model should be timestamped.
+     *
+     * @var bool
+     */
+    public $timestamps = false;
 }

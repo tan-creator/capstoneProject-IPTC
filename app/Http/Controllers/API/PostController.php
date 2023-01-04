@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Http\Controllers\Controller;
-use App\Models\Post;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use App\Http\Resources\PostResource;
-use App\Http\Requests\PostRequest;
-use App\Models\Comment;
-use App\Models\Like;
 use Exception;
+use App\Models\Post;
+use App\Models\Like;
+use App\Models\Comment;
+// use Illuminate\Support\Arr;
+use Illuminate\Http\Request;
+use App\Http\Requests\PostRequest;
+use App\Http\Resources\PostResource;
+use App\Http\Controllers\Controller;
+// use Illuminate\Support\Facades\Validator;
 
 class PostController extends Controller
 {
@@ -21,8 +22,16 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = PostResource::collection(Post::all());
-        return response()->json($posts, 200);
+        try {
+            $posts = PostResource::collection(Post::all());
+            return response()->json($posts, 200);
+        }
+        catch (Exception $e) {
+            return response()->json([
+                'status' => 400, 
+                'msg' => $e,
+            ], 400);
+        }
     }
 
     /**
@@ -35,31 +44,62 @@ class PostController extends Controller
     {
         try {
             Post::create($request->all());
-            return response()->json(['status' => 200, 'msg' => 'Posted successfully'], 200);
+            return response()->json([
+                'status' => 200, 
+                'msg' => 'Posted successfully'
+            ], 200);
         }
         catch (Exception $e) {
-            return response()->json(['status' => 400, 'msg' => 'Post failed! Something were wrong!'], 400);
+            return response()->json([
+                'status' => 400, 
+                'msg' => $e,
+            ], 400);
         }
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\PostRequest  $request
+     * @param  \Illuminate\Http\Request  $request
      * @param  int  $PostID
      * @return \Illuminate\Http\Response
      */
     public function update(PostRequest $request, $PostID)
     {
         try {
-            if (!Post::Where('PostID', $PostID)) {
-                return response()->json(['status' => 400, 'msg' => 'Can not find this post'], 400);
+            //$post = json_decode(json_encode(Post::Where('PostID', $PostID)->first()),true);
+            // Arr::pull($post, 'PostID');
+            // Arr::pull($post, 'UserName');
+            if (empty(Post::Where('PostID', $PostID)->first())) {
+                return response()->json([
+                    'status' => 400, 
+                    'msg' => 'Can not find this post'
+                ], 400);
             }
-            Post::Where('PostID', $PostID)->update(array($request));
-            return response()->json(['status' => 200, 'msg' => 'Updated successfully'], 200);
+
+            // $post = array_replace_recursive($post, $request->all());
+            // $post = new PostRequest($post);
+            // $post = $this->validatePost($post);
+
+            // Validator::make($request->all(),[
+            //     'Content' => 'max:4000',
+            //     'PostImage' => 'max:400',
+            // ], [
+            //     'Content.max' => ':attribute is maximum 4000 characters long',
+            //     'PostImage.max' => ':attribute is maximum 40 characters long',
+            // ])->validate();
+
+            Post::Where('PostID', $PostID)->update($request->except('PostID', 'UserName'));   
+            return response()->json([
+                'status' => 200, 
+                'msg' => 'Updated successfully'
+            ], 200);
         }
         catch (Exception $e) {
-            return response()->json(['status' => 400, 'msg' => 'Could not update this post'], 400);
+            return response()->json([
+                'status' => 400, 
+                'msg' => $e,
+            ], 400);
         }
     }
 
@@ -73,10 +113,16 @@ class PostController extends Controller
     {
         try {
             Post::where('PostID', $PostID)->delete();
-            return response()->json(['status' => 200, 'msg' => 'Removed post successfully'], 200);
+            return response()->json([
+                'status' => 200, 
+                'msg' => 'Removed post successfully'
+            ], 200);
         }
         catch (Exception $e) {
-            return response()->json(['status' => 400, 'msg' => 'Remove failed! Something were wrong!'], 400);
+            return response()->json([
+                'status' => 400, 
+                'msg' => $e,
+            ], 400);
         }
     }
 
@@ -90,10 +136,16 @@ class PostController extends Controller
     {
         try {
             Like::create($request->all());
-            return response()->json(['status' => 200, 'msg' => 'Liked successfully'], 200);
+            return response()->json([
+                'status' => 200, 
+                'msg' => 'Liked successfully'
+            ], 200);
         }
         catch (Exception $e) {
-            return response()->json(['status' => 400, 'msg' => 'Like failed! Something were wrong!'], 400);
+            return response()->json([
+                'status' => 400, 
+                'msg' => 'Like failed! Something were wrong!'
+            ], 400);
         }
     }
 
@@ -111,13 +163,22 @@ class PostController extends Controller
                      ->get('LikeID')[0]->LikeID; // Take Like ID by Post ID and Username
             if ($Liked) {
                 Like::where('LikeID', $Liked)->delete();
-                return response()->json(['status' => 200, 'msg' => 'Disliked successfully'], 200);
+                return response()->json([
+                    'status' => 200, 
+                    'msg' => 'Disliked successfully'
+                ], 200);
             } else {
-                return response()->json(['status' => 400, 'msg' => 'You did not like this post yet!'], 400);
+                return response()->json([
+                    'status' => 400, 
+                    'msg' => 'You did not like this post yet!'
+                ], 400);
             }
         }
         catch (Exception $e) {
-            return response()->json(['status' => 400, 'msg' => 'Dislike failed! Something were wrong!'], 400);
+            return response()->json([
+                'status' => 400, 
+                'msg' => 'Dislike failed! Something were wrong!'
+            ], 400);
         }
     }
 
@@ -131,10 +192,16 @@ class PostController extends Controller
     {
         try {
             Comment::create($request->all());
-            return response()->json(['status' => 200, 'msg' => 'Commented successfully'], 200);
+            return response()->json([
+                'status' => 200, 
+                'msg' => 'Commented successfully'
+            ], 200);
         }
         catch (Exception $e) {
-            return response()->json(['status' => 400, 'msg' => 'Comment failed! Something were wrong!'], 400);
+            return response()->json([
+                'status' => 400, 
+                'msg' => 'Comment failed! Something were wrong!'
+            ], 400);
         }
     }
 
@@ -152,13 +219,22 @@ class PostController extends Controller
                      ->get('CommentID')[0]->CommentID; // Take Like ID by Post ID and Username
             if ($Commented) {
                 Comment::where('CommentID', $Commented)->delete();
-                return response()->json(['status' => 200, 'msg' => 'Removed comment successfully'], 200);
+                return response()->json([
+                    'status' => 200, 
+                    'msg' => 'Removed comment successfully'
+                ], 200);
             } else {
-                return response()->json(['status' => 400, 'msg' => 'This comment was not available'], 400);
+                return response()->json([
+                    'status' => 400, 
+                    'msg' => 'Not found this comment'
+                ], 400);
             }
         }
         catch (Exception $e) {
-            return response()->json(['status' => 400, 'msg' => 'Remove failed! Something were wrong!'], 400);
+            return response()->json([
+                'status' => 400, 
+                'msg' => 'Remove failed! Something were wrong!'
+            ], 400);
         }
     }
 }

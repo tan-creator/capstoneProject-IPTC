@@ -17,4 +17,11 @@ class MClass extends Model
         'SchoolYear',
         'TeacherClassUserName',
     ];
+
+    /**
+     * Indicates if the model should be timestamped.
+     *
+     * @var bool
+     */
+    public $timestamps = false;
 }

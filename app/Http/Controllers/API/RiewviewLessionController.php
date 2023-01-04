@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\API;
 
+use Exception;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\ReviewLesson;
-use Illuminate\Support\Facades\DB;
+use App\Http\Requests\ReviewRequest;
 
 class RiewviewLessionController extends Controller
 {
@@ -16,19 +17,38 @@ class RiewviewLessionController extends Controller
      */
     public function index()
     {
-        return ReviewLesson::all();
+        try {
+            return response()->json(ReviewLesson::all(), 200);
+        }
+        catch (Exception $e) {
+            return response()->json([
+                'status' => 400, 
+                'msg' => $e,
+            ], 400);
+        }   
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\ReviewRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ReviewRequest $request)
     {
-        DB::unprepared('SET IDENTITY_INSERT ReviewsLesson ON;');
-        return DB::table('ReviewsLesson')->insert($request->all());
+        try {
+            ReviewLesson::create($request->all());
+            return response()->json([
+                'status' => 200, 
+                'msg' => 'Created successfully!'
+            ], 200);
+        }
+        catch (Exception $e) {
+            return response()->json([
+                'status' => 400, 
+                'msg' => $e,
+            ], 400);
+        }
     }
 
     /**
@@ -37,21 +57,57 @@ class RiewviewLessionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($LessonID)
+    public function show($SubjectID)
     {
-        return DB::table('ReviewsLesson')->where('LessonID', $LessonID)->first();
+        try {
+            if (empty(ReviewLesson::where('SubjectID', $SubjectID)->first())) {
+                return response()->json([
+                    'status' => 400, 
+                    'msg' => 'Can not find any review'
+                ], 400);
+            }
+            return response()->json(ReviewLesson::where('SubjectID', $SubjectID)->get(), 200);
+        }
+        catch (Exception $e) {
+            return response()->json([
+                'status' => 400, 
+                'msg' => $e,
+            ], 400);
+        }
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\ReviewRequest  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $LessonID)
+    public function update(ReviewRequest $request, $LessonID)
     {
-        return DB::table('ReviewsLesson')->where('LessonID', $LessonID)->update($request->all());
+        try {
+            if (empty(ReviewLesson::where('LessonID', $LessonID)->first())) {
+                return response()->json([
+                    'status' => 400, 
+                    'msg' => 'Can not find this student'
+                ], 400);
+            }
+            ReviewLesson::where('LessonID', $LessonID)
+                   ->update($request->except(
+                        'LessonID', 
+                        'SubjectID', 
+                    ));   
+            return response()->json([
+                'status' => 200, 
+                'msg' => 'Updated successfully'
+            ], 200);
+        }
+        catch (Exception $e) {
+            return response()->json([
+                'status' => 400, 
+                'msg' => $e,
+            ], 400);
+        }
     }
 
     /**
@@ -62,6 +118,18 @@ class RiewviewLessionController extends Controller
      */
     public function destroy($LessonID)
     {
-        return DB::table('ReviewsLesson')->where('LessonID', $LessonID)->delete();
+        try {
+            ReviewLesson::where('LessonID', $LessonID)->delete();
+            return response()->json([
+                'status' => 200, 
+                'msg' => 'Removed user successfully'
+            ], 200);
+        }
+        catch (Exception $e) {
+            return response()->json([
+                'status' => 400, 
+                'msg' => $e,
+            ], 400);
+        }
     }
 }

@@ -21,4 +21,11 @@ class Permission extends Model
     protected $casts = [
         'PermissionDay' => 'date:d-m-Y',
     ];
+
+    /**
+     * Indicates if the model should be timestamped.
+     *
+     * @var bool
+     */
+    public $timestamps = false;
 }

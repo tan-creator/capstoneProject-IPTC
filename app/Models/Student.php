@@ -18,4 +18,11 @@ class Student extends Model
         'StudentName',
         'StudentImage',
     ];
+
+    /**
+     * Indicates if the model should be timestamped.
+     *
+     * @var bool
+     */
+    public $timestamps = false;
 }

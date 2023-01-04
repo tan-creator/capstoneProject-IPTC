@@ -6,7 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class PostRequest extends FormRequest
+class SubjectRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,10 +26,11 @@ class PostRequest extends FormRequest
     public function rules()
     {
         return [
-            'UserName' => 'required',
-            'Content' => 'max:4000',
-            'PostImage' => 'max:400',
-            // 'PostDay' => 'date:Y-m-d H:i:s',
+            'TeacherSubjectUserName' => 'required|max:40',
+            'ClassID' => 'required|integer',
+            'SubjectName' => 'required|max:40',
+            'SubjectTime' => 'required|max:100',
+            'DateOfWeek' => 'required|max:40',
         ];
     }
 
@@ -41,12 +42,18 @@ class PostRequest extends FormRequest
     public function messages()
     {
         return [
-            'UserName.required' => ':attribute is required',
+            'TeacherSubjectUserName.required' => ':attribute is required',
+            'ClassID.required' => ':attribute is required',
+            'SubjectName.required' => ':attribute is required',
+            'SubjectTime.required' => ':attribute is required',
+            'DateOfWeek.required' => ':attribute is required',
 
-            'Content.max' => ':attribute is maximum 4000 characters long',
-            'PostImage.max' => ':attribute is maximum 40 characters long',
+            'TeacherSubjectUserName.max' => ':attribute is maximum 40 characters long',
+            'SubjectName.max' => ':attribute is maximum 40 characters long',
+            'SubjectTime.max' => ':attribute is maximum 100 characters long',
+            'DateOfWeek.max' => ':attribute is maximum 40 characters long',
 
-            //'PostDay.date_format' => ':attribute must have date format Y-m-d H:i:s',
+            'ClassID.integer' => ':attribute must be an integer',
         ];
     }
 
@@ -58,11 +65,11 @@ class PostRequest extends FormRequest
     public function attributes()
     {
         return [
-            'PostID' => 'ID post',
-            'UserName' => 'User account name',
-            'Content' => 'Description of the post',
-            'PostImage' => 'Post image',
-            'PostDay' => 'Created day',
+            'TeacherSubjectUserName' => 'Teacher account name',
+            'ClassID' => 'Id class',
+            'SubjectName' => 'Subject name',
+            'SubjectTime' => 'Subject Time',
+            'DateOfWeek' => 'Date of week',
         ];
     }
 

@@ -19,4 +19,11 @@ class Subject extends Model
         'SubjectTime',
         'DateOfWeek',
     ];
+
+    /**
+     * Indicates if the model should be timestamped.
+     *
+     * @var bool
+     */
+    public $timestamps = false;
 }

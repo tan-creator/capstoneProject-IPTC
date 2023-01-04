@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use Exception;
 use App\Models\User;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+use App\Http\Requests\UserRequest;
+use App\Http\Controllers\Controller;
 
 class UserController extends Controller
 {
@@ -18,58 +18,93 @@ class UserController extends Controller
      */
     public function index()
     {
-        return User::all();
+        try {
+            $users = User::all();
+            return response()->json($users, 200);
+        }
+        catch (Exception $e) {
+            return response()->json([
+                'status' => 400, 
+                'msg' => $e,
+            ], 400);
+        }
     }
   
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\UserRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
-        //DB::unprepared('SET IDENTITY_INSERT Users ON;');
-        return DB::table('Users')->insert($request->all());
-        
-        //return User::create($request->all());
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+        try {
+            User::create($request->all());
+            return response()->json([
+                'status' => 200, 
+                'msg' => 'Created successfully!'
+            ], 200);
+        }
+        catch (Exception $e) {
+            return response()->json([
+                'status' => 400, 
+                'msg' => $e,
+            ], 400);
+        }
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\UserRequest  $request
+     * @param  int  $UserName
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $UserName)
-    {
-        $data = Arr::except($request->all(), ['PassWord']);
-        
-        return DB::table('Users')
-                ->where('UserName', $UserName)
-                ->update($data);
+    public function update(UserRequest $request, $UserName)
+    {     
+        try {
+            if (empty(User::Where('UserName', $UserName)->first())) {
+                return response()->json([
+                    'status' => 400, 
+                    'msg' => 'Can not find this user'
+                ], 400);
+            }
+
+            User::Where('UserName', $UserName)
+                ->update($request->except('PassWord'));   
+            return response()->json([
+                'status' => 200, 
+                'msg' => 'Updated successfully'
+            ], 200);
+        }
+        catch (Exception $e) {
+            return response()->json([
+                'status' => 400, 
+                'msg' => $e,
+            ], 400);
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int  $UserName
      * @return \Illuminate\Http\Response
      */
     public function destroy($UserName)
     {
-        return DB::table('Users')->where('UserName', $UserName)->delete();
+        try {
+            User::where('UserName', $UserName)->delete();
+            return response()->json([
+                'status' => 200, 
+                'msg' => 'Removed user successfully'
+            ], 200);
+        }
+        catch (Exception $e) {
+            return response()->json([
+                'status' => 400, 
+                'msg' => $e,
+            ], 400);
+        }
     }
 }

@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\API;
 
+use Exception;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+// use Illuminate\Http\Request;
 use App\Models\Student;
-use Helpers;
-use Illuminate\Support\Facades\DB;
+use App\Http\Requests\StudentRequest;
 
 class StudentController extends Controller
 {
@@ -17,21 +17,41 @@ class StudentController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        return Student::all();      
+    {  
+        try {
+            $users = Student::all();
+            return response()->json($users, 200);
+        }
+        catch (Exception $e) {
+            return response()->json([
+                'status' => 400, 
+                'msg' => $e,
+            ], 400);
+        }   
     }
 
     
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\StudentRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StudentRequest $request)
     {
-        DB::unprepared('SET IDENTITY_INSERT Student ON;');
-        return DB::table('Student')->insert($request->all());
+        try {
+            Student::create($request->all());
+            return response()->json([
+                'status' => 200, 
+                'msg' => 'Created successfully!'
+            ], 200);
+        }
+        catch (Exception $e) {
+            return response()->json([
+                'status' => 400, 
+                'msg' => $e,
+            ], 400);
+        }
     }
 
     /**
@@ -42,19 +62,56 @@ class StudentController extends Controller
      */
     public function show($ClassID)
     {
-        return Student::where('ClassID', $ClassID)->get();
+        try {
+            if (empty(Student::where('ClassID', $ClassID)->first())) {
+                return response()->json([
+                    'status' => 400, 
+                    'msg' => 'Can not find any student'
+                ], 400);
+            }
+            return response()->json(Student::where('ClassID', $ClassID)->get(), 200);
+        }
+        catch (Exception $e) {
+            return response()->json([
+                'status' => 400, 
+                'msg' => $e,
+            ], 400);
+        }
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\StudentRequest  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StudentRequest $request, $id)
     {
-        return DB::table('Student')->where('StudentID', $id)->update($request->all());
+        try {
+            if (empty(Student::where('StudentID', $id)->first())) {
+                return response()->json([
+                    'status' => 400, 
+                    'msg' => 'Can not find this student'
+                ], 400);
+            }
+            Student::where('StudentID', $id)
+                   ->update($request->except(
+                        'StudentID', 
+                        'ParentUserName', 
+                        'ClassID'
+                    ));   
+            return response()->json([
+                'status' => 200, 
+                'msg' => 'Updated successfully'
+            ], 200);
+        }
+        catch (Exception $e) {
+            return response()->json([
+                'status' => 400, 
+                'msg' => $e,
+            ], 400);
+        }
     }
 
     /**
@@ -65,6 +122,18 @@ class StudentController extends Controller
      */
     public function destroy($id)
     {
-        return DB::table('Student')->where('StudentID', $id)->delete();
+        try {
+            Student::where('StudentID', $id)->delete();
+            return response()->json([
+                'status' => 200, 
+                'msg' => 'Removed user successfully'
+            ], 200);
+        }
+        catch (Exception $e) {
+            return response()->json([
+                'status' => 400, 
+                'msg' => $e,
+            ], 400);
+        }
     }
 }

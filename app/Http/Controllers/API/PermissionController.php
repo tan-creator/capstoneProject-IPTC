@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\API;
 
+use Exception;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Permission;
 use App\Http\Resources\PermissionResource;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Arr;
 
 class PermissionController extends Controller
 {
@@ -18,7 +18,15 @@ class PermissionController extends Controller
      */
     public function index()
     {
-        return response()->json(PermissionResource::collection(Permission::all()), 200);
+        try {
+            return response()->json(PermissionResource::collection(Permission::all()), 200);
+        }
+        catch (Exception $e) {
+            return response()->json([
+                'status' => 400, 
+                'msg' => $e,
+            ], 400);
+        } 
     }
 
     /**
@@ -29,7 +37,19 @@ class PermissionController extends Controller
      */
     public function store(Request $request)
     {
-        return DB::table('permissionForm')->insert($request->all());
+        try {
+            Permission::create($request->all());
+            return response()->json([
+                'status' => 200, 
+                'msg' => 'Created successfully!'
+            ], 200);
+        }
+        catch (Exception $e) {
+            return response()->json([
+                'status' => 400, 
+                'msg' => $e,
+            ], 400);
+        }
     }
 
     /**
@@ -40,13 +60,23 @@ class PermissionController extends Controller
      */
     public function showForParent($ParentUsername)
     {
-        $studentIDobjs = DB::select('EXEC SELECT_STUIDBYPARENT ?', array($ParentUsername));
-        $studentIDarrs = [];
-        foreach ( $studentIDobjs as $studentIDobj) {
-            $studentIDarrs[] = $studentIDobj->StudentID;
+        try {
+            $studentIDobjs = DB::select('EXEC SELECT_STUIDBYPARENT ?', array($ParentUsername));
+            $studentIDarrs = [];
+
+            foreach ( $studentIDobjs as $studentIDobj) {
+                $studentIDarrs[] = $studentIDobj->StudentID;
+            }
+            
+            $permissionByStudentID = Permission::where('StudentID', $studentIDarrs)->get();
+            return response()->json(PermissionResource::collection($permissionByStudentID), 200);
         }
-        $permissionByStudentID = Permission::where('StudentID', $studentIDarrs)->get();
-        return response()->json(PermissionResource::collection($permissionByStudentID), 200);
+        catch (Exception $e) {
+            return response()->json([
+                'status' => 400, 
+                'msg' => $e,
+            ], 400);
+        }
     }
 
     /**
@@ -57,25 +87,23 @@ class PermissionController extends Controller
      */
     public function showForTeacher($TeacherUsername)
     {
-        $studentIDobjs = DB::select('EXEC SELECT_STUIDBYTEACHER ?', array($TeacherUsername));
-        $studentIDarrs = [];
-        foreach ( $studentIDobjs as $studentIDobj) {
-            $studentIDarrs[] = $studentIDobj->StudentID;
-        }
-        $permissionByStudentID = Permission::where('StudentID', $studentIDarrs)->get();
-        return response()->json(PermissionResource::collection($permissionByStudentID), 200);
-    }
+        try {
+            $studentIDobjs = DB::select('EXEC SELECT_STUIDBYTEACHER ?', array($TeacherUsername));
+            $studentIDarrs = [];
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
+            foreach ( $studentIDobjs as $studentIDobj) {
+                $studentIDarrs[] = $studentIDobj->StudentID;
+            }
+
+            $permissionByStudentID = Permission::where('StudentID', $studentIDarrs)->get();
+            return response()->json(PermissionResource::collection($permissionByStudentID), 200);
+        }
+        catch (Exception $e) {
+            return response()->json([
+                'status' => 400, 
+                'msg' => $e,
+            ], 400);
+        }
     }
 
     /**
@@ -86,6 +114,18 @@ class PermissionController extends Controller
      */
     public function destroy($PermissionFormID)
     {
-        return DB::table('permissionForm')->where('PermissionFormID', $PermissionFormID)->delete();
+        try {
+            Permission::where('PermissionFormID', $PermissionFormID)->delete();
+            return response()->json([
+                'status' => 200, 
+                'msg' => 'Removed successfully'
+            ], 200);
+        }
+        catch (Exception $e) {
+            return response()->json([
+                'status' => 400, 
+                'msg' => $e,
+            ], 400);
+        }
     }
 }

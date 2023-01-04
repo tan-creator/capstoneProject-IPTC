@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\API;
 
+use Exception;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\MClass;
 use Illuminate\Support\Facades\DB;
 
@@ -16,7 +16,15 @@ class ClassController extends Controller
      */
     public function index()
     {
-        return MClass::all();
+        try {
+            return response()->json(MClass::all(), 200);
+        }
+        catch (Exception $e) {
+            return response()->json([
+                'status' => 400, 
+                'msg' => $e,
+            ], 400);
+        } 
     }
 
     /**
@@ -25,11 +33,11 @@ class ClassController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        DB::unprepared('SET IDENTITY_INSERT TheClass ON;');
-        return DB::table('TheClass')->insert($request->all());
-    }
+    // public function store(Request $request)
+    // {
+    //     DB::unprepared('SET IDENTITY_INSERT TheClass ON;');
+    //     return DB::table('TheClass')->insert($request->all());
+    // }
 
     /**
      * Display the specified resource.
@@ -40,6 +48,21 @@ class ClassController extends Controller
     public function show($ClassID)
     {
         return DB::table('TheClass')->where('ClassID', $ClassID)->get();
+        try {
+            if (empty(MClass::where('ClassID', $ClassID)->first())) {
+                return response()->json([
+                    'status' => 400, 
+                    'msg' => 'Can not find this class',
+                ], 400);
+            }
+            return response()->json(MClass::where('ClassID', $ClassID)->get(), 200);
+        }
+        catch (Exception $e) {
+            return response()->json([
+                'status' => 400, 
+                'msg' => $e,
+            ], 400);
+        }
     }
 
     /**
@@ -49,10 +72,10 @@ class ClassController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $ClassID)
-    {
-        return DB::table('TheClass')->where('ClassID', $ClassID)->update($request->all());
-    }
+    // public function update(Request $request, $ClassID)
+    // {
+    //     return DB::table('TheClass')->where('ClassID', $ClassID)->update($request->all());
+    // }
 
     /**
      * Remove the specified resource from storage.
@@ -60,8 +83,8 @@ class ClassController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($ClassID)
-    {
-        return DB::table('TheClass')->where('ClassID', $ClassID)->delete();
-    }
+    // public function destroy($ClassID)
+    // {
+    //     return DB::table('TheClass')->where('ClassID', $ClassID)->delete();
+    // }
 }
