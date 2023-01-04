@@ -13,7 +13,10 @@ export default function NavBar() {
         const user = JSON.parse(localStorage.getItem("account"));
         setAccount({ ...user });
     }, []);
-
+    let navigate = useNavigate();
+    const handleOnClick = () => {
+        navigate("/noti");
+    };
     return (
         <div>
             <div className="header">
@@ -48,6 +51,8 @@ export default function NavBar() {
                         className="notificatios-icon"
                         alt=""
                         src={window.location.origin + "/img/notificatios.svg"}
+                        onClick={handleOnClick}
+                        type="button"
                     />
                     <div className="button-div">
                         <img
@@ -114,7 +119,7 @@ export default function NavBar() {
                             Đóng góp ý kiến
                         </ul>
                         <a
-                            href="#"
+                            href="/"
                             style={{
                                 textDecoration: "none",
                                 color: "#606060",
@@ -137,9 +142,7 @@ export default function NavBar() {
                     className="collapse"
                     id="logout"
                     style={{ position: "absolute", top: "200px" }}
-                >
-                    <div className="card card-body">but</div>
-                </div>
+                ></div>
             </div>
         </div>
     );

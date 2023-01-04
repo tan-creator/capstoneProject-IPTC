@@ -131,9 +131,7 @@ export default function Dashboard() {
                                         alt=""
                                         className="category_image"
                                     />
-                                    <h3 className="category__name">
-                                        Xem điểm
-                                    </h3>
+                                    <h3 className="category__name">Xem điểm</h3>
                                     <a
                                         href="/grade"
                                         className="category__details"
@@ -251,19 +249,20 @@ export default function Dashboard() {
                                             Phát triển toàn diện
                                         </h4>
                                         <p className="feature-best__desc text-clamp text-clamp--2">
-                                            Lorem, ipsum dolor sit amet
-                                            consectetur adipisicing elit.
+                                            Giúp học sinh phát triển toàn diện
+                                            kỹ năng của mình
                                         </p>
                                     </li>
 
                                     <li className="feature-best__item">
                                         <i className="fa fa-home feature-best__icon"></i>
                                         <h4 className="feature-best__title">
-                                            Cải thiện quy trình giảng dạy
+                                            Nắm được các thông báo
                                         </h4>
                                         <p className="feature-best__desc text-clamp text-clamp--2">
-                                            Lorem, ipsum dolor sit amet
-                                            consectetur adipisicing elit.
+                                            Phụ huynh và học sinh có thể dễ dàng
+                                            nắm bắt được kịp thời các thông báo
+                                            của nhà trường
                                         </p>
                                     </li>
                                     <li className="feature-best__item">
@@ -272,19 +271,17 @@ export default function Dashboard() {
                                             Đạt kết quả tốt nhất
                                         </h4>
                                         <p className="feature-best__desc text-clamp text-clamp--2">
-                                            Lorem, ipsum dolor sit amet
-                                            consectetur adipisicing elit.
+                                            Phụ huynh dễ dàng xem điểm con em
+                                            mình, dễ dàng quản lí và đôn đốc
+                                            tình hình học tập
                                         </p>
                                     </li>
                                     <li className="feature-best__item">
                                         <i className="fa fa-home feature-best__icon"></i>
                                         <h4 className="feature-best__title">
-                                            Chủ động tương tác
+                                            Xây dựng cộng đồng
                                         </h4>
-                                        <p className="feature-best__desc text-clamp text-clamp--2">
-                                            Lorem, ipsum dolor sit amet
-                                            consectetur adipisicing elit.
-                                        </p>
+                                        <p className="feature-best__desc text-clamp text-clamp--2">Có một môi trường liên kết mọi người trong trường học lại với nhau, tăng sự gắn kết và hiệu quả trong học tập</p>
                                     </li>
                                 </ul>
                             </div>

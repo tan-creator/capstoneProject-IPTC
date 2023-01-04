@@ -364,7 +364,7 @@ export default function Student(props) {
                         </>
                     )}
                     <table className="table table-bordered table-striped table-hover p-5">
-                        <thead>
+                        <thead style={{ backgroundColor: "#707070" }}>
                             <tr style={{ textAlign: "center" }}>
                                 <th>Môn</th>
                                 <th colSpan="3">Điểm miệng</th>

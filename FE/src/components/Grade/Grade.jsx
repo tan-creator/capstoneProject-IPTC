@@ -52,7 +52,7 @@ export default function Grade() {
                     role="group"
                     aria-label="Basic example"
                     style={{
-                        width: 500,
+                        width: 900,
                         display: "flex",
                         justifyContent: "center",
                     }}
@@ -88,7 +88,7 @@ export default function Grade() {
                         <tr>
                             <th>Mã học sinh</th>
                             <th>Tên tài khoản</th>
-                            <th>Lớp</th>
+                            {/* <th>Lớp</th> */}
                             <th>Tên học sinh</th>
                         </tr>
                     </thead>
@@ -100,7 +100,7 @@ export default function Grade() {
                                         <td>{student?.StudentID}</td>
                                     </Link>
                                     <td>{student?.ParentUserName}</td>
-                                    <td>{student?.ClassID}</td>
+                                    {/* <td>{student?.ClassID}</td> */}
                                     <td>{student?.StudentName}</td>
                                 </tr>
                             );
