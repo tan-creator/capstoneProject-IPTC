@@ -22,7 +22,7 @@ class AuthController extends Controller
     public function login(Request $request) {
         $Password = User::select('PassWord')
                         ->where('UserName', $request->UserName)
-                        ->get();
+                        ->get()[0];
 
         if ($Password->count() > 0) {
             if(Hash::check($request->PassWord, $Password->PassWord)) {
