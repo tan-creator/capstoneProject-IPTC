@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Sidebar from "../Layout/DefaultLayout/Sidebar/Sidebar";
 import NavBar from "../NavBar/NavBar";
+import { Spin } from "antd";
 import "./Grade.css";
 export default function Grade() {
     const [students, setStudent] = useState([]);
@@ -46,29 +47,31 @@ export default function Grade() {
                         <i className="bx bxs-notepad" />
                         DANH SÁCH LỚP ĐANG DẠY
                     </span>
-                    
                 </div>
                 <div
                     className="btn-group"
                     role="group"
                     aria-label="Basic example"
                     style={{
-                        width: 900,
                         display: "flex",
                         justifyContent: "center",
                     }}
                 >
-                    {classes.map((cl) => {
-                        return (
-                            <button
-                                onClick={() => handlePickClass(cl?.ClassID)}
-                                type="button"
-                                className="btn btn-secondary"
-                            >
-                                {cl?.ClassName}
-                            </button>
-                        );
-                    })}
+                    {classes.length === 0 ? (
+                        <Spin />
+                    ) : (
+                        classes.map((cl) => {
+                            return (
+                                <button
+                                    onClick={() => handlePickClass(cl?.ClassID)}
+                                    type="button"
+                                    className="btn btn-secondary"
+                                >
+                                    {cl?.ClassName}
+                                </button>
+                            );
+                        })
+                    )}
                 </div>
             </div>
             <div className="grade">

@@ -10,11 +10,9 @@ function Shedule() {
     const [user, setUser] = useState([]);
     const [classes, setClass] = useState([]);
     const [student, setStudent] = useState([]);
-    const [persons, setPerson] = useState([])
-
+    const [persons, setPerson] = useState([]);
 
     useEffect(() => {
-
         const users = JSON.parse(localStorage.getItem("account"));
         setUser(users);
 
@@ -46,7 +44,6 @@ function Shedule() {
             })
             .catch((error) => console.log("error", error));
     }, []);
-
 
     function getSubject() {
         const arrLichHoc = [];
@@ -83,30 +80,29 @@ function Shedule() {
                     if (person.UserName == arr.TeacherSubjectUserName) {
                         arr.Names = person.Names;
                     }
-                })
-            })
+                });
+            });
         }
         console.log("Lich hoc:\n" + arrLichHoc);
         return arrLichHoc;
     }
 
-
-    const listLichHoc = []
+    const listLichHoc = [];
     getSubject().map((obj) => {
-        const time = []
-        const date = []
-        time.push(...obj.SubjectTime.split(" "))
-        date.push(...obj.DateOfWeek.split(" "))
+        const time = [];
+        const date = [];
+        time.push(...obj.SubjectTime.split(" "));
+        date.push(...obj.DateOfWeek.split(" "));
         for (var i = 0; i < time.length; i++) {
             listLichHoc.push({
                 time: time[i],
                 date: date[i],
                 ClassName: obj.ClassName,
                 Names: obj.Names,
-                SubjectName: obj.SubjectName
-            })
+                SubjectName: obj.SubjectName,
+            });
         }
-    })
+    });
 
     const arrT2 = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
     const arrT3 = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
@@ -120,55 +116,55 @@ function Shedule() {
         listLichHoc.map((arr) => {
             if (arr.time == "7:00-7:45") {
                 if (arr.date == str) {
-                    array[0] = arr
+                    array[0] = arr;
                 }
             }
             if (arr.time == "7:50-8:35") {
                 if (arr.date == str) {
-                    array[1] = arr
+                    array[1] = arr;
                 }
             }
             if (arr.time == "8:40-9:25") {
                 if (arr.date == str) {
-                    array[2] = arr
+                    array[2] = arr;
                 }
             }
             if (arr.time == "9:40-10:25") {
                 if (arr.date == str) {
-                    array[3] = arr
+                    array[3] = arr;
                 }
             }
             if (arr.time == "10:30-11:15") {
                 if (arr.date == str) {
-                    array[4] = arr
+                    array[4] = arr;
                 }
             }
             if (arr.time == "13:00-13:45") {
                 if (arr.date == str) {
-                    array[5] = arr
+                    array[5] = arr;
                 }
             }
             if (arr.time == "13:50-14:35") {
                 if (arr.date == str) {
-                    array[6] = arr
+                    array[6] = arr;
                 }
             }
             if (arr.time == "14:40-15:25") {
                 if (arr.date == str) {
-                    array[7] = arr
+                    array[7] = arr;
                 }
             }
             if (arr.time == "15:40-16:25") {
                 if (arr.date == str) {
-                    array[8] = arr
+                    array[8] = arr;
                 }
             }
             if (arr.time == "16:30-17:15") {
                 if (arr.date == str) {
-                    array[9] = arr
+                    array[9] = arr;
                 }
             }
-        })
+        });
         console.log(array);
         return array;
     }
@@ -183,12 +179,14 @@ function Shedule() {
                         <div className="annouce" style={{ paddingTop: 10 }}>
                             {user.Role == "Parent" && (
                                 <span>
-                                    <i className="bx bxs-notepad" />LỊCH HỌC
+                                    <i className="bx bxs-notepad" />
+                                    LỊCH HỌC
                                 </span>
                             )}
                             {user.Role == "Teacher" && (
                                 <span>
-                                    <i className="bx bxs-notepad" />LỊCH DẠY
+                                    <i className="bx bxs-notepad" />
+                                    LỊCH DẠY
                                 </span>
                             )}
                         </div>
@@ -202,7 +200,9 @@ function Shedule() {
                                 <strong>Năm học: </strong>2022-2023
                             </p>
                         </div>
-                        {listLichHoc.length == 0 ? <Spin /> :
+                        {listLichHoc.length == 0 ? (
+                            <Spin />
+                        ) : (
                             <div className="schedule-box">
                                 <table>
                                     <thead>
@@ -274,7 +274,9 @@ function Shedule() {
                                             <td>
                                                 {getLich(arrT2, "2").map(
                                                     (data) => {
-                                                        const color = data.time ? "#f48023" : "#fff";
+                                                        const color = data.time
+                                                            ? "#f48023"
+                                                            : "#fff";
                                                         return (
                                                             <tr>
                                                                 <div
@@ -284,9 +286,24 @@ function Shedule() {
                                                                             color,
                                                                     }}
                                                                 >
-                                                                    <p> {data?.SubjectName} </p>
-                                                                    <p> {data?.ClassName} </p>
-                                                                    <p> {data?.Names} </p>
+                                                                    <p>
+                                                                        {" "}
+                                                                        {
+                                                                            data?.SubjectName
+                                                                        }{" "}
+                                                                    </p>
+                                                                    <p>
+                                                                        {" "}
+                                                                        {
+                                                                            data?.ClassName
+                                                                        }{" "}
+                                                                    </p>
+                                                                    <p>
+                                                                        {" "}
+                                                                        {
+                                                                            data?.Names
+                                                                        }{" "}
+                                                                    </p>
                                                                 </div>
                                                             </tr>
                                                         );
@@ -297,7 +314,9 @@ function Shedule() {
                                             <td>
                                                 {getLich(arrT3, "3").map(
                                                     (data) => {
-                                                        const color = data.time ? "#f48023" : "#fff";
+                                                        const color = data.time
+                                                            ? "#f48023"
+                                                            : "#fff";
                                                         return (
                                                             <tr>
                                                                 <div
@@ -317,7 +336,12 @@ function Shedule() {
                                                                             data?.ClassName
                                                                         }
                                                                     </p>
-                                                                    <p> {data?.Names} </p>
+                                                                    <p>
+                                                                        {" "}
+                                                                        {
+                                                                            data?.Names
+                                                                        }{" "}
+                                                                    </p>
                                                                 </div>
                                                             </tr>
                                                         );
@@ -327,7 +351,9 @@ function Shedule() {
                                             <td>
                                                 {getLich(arrT4, "4").map(
                                                     (data) => {
-                                                        const color = data.time ? "#f48023" : "#fff";
+                                                        const color = data.time
+                                                            ? "#f48023"
+                                                            : "#fff";
                                                         return (
                                                             <tr>
                                                                 <div
@@ -347,7 +373,12 @@ function Shedule() {
                                                                             data?.ClassName
                                                                         }
                                                                     </p>
-                                                                    <p> {data?.Names} </p>
+                                                                    <p>
+                                                                        {" "}
+                                                                        {
+                                                                            data?.Names
+                                                                        }{" "}
+                                                                    </p>
                                                                 </div>
                                                             </tr>
                                                         );
@@ -357,7 +388,9 @@ function Shedule() {
                                             <td>
                                                 {getLich(arrT5, "5").map(
                                                     (data) => {
-                                                        const color = data.time ? "#f48023" : "#fff";
+                                                        const color = data.time
+                                                            ? "#f48023"
+                                                            : "#fff";
                                                         return (
                                                             <tr>
                                                                 <div
@@ -377,7 +410,12 @@ function Shedule() {
                                                                             data?.ClassName
                                                                         }
                                                                     </p>
-                                                                    <p> {data?.Names} </p>
+                                                                    <p>
+                                                                        {" "}
+                                                                        {
+                                                                            data?.Names
+                                                                        }{" "}
+                                                                    </p>
                                                                 </div>
                                                             </tr>
                                                         );
@@ -387,7 +425,9 @@ function Shedule() {
                                             <td>
                                                 {getLich(arrT6, "6").map(
                                                     (data) => {
-                                                        const color = data.time ? "#f48023" : "#fff";
+                                                        const color = data.time
+                                                            ? "#f48023"
+                                                            : "#fff";
                                                         return (
                                                             <tr>
                                                                 <div
@@ -407,7 +447,12 @@ function Shedule() {
                                                                             data?.ClassName
                                                                         }
                                                                     </p>
-                                                                    <p> {data?.Names} </p>
+                                                                    <p>
+                                                                        {" "}
+                                                                        {
+                                                                            data?.Names
+                                                                        }{" "}
+                                                                    </p>
                                                                 </div>
                                                             </tr>
                                                         );
@@ -417,7 +462,9 @@ function Shedule() {
                                             <td>
                                                 {getLich(arrT7, "7").map(
                                                     (data) => {
-                                                        const color = data.time ? "#f48023" : "#fff";
+                                                        const color = data.time
+                                                            ? "#f48023"
+                                                            : "#fff";
                                                         return (
                                                             <tr>
                                                                 <div
@@ -437,7 +484,12 @@ function Shedule() {
                                                                             data?.ClassName
                                                                         }
                                                                     </p>
-                                                                    <p> {data?.Names} </p>
+                                                                    <p>
+                                                                        {" "}
+                                                                        {
+                                                                            data?.Names
+                                                                        }{" "}
+                                                                    </p>
                                                                 </div>
                                                             </tr>
                                                         );
@@ -447,7 +499,9 @@ function Shedule() {
                                             <td>
                                                 {getLich(arrCN, "8").map(
                                                     (data) => {
-                                                        const color = data.time ? "#f48023" : "#fff";
+                                                        const color = data.time
+                                                            ? "#f48023"
+                                                            : "#fff";
                                                         return (
                                                             <tr>
                                                                 <div
@@ -467,7 +521,12 @@ function Shedule() {
                                                                             data?.ClassName
                                                                         }
                                                                     </p>
-                                                                    <p> {data?.Names} </p>
+                                                                    <p>
+                                                                        {" "}
+                                                                        {
+                                                                            data?.Names
+                                                                        }{" "}
+                                                                    </p>
                                                                 </div>
                                                             </tr>
                                                         );
@@ -478,7 +537,7 @@ function Shedule() {
                                     </tbody>
                                 </table>
                             </div>
-                        }
+                        )}
                     </div>
                 </div>
             </div>

@@ -4,7 +4,8 @@ import NavBar from "../../../NavBar/NavBar";
 import { useParams } from "react-router-dom";
 import { useAlert } from "react-alert";
 import axios from "axios";
-import _ from "lodash";
+import _, { isNumber } from "lodash";
+import { Spin } from "antd";
 export default function Student(props) {
     const alert = useAlert();
 
@@ -158,7 +159,30 @@ export default function Student(props) {
         });
         setIsUpdate(true);
     };
-    console.log(subjects);
+    const showScore = (point) => {
+        if (
+            (point?.Quiz1,
+            isNumber(point?.Quiz2),
+            isNumber(point?.Quiz3),
+            isNumber(point?.Oral_1),
+            isNumber(point?.Oral_2),
+            isNumber(point?.Oral_3),
+            isNumber(point?.Midterm),
+            isNumber(point?.Final))
+        ) {
+            return (
+                (point?.Quiz1 +
+                    point?.Quiz2 +
+                    point?.Quiz3 +
+                    point?.Oral_1 +
+                    point?.Oral_2 +
+                    point?.Oral_3 +
+                    point?.Midterm * 2 +
+                    point?.Final * 3) /
+                11
+            ).toFixed(2);
+        }
+    };
     return (
         <div>
             <NavBar />
@@ -379,65 +403,78 @@ export default function Student(props) {
                             </tr>
                         </thead>
                         <tbody style={{ textAlign: "center" }}>
-                            {subjects.map((subject) => {
-                                return (
-                                    <tr>
-                                        <th scope="row">
-                                            {subject?.SubjectName}
-                                        </th>
-                                        {subject?.points?.map((p) => {
-                                            return (
-                                                <>
-                                                    <td>{p?.Quiz1}</td>
-                                                    <td>{p?.Quiz2}</td>
-                                                    <td>{p?.Quiz3}</td>
-                                                    <td>{p?.Oral_1}</td>
-                                                    <td>{p?.Oral_2}</td>
-                                                    <td>{p?.Oral_3}</td>
-                                                    <td>{p?.Midterm}</td>
-                                                    <td>{p?.Final}</td>
-                                                    <td
-                                                        style={{
-                                                            width: "150px",
-                                                            fontWeight: "bold",
-                                                        }}
-                                                    >
-                                                        {(
-                                                            (p?.Quiz1 +
-                                                                p?.Quiz2 +
-                                                                p?.Quiz3 +
-                                                                p?.Oral_1 +
-                                                                p?.Oral_2 +
-                                                                p?.Oral_3 +
-                                                                p?.Midterm * 2 +
-                                                                p?.Final * 3) /
-                                                            11
-                                                        ).toFixed(2)}
-                                                    </td>
-                                                    {account?.Role ===
-                                                        "Teacher" && (
-                                                        <td>
-                                                            <button
-                                                                type="button"
-                                                                className="btn btn-success"
-                                                                data-toggle="modal"
-                                                                data-target="#exampleModal"
-                                                                onClick={() =>
-                                                                    handleUpdate(
-                                                                        p
-                                                                    )
-                                                                }
-                                                            >
-                                                                UPDATE
-                                                            </button>
+                            {subjects?.length == 0 ? (
+                                <tr
+                                    style={{
+                                        textAlign: "center",
+                                    }}
+                                >
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>
+                                        <Spin />
+                                    </td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            ) : (
+                                subjects.map((subject) => {
+                                    return (
+                                        <tr>
+                                            <th scope="row">
+                                                {subject?.SubjectName}
+                                            </th>
+                                            {subject?.points?.map((p) => {
+                                                return (
+                                                    <>
+                                                        <td>{p?.Quiz1}</td>
+                                                        <td>{p?.Quiz2}</td>
+                                                        <td>{p?.Quiz3}</td>
+                                                        <td>{p?.Oral_1}</td>
+                                                        <td>{p?.Oral_2}</td>
+                                                        <td>{p?.Oral_3}</td>
+                                                        <td>{p?.Midterm}</td>
+                                                        <td>{p?.Final}</td>
+                                                        <td
+                                                            style={{
+                                                                width: "150px",
+                                                                fontWeight:
+                                                                    "bold",
+                                                            }}
+                                                        >
+                                                            {showScore(p)}
                                                         </td>
-                                                    )}
-                                                </>
-                                            );
-                                        })}
-                                    </tr>
-                                );
-                            })}
+                                                        {account?.Role ===
+                                                            "Teacher" && (
+                                                            <td>
+                                                                <button
+                                                                    type="button"
+                                                                    className="btn btn-success"
+                                                                    data-toggle="modal"
+                                                                    data-target="#exampleModal"
+                                                                    onClick={() =>
+                                                                        handleUpdate(
+                                                                            p
+                                                                        )
+                                                                    }
+                                                                >
+                                                                    UPDATE
+                                                                </button>
+                                                            </td>
+                                                        )}
+                                                    </>
+                                                );
+                                            })}
+                                        </tr>
+                                    );
+                                })
+                            )}
                         </tbody>
                     </table>
                 </div>
