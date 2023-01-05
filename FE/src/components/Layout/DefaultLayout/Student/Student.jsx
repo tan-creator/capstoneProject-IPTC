@@ -421,7 +421,6 @@ export default function Student(props) {
                                     <td></td>
                                     <td></td>
                                     <td></td>
-                                    <td></td>
                                 </tr>
                             ) : (
                                 subjects.map((subject) => {

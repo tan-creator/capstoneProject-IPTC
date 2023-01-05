@@ -42,6 +42,12 @@ export default function App() {
             .then((json) => {
                 localStorage.setItem("subjects", JSON.stringify(json));
             });
+
+        fetch("http://127.0.0.1:8000/api/permission")
+            .then((response) => response.json())
+            .then((json) => {
+                localStorage.setItem("permissions", JSON.stringify(json));
+            });
     };
     useEffect(() => {
         getApi();

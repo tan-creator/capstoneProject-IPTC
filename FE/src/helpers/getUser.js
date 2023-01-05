@@ -22,3 +22,13 @@ export const getPost = () => {
     const posts = JSON.parse(localStorage.getItem("posts"));
     return posts;
 };
+
+export const getClass = () => {
+    const classes = JSON.parse(localStorage.getItem("classes"));
+    return classes;
+};
+
+export const getPermission = () => {
+    const permissions = JSON.parse(localStorage.getItem("permissions"));
+    return permissions;
+};

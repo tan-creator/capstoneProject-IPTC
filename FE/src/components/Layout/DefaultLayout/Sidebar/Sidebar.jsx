@@ -14,15 +14,15 @@ export default function Sidebar() {
         searchBtn.addEventListener("click", () => {
             sidebar.classList.remove("close");
         });
-        modeSwitch.addEventListener("click", () => {
-            body.classList.toggle("dark");
-            if (body.classList.contains("dark")) {
-                console.log(123);
-                modeText.innerText = "Light mode";
-            } else {
-                modeText.innerText = "Dark mode";
-            }
-        });
+        // modeSwitch.addEventListener("click", () => {
+        //     body.classList.toggle("dark");
+        //     if (body.classList.contains("dark")) {
+        //         console.log(123);
+        //         modeText.innerText = "Light mode";
+        //     } else {
+        //         modeText.innerText = "Dark mode";
+        //     }
+        // });
 
         const user = JSON.parse(localStorage.getItem("account"));
         setAccount({ ...user });
@@ -172,7 +172,7 @@ export default function Sidebar() {
                                     </span>
                                 </a>
                             </li>
-                            <li className="mode">
+                            {/* <li className="mode">
                                 <div className="sun-moon">
                                     <i className="bx bx-moon icon moon" />
                                     <i className="bx bx-sun icon sun" />
@@ -181,7 +181,7 @@ export default function Sidebar() {
                                 <div className="toggle-switch">
                                     <span className="switch" />
                                 </div>
-                            </li>
+                            </li> */}
                         </div>
                     </div>
                 </nav>

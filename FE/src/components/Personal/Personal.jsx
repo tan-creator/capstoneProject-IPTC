@@ -31,11 +31,11 @@ export default function Personnal() {
     const handleSubmit = async (e) => {
         if (dataUpdate.oldPassword) {
             if (!dataUpdate.newPassword || !dataUpdate.verifyPassword) {
-                return alert.error("Vui long nhap mat khau moi !");
+                return alert.error("Vui lòng nhập mật khẩu mới!");
             }
             if (dataUpdate.oldPassword === dataUpdate.newPassword) {
                 return alert.error(
-                    "Mat khau cu va moi khong duoc trung nhau !"
+                    "Mật khẩu cũ và mới không được giống nhau"
                 );
             }
             const result = await axios.post(
@@ -49,7 +49,7 @@ export default function Personnal() {
         }
         const value = e.target.value;
         if (!isValidBirthdate(dataUpdate?.BirthDay)) {
-            return alert.error("Vui long nhap tuoi cho chinh xac !");
+            return alert.error("Vui lòng nhập chính xác ngày sinh");
         }
         await axios
             .put(`http://127.0.0.1:8000/api/user/${value}`, { ...dataUpdate })
@@ -242,13 +242,13 @@ export default function Personnal() {
                                                         </div>
                                                         <div className="form-group">
                                                             <label htmlFor="">
-                                                                Mat Khau Cu
+                                                                Mật khẩu cũ
                                                             </label>
                                                             <input
                                                                 type="password"
                                                                 className="form-control"
                                                                 name="oldPassword"
-                                                                placeholder="Nhập Mat khau cu"
+                                                                placeholder="Nhập mật khẩu cũ"
                                                                 onChange={
                                                                     handleOnChange
                                                                 }
@@ -256,13 +256,13 @@ export default function Personnal() {
                                                         </div>
                                                         <div className="form-group">
                                                             <label htmlFor="">
-                                                                Mat Khau Moi
+                                                                Mật khẩu mới
                                                             </label>
                                                             <input
                                                                 type="password"
                                                                 className="form-control"
                                                                 name="newPassword"
-                                                                placeholder="Nhập Mat Khau Moi"
+                                                                placeholder="Nhập mật khẩu mới"
                                                                 onChange={
                                                                     handleOnChange
                                                                 }
@@ -270,14 +270,13 @@ export default function Personnal() {
                                                         </div>
                                                         <div className="form-group">
                                                             <label htmlFor="">
-                                                                Nhap Lai Mat
-                                                                Khau Moi
+                                                            Nhập lại mật khẩu mới
                                                             </label>
                                                             <input
                                                                 type="password"
                                                                 className="form-control"
                                                                 name="verifyPassword"
-                                                                placeholder="Nhập Lai Mat Khau Moi"
+                                                                placeholder="Nhập lại mật khẩu mới"
                                                                 onChange={
                                                                     handleOnChange
                                                                 }
