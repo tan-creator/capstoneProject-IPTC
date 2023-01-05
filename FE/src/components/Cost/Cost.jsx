@@ -69,10 +69,10 @@ function Cost() {
 
         if (user.Role == "Parent") {
             student.map((std) => {
-                if (user.UserName === std.ParentUserName) { idCl = std.ClassID }
+                if (user.UserName === std.ParentUserName) { idClassParent = std.ClassID }
             })
             costs.map((cost) => {
-                if (cost.ClassID == idCl) { arrCost.push(cost); }
+                if (cost.ClassID == idClassParent) { arrCost.push(cost); }
             })
         }
 
@@ -186,8 +186,8 @@ function Cost() {
                     {user?.Role === "Parent" && (
                         <div className="head-cost-content">
                             <div>
-                                <h2>Lich su chi tieu</h2>
-                                <p>Tong chi tieu trong nam: {sumCost()}</p>
+                                <h2>Lịch sử chi tiêu</h2>
+                                <p style={{ fontSize: "18px" }}>Tổng chi tiêu trong năm: {sumCost()}</p>
                             </div>
                         </div>
                     )}
