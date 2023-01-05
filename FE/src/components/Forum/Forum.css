@@ -58,6 +58,7 @@
     display: flex;
     justify-content: space-around;
     width: 100%;
+    border-bottom: 1px solid #ccc;
 }
 .action1 {
     font-family: "Poppins", sans-serif;
@@ -103,7 +104,7 @@
 }
 .box-comment {
     display: flex;
-    padding: 0 20px 10px 20px;
+    padding: 10px 20px ;
     width: 100%;
 }
 
@@ -163,4 +164,20 @@
     cursor: pointer;
     box-sizing: border-box;
     border: 1px solid #ccc;
+}
+
+.box-person-comment {
+    padding: 10px 20px;
+}
+.item-person-comment {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.content-person-comment {
+    background-color: #f0f2f5;
+    margin-left: 10px;
+    max-width: 90%;
+    padding: 10px 20px;
+    border-radius: 20px;
 }
