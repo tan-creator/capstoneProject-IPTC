@@ -22,7 +22,7 @@ class PermissionResource extends JsonResource
                             ->where('StudentID', '=', $this->StudentID)
                             ->first()->StudentName,
             'TeacherName' => DB::select('EXEC SELECT_TEACHERNAME ?', array($this->StudentID))[0]->Names,
-            'PermissionDay' => date('d-m-Y', strtotime($this->Permission)),
+            'PermissionDay' => date('d-m-Y', strtotime($this->PermissionDay)),
             'PermissionContent' => $this->PermissionContent,
         ];
     }
