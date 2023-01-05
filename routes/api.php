@@ -56,7 +56,7 @@ Route::prefix('notification')->controller(App\Http\Controllers\API\NotificationC
     Route::get('/', 'index');
     Route::get('/{NotificationID}', 'show');
     Route::post('/', 'store');
-    Route::delete('/{id}', 'destroy');    
+    // Route::delete('/{id}', 'destroy');    
 });
 
 Route::prefix('Point')->controller(App\Http\Controllers\API\PointController::class)->group(function () {
