@@ -8,6 +8,8 @@
     width: 100%;
     box-shadow: 0 7px 25px rgb(0 0 0 / 8%);
     border-radius: 10px;
+    /* text-align: center;
+    line-height: 20; */
 }
 
 .box-profile {
@@ -21,24 +23,35 @@
 .box-content {
     padding: 0 20px 10px 20px;
     font-size: 15px;
+    height: auto;
 }
 
 .box-forum {
     display: flex;
     flex-direction: column;
 }
+
 .format-icon {
     display: flex;
     justify-content: space-around;
     padding-bottom: 10px;
 }
+
+.box-info-post{
+    margin-left: 10px;
+}
+
+.box-user-top i {
+    font-size: 16px;
+}
+
 .box-post-header-avatar {
     width: 60px;
     height: 60px;
     margin-right: "20px";
     border-radius: 50px;
     background-color: #ccc;
-    border:  1px solid #ccc;
+    border: 1px solid #ccc;
 }
 .box-icon {
     padding: 5px 0;
@@ -94,20 +107,20 @@
     width: 100%;
 }
 
-.box-img-avatar{
+.box-img-avatar {
     width: 40px;
     height: 40px;
     margin-right: 20px;
     border-radius: 50px;
     background-color: #ccc;
-    border:  1px solid #ccc;
+    border: 1px solid #ccc;
 }
 
 .form-comment {
     width: calc(100% - 60px);
 }
 
-.form-group-comment{
+.form-group-comment {
     margin-bottom: 0;
     width: 100%;
 }
@@ -117,6 +130,13 @@
     border: none;
     border-radius: 50px;
     background-color: #f0f2f5;
+    height: 40px;
+    padding: 0 10px;
+    font-size: 14px;
+}
+
+.form-control-comment:focus {
+    border: none;
 }
 
 .form-group-comment {
@@ -124,6 +144,8 @@
     justify-content: space-between;
     flex-direction: row;
 }
+
+
 
 .btn-comment {
     width: 10%;
@@ -139,4 +161,6 @@
 
 .btn-comment:hover {
     cursor: pointer;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
 }

@@ -38,38 +38,40 @@ export default function noti() {
                             THÔNG BÁO
                         </span>
                     </div>
-                    {parent.map(function (noti) {
-                        return (
-                            <div className="box" key={noti.Phone}>
-                                <div className="box-profile">
-                                    <img
-                                        className="box-img-avatar"
-                                        src="./img/avatar.svg"
-                                        alt=""
-                                    />
-                                    <div className="box-info">
-                                        <div className="box-user-top">
-                                            <h4 className="card-user-name">
-                                                {noti.AdminUserName}
-                                            </h4>
-                                            <i className="bx bxs-check-circle" />
+                    {parent
+                        .sort((a, b) => b.NotificationID - a.NotificationID)
+                        .map(function (noti) {
+                            return (
+                                <div className="box" key={noti.Phone}>
+                                    <div className="box-profile">
+                                        <img
+                                            className="box-img-avatar"
+                                            src="./img/avatar.svg"
+                                            alt=""
+                                        />
+                                        <div className="box-info">
+                                            <div className="box-user-top">
+                                                <h4 className="card-user-name">
+                                                    {noti.AdminUserName}
+                                                </h4>
+                                                <i className="bx bxs-check-circle" />
+                                            </div>
+                                            <div className="box-user-desc">
+                                                {noti.NotificationDate}
+                                            </div>
                                         </div>
-                                        <div className="box-user-desc">
-                                            {noti.NotificationDate}
+                                    </div>
+                                    <div className="box-question">
+                                        <div className="box-main-question">
+                                            {noti.NotificationTitle}
+                                        </div>
+                                        <div className="box-subtitle">
+                                            {noti.NotificationContent}
                                         </div>
                                     </div>
                                 </div>
-                                <div className="box-question">
-                                    <div className="box-main-question">
-                                        {noti.NotificationTitle}
-                                    </div>
-                                    <div className="box-subtitle">
-                                        {noti.NotificationContent}
-                                    </div>
-                                </div>
-                            </div>
-                        );
-                    })}
+                            );
+                        })}
                     <div className="content-right">
                         <div className="anounce box">
                             <div className="pb10">

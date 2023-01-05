@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Sidebar from "../Layout/DefaultLayout/Sidebar/Sidebar";
+import isValidBirthdate from "is-valid-birthdate";
 import NavBar from "../NavBar/NavBar";
 import { useAlert } from "react-alert";
 import axios from "axios";
@@ -7,11 +8,14 @@ import "./personal.css";
 export default function Personnal() {
     const alert = useAlert();
 
-    const [account, setAccount] = useState({});
+    let [account, setAccount] = useState({});
     const [dataUpdate, setDataUpdate] = useState({
         Names: "",
         BirthDay: "",
         Phone: "",
+        oldPassword: "",
+        newPassword: "",
+        verifyPassword: "",
     });
     const handleOnChange = (e) => {
         const name = e.target.name;
@@ -25,8 +29,28 @@ export default function Personnal() {
         });
     };
     const handleSubmit = async (e) => {
+        if (dataUpdate.oldPassword) {
+            if (!dataUpdate.newPassword || !dataUpdate.verifyPassword) {
+                return alert.error("Vui long nhap mat khau moi !");
+            }
+            if (dataUpdate.oldPassword === dataUpdate.newPassword) {
+                return alert.error(
+                    "Mat khau cu va moi khong duoc trung nhau !"
+                );
+            }
+            const result = await axios.post(
+                `http://127.0.0.1:8000/api/resetPassword?UserName=${account.UserName}&oldPassword=${dataUpdate.oldPassword}&newPassword=${dataUpdate.newPassword}&verifyPassword=${dataUpdate.verifyPassword}`
+            );
+            const { statusCode, msg } = result.data;
+            if (statusCode !== 200) {
+                return alert.error(msg);
+            }
+            return alert.success(msg);
+        }
         const value = e.target.value;
-
+        if (!isValidBirthdate(dataUpdate?.BirthDay)) {
+            return alert.error("Vui long nhap tuoi cho chinh xac !");
+        }
         await axios
             .put(`http://127.0.0.1:8000/api/user/${value}`, { ...dataUpdate })
             .then((response) => {
@@ -42,9 +66,15 @@ export default function Personnal() {
                 alert.error("Fetch thất bại: ");
                 console.log("error", error);
             });
-        console.log(dataUpdate);
+        const newAccount = {
+            ...account,
+            ...dataUpdate,
+        };
+        localStorage.setItem("account", JSON.stringify(newAccount));
+        setAccount({ ...newAccount });
     };
     const handleUpdate = (dataUpdate) => {
+        console.log(dataUpdate);
         setDataUpdate({
             Names: dataUpdate?.Names,
             BirthDay: dataUpdate?.BirthDay,
@@ -69,20 +99,20 @@ export default function Personnal() {
                     <div className="info-basic">
                         <div className="info">
                             <div className="txtcel1">
-                                {account.Role === "Teacher"
+                                {account?.Role === "Teacher"
                                     ? "Tên giáo viên: "
                                     : "Tên Cha/Mẹ: "}
                             </div>
                             <div className="txtcel2" id="txtName">
-                                <strong>{account.Names}</strong>
+                                <strong>{account?.Names}</strong>
                             </div>
                             <div className="txtcel1">Tên đăng nhập</div>
                             <div className="txtcel2" id="txtName">
-                                <strong>{account.UserName}</strong>
+                                <strong>{account?.UserName}</strong>
                             </div>
                             <div className="txtcel1">Vai trò:</div>
                             <div className="txtcel2">
-                                {account.Role === "Teacher"
+                                {account?.Role === "Teacher"
                                     ? "Giáo viên"
                                     : "Phụ huynh"}
                             </div>
@@ -137,7 +167,7 @@ export default function Personnal() {
                                             color: "#fff",
                                             fontWeight: "bold",
                                         }}
-                                        onClick={() => handleUpdate()}
+                                        onClick={() => handleUpdate(account)}
                                     >
                                         UPDATE
                                     </button>
@@ -170,7 +200,7 @@ export default function Personnal() {
                                                                 name="Names"
                                                                 placeholder="Nhập tên của bạn"
                                                                 value={
-                                                                    dataUpdate.Names
+                                                                    dataUpdate?.Names
                                                                 }
                                                                 onChange={
                                                                     handleOnChange
@@ -186,7 +216,7 @@ export default function Personnal() {
                                                                 className="form-control"
                                                                 name="BirthDay"
                                                                 value={
-                                                                    dataUpdate.BirthDay
+                                                                    dataUpdate?.BirthDay
                                                                 }
                                                                 onChange={
                                                                     handleOnChange
@@ -203,8 +233,51 @@ export default function Personnal() {
                                                                 name="Phone"
                                                                 placeholder="Nhập số điện thoại của bạn"
                                                                 value={
-                                                                    dataUpdate.Phone
+                                                                    dataUpdate?.Phone
                                                                 }
+                                                                onChange={
+                                                                    handleOnChange
+                                                                }
+                                                            />
+                                                        </div>
+                                                        <div className="form-group">
+                                                            <label htmlFor="">
+                                                                Mat Khau Cu
+                                                            </label>
+                                                            <input
+                                                                type="password"
+                                                                className="form-control"
+                                                                name="oldPassword"
+                                                                placeholder="Nhập Mat khau cu"
+                                                                onChange={
+                                                                    handleOnChange
+                                                                }
+                                                            />
+                                                        </div>
+                                                        <div className="form-group">
+                                                            <label htmlFor="">
+                                                                Mat Khau Moi
+                                                            </label>
+                                                            <input
+                                                                type="password"
+                                                                className="form-control"
+                                                                name="newPassword"
+                                                                placeholder="Nhập Mat Khau Moi"
+                                                                onChange={
+                                                                    handleOnChange
+                                                                }
+                                                            />
+                                                        </div>
+                                                        <div className="form-group">
+                                                            <label htmlFor="">
+                                                                Nhap Lai Mat
+                                                                Khau Moi
+                                                            </label>
+                                                            <input
+                                                                type="password"
+                                                                className="form-control"
+                                                                name="verifyPassword"
+                                                                placeholder="Nhập Lai Mat Khau Moi"
                                                                 onChange={
                                                                     handleOnChange
                                                                 }

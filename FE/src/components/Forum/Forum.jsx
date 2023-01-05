@@ -52,7 +52,7 @@ export default function Forum() {
                                                                 src={user.Images}
                                                                 alt=""
                                                             />
-                                                            <div className="box-info">
+                                                            <div className="box-info-post">
                                                                 <div className="box-user-top">
                                                                     <h4 className="card-user-name">
                                                                         {user.Names}
@@ -229,7 +229,7 @@ const FunctionPost = memo(({ PostID, UserName, UserIMG }) => {
                         return (
                             <div key={cmt.CommentID}>
                                 <div>
-                                    <img src={cmt?.Images}></img>
+                                    <img src={cmt?.Images}>{room?.photoURL ? '' : room.name?.charAt(0)?.toUpperCase()}</img>
                                 </div>
                                 <div>
                                     <p>{cmt?.Names}</p>

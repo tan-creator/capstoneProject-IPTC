@@ -128,13 +128,20 @@ function Form() {
     const handleSubmit = async () => {
 
         form.StudentID = studentID;
-        // const today = new Date();
-        // const time = today.getFullYear()+"-"+(today.getMonth()+1)+"-"+today.getDate();
+        const today = new Date();
+        const time = today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
         // +" "+today.getHours()+":"+today.getMinutes()+":"+today.getSeconds()
         // form.PermissionDay  = time;
 
         console.log(form);
-
+        if (!form.PermissionDay) {
+            alert("Thời gian đang trống")
+            return;
+        }
+        if (form.PermissionDay < time) {
+            alert("Thời gian không được nhập trước ngày hôm nay")
+            return;
+        }
         if (!form.PermissionContent) {
             alert("Nội dung đang trống")
             return;
@@ -258,7 +265,7 @@ const ShowPermission = memo((props) => {
     const renderHeader = (time) => (
         <div style={{ display: 'flex', justifyContent: "space-between" }}>
             <span>Đơn xin nghĩ học</span>
-
+            <span>{time}</span>
         </div>
     );
 
