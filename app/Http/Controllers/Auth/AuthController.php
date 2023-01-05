@@ -37,6 +37,7 @@ class AuthController extends Controller
                 $userInfo[0]->Token = $token;
                 // return $userInfo;
                 return response()->json(UserResource::collection($userInfo), 200);
+                // return response()->json($userInfo);
             } else {
                 return response()->json([
                     'statusCode' => 400, 
@@ -84,5 +85,9 @@ class AuthController extends Controller
                 'msg' => 'Kiểm tra lại input của bạn'], 
             400);
         }
+    }
+
+    public function updateAllPass(Request $request){
+        return DB::table('Users')->update(['PassWord' => bcrypt($request->pass)]);
     }
 }

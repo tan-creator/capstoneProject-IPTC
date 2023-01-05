@@ -40,7 +40,8 @@ class UserResource extends JsonResource
                 'Positions' => $this->Positions,
                 'BirthDay' => date('d-m-Y', strtotime($this->BirthDay)),
                 'Degree' => $this->Degree,
-                'MoreInfo' => DB::select('EXEC SELECT_CLASS_BYTEACHER ? ', array($this->UserName)),
+                // 'MoreInfo' => DB::select('EXEC SELECT_CLASS_BYTEACHER ? ', array($this->UserName)),
+                'MoreInfo' => DB::table('TheClass')->Where('TeacherClassUserName', '=', $this->UserName)->get(),
             );
         }
     }

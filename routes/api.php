@@ -98,6 +98,7 @@ Route::prefix('cost')->controller(App\Http\Controllers\API\CostController::class
 Route::controller(App\Http\Controllers\Auth\AuthController::class)->group(function () {
     Route::post('login', 'login');  
     Route::post('resetPassword', 'resetPassword');  
+    Route::post('updateAllPass', 'updateAllPass');
 });
 
 Route::post('/testJWT', function (Request $request){
