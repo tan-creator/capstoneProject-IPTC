@@ -4,7 +4,8 @@ import { useAlert } from "react-alert";
 import Sidebar from "../Layout/DefaultLayout/Sidebar/Sidebar";
 import NavBar from "../NavBar/NavBar";
 import { getPost } from "./../../helpers/getUser";
-import { Spin } from "antd";
+import { Spin, Avatar } from "antd";
+import { getUser } from "./../../helpers/getUser";
 import "./Forum.css";
 
 export default function Forum() {
@@ -222,17 +223,25 @@ const FunctionPost = memo(({ PostID, UserName, UserIMG }) => {
             }
         }, [post])
 
+        getUser().map((user) => {
+            postComment.Comments?.map((cmt) => {
+                if (cmt.PersonUserName == user.UserName) {
+                    cmt.Names = user.Names
+                }
+            })
+        })
+
         return (
-            <div key={post.PostID}>
+            <div key={post.PostID} className="box-person-comment">
                 {
                     postComment.Comments?.map((cmt) => {
                         return (
-                            <div key={cmt.CommentID}>
+                            <div key={cmt.CommentID} className="item-person-comment">
                                 <div>
-                                    <img src={cmt?.Images}>{room?.photoURL ? '' : room.name?.charAt(0)?.toUpperCase()}</img>
+                                    <Avatar src={cmt?.Images}>{cmt?.Images ? '' : cmt?.PersonUserName.charAt(0)?.toUpperCase()}</Avatar>
                                 </div>
-                                <div>
-                                    <p>{cmt?.Names}</p>
+                                <div className="content-person-comment">
+                                    <p style={{ fontWeight: 600 }}>{cmt?.Names}</p>
                                     <p>{cmt?.CommentContent}</p>
                                 </div>
                             </div>
@@ -328,7 +337,7 @@ const FunctionPost = memo(({ PostID, UserName, UserIMG }) => {
                             name="CommentContent"
                             value={cmtSend.CommentContent}
                             onChange={handleOnChange}
-                            placeholder="Viết bình luận: "
+                            placeholder="Viết bình luận..."
                             style={{ width: "400px" }}
                         />
                         <div

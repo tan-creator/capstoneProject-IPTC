@@ -4,6 +4,7 @@ import NavBar from "../NavBar/NavBar";
 import Sidebar from "../Layout/DefaultLayout/Sidebar/Sidebar";
 import "./form.css"
 import { Spin, Collapse, Typography } from "antd";
+import { getStudent, getClass, getUser, getPermission } from "../../helpers/getUser";
 
 function Form() {
     const [classes, setClass] = useState([]);
@@ -15,39 +16,45 @@ function Form() {
     const alertNav = useAlert();
 
     useEffect(() => {
-        fetch("http://127.0.0.1:8000/api/student")
-            .then(response => response.json())
-            .then(json => {
-                setStudent(json)
-            })
-            .catch(error => console.log('error', error));
+        // fetch("http://127.0.0.1:8000/api/student")
+        //     .then(response => response.json())
+        //     .then(json => {
+        //         setStudent(json)
+        //     })
+        //     .catch(error => console.log('error', error));
 
-        fetch("http://127.0.0.1:8000/api/class")
-            .then(response => response.json())
-            .then(json => {
-                setClass(json)
-            })
-            .catch(error => console.log('error', error));
+        // fetch("http://127.0.0.1:8000/api/class")
+        //     .then(response => response.json())
+        //     .then(json => {
+        //         setClass(json)
+        //     })
+        //     .catch(error => console.log('error', error));
 
-        fetch("http://127.0.0.1:8000/api/user")
-            .then(response => response.json())
-            .then(json => {
-                setUser(json)
-            })
-            .catch(error => console.log('error', error));
+        // fetch("http://127.0.0.1:8000/api/user")
+        //     .then(response => response.json())
+        //     .then(json => {
+        //         setUser(json)
+        //     })
+        //     .catch(error => console.log('error', error));
+
+        setStudent(getStudent());
+        setClass(getClass());
+        setUser(getUser());
+        setPermission(getPermission())
+        setIsLoading(false)
 
         const users = JSON.parse(localStorage.getItem("account"));
         setAccount({ ...users })
         console.log("Thong tin account\n" + account);
 
-        fetch("http://127.0.0.1:8000/api/permission")
-            .then(response => response.json())
-            .then(json => {
-                setPermission(json)
-                setIsLoading(false)
-                console.log(permission);
-            })
-            .catch(error => console.log('error', error));
+        // fetch("http://127.0.0.1:8000/api/permission")
+        //     .then(response => response.json())
+        //     .then(json => {
+        //         setPermission(json)
+        //         setIsLoading(false)
+        //         console.log(permission);
+        //     })
+        //     .catch(error => console.log('error', error));
     }, []);
 
     const [form, setForm] = useState({
@@ -96,7 +103,7 @@ function Form() {
     const studentName = getStudentName();
 
     function getUserName() {
-        permission.map((per) => {
+        permission?.map((per) => {
             student.map((std) => {
                 if (per.StudentName == std.StudentName) {
                     per.ParentUserName = std.ParentUserName;
