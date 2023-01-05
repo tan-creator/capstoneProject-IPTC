@@ -3,8 +3,9 @@ import NavBar from "../NavBar/NavBar";
 import Sidebar from "../Layout/DefaultLayout/Sidebar/Sidebar";
 import { useAlert } from "react-alert";
 import "./cost.css"
+import { Spin } from "antd";
 
-function Cost () {
+function Cost() {
     const [classes, setClass] = useState([]);
     const [costs, setCosts] = useState([])
     const [user, setUser] = useState({})
@@ -14,50 +15,55 @@ function Cost () {
         CostType: "",
         CostAmountMoney: "",
         CostDescription: "",
-        CreateAt : ""
+        CreateAt: ""
     });
     const [dataSend, setDataSend] = useState();
+    const [isLoading, setIsLoading] = useState(true)
     const alertNav = useAlert();
 
     useEffect(() => {
         fetch("http://127.0.0.1:8000/api/student")
-            .then (response => response.json())
+            .then(response => response.json())
             .then(json => {
                 setStudent(json)
             })
-            .catch(error => console.log('error',error));
+            .catch(error => console.log('error', error));
 
         fetch("http://127.0.0.1:8000/api/class")
-            .then (response => response.json())
+            .then(response => response.json())
             .then(json => {
                 setClass(json)
             })
-            .catch(error => console.log('error',error));
+            .catch(error => console.log('error', error));
 
         const users = JSON.parse(localStorage.getItem("account"));
-        setUser({ ...users})
+        setUser({ ...users })
 
     }, []);
 
     useLayoutEffect(() => {
         fetch("http://127.0.0.1:8000/api/cost")
-            .then (response => response.json())
+            .then(response => response.json())
             .then(json => {
                 setCosts(json)
+                console.log(json);
             })
-            .catch(error => console.log('error',error));
-    },[costs])
+            .catch(error => console.log('error', error));
+    }, [costs])
 
-    function getCost () {
+    function getCost() {
         const arrCost = [];
-        var idCl = "";
+        var idClassParent = "";
+        var idClassTeacher = [];
 
         if (user.Role == "Teacher") {
             classes.map((cls) => {
-                if (user.UserName === cls.TeacherClassUserName) { idCl = cls.ClassID }
+                if (user.UserName === cls.TeacherClassUserName) { idClassTeacher.push(cls.ClassID) }
             })
             costs.map((cost) => {
-                if(cost.ClassID == idCl) { arrCost.push(cost) }
+                idClassTeacher.map((id) => {
+                    if (cost.ClassID == id) { arrCost.push(cost) }
+                })
             })
         }
 
@@ -66,7 +72,7 @@ function Cost () {
                 if (user.UserName === std.ParentUserName) { idCl = std.ClassID }
             })
             costs.map((cost) => {
-                if(cost.ClassID == idCl) { arrCost.push(cost); }
+                if (cost.ClassID == idCl) { arrCost.push(cost); }
             })
         }
 
@@ -122,37 +128,37 @@ function Cost () {
         }
 
         const today = new Date();
-        const time = today.getFullYear()+"-"+(today.getMonth()+1)+"-"+today.getDate()+" "+today.getHours()+":"+today.getMinutes()+":"+today.getSeconds();
-        bill.CreateAt  = time;
+        const time = today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate() + " " + today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+        bill.CreateAt = time;
 
         console.log(bill);
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json ; charset=UTF-8' },
-            body: JSON.stringify({...bill})
+            body: JSON.stringify({ ...bill })
         };
         fetch('http://127.0.0.1:8000/api/cost', requestOptions)
-            .then((response)  => {
+            .then((response) => {
                 if (response.status == 200) {
-                    console.log("Thành công\n"+bill);
+                    console.log("Thành công\n" + bill);
                     alertNav.success("Thêm thành công: ");
                 } else {
-                    console.log("Thất bại\n"+bill);
+                    console.log("Thất bại\n" + bill);
                     alertNav.error("Thêm thất bại: ");
                 }
             })
             .catch(error => {
                 alertNav.error("Fetch thất bại: ");
-                console.log('error',error)
+                console.log('error', error)
             });
     }
 
-    const handleDeleteCost =  (e) => {
+    const handleDeleteCost = (e) => {
         const value = e.target.value;
         console.log(value)
 
         fetch(`http://127.0.0.1:8000/api/cost/${value}`, { method: 'DELETE' })
-            .then((response)  => {
+            .then((response) => {
                 if (response.status == 200) {
                     console.log(response);
                     alertNav.success("Xóa thành công: ");
@@ -162,7 +168,7 @@ function Cost () {
             })
             .catch(error => {
                 alertNav.error(error.toString());
-                console.log('error',error)
+                console.log('error', error)
             });
 
     }
@@ -175,143 +181,146 @@ function Cost () {
         <div>
             <NavBar />
             <Sidebar />
-                <div className="cost">
-                    <div className="cost-content">
-                        {user?.Role === "Parent" && (
-                            <div className="head-cost-content">
-                                <div>
-                                    <h2>Lich su chi tieu</h2>
-                                    <p>Tong chi tieu trong nam: {sumCost()}</p>
-                                </div>
+            <div className="cost">
+                <div className="cost-content">
+                    {user?.Role === "Parent" && (
+                        <div className="head-cost-content">
+                            <div>
+                                <h2>Lich su chi tieu</h2>
+                                <p>Tong chi tieu trong nam: {sumCost()}</p>
                             </div>
-                        )}
-                        {user?.Role === "Teacher" && (
-                            <div className="head-cost-content" style={{display:"flex"}}>
-                                <div>
-                                    <h2>Lịch sử chi tiêu</h2>
-                                    <p>Tổng chi tiêu trong năm: {sumCost()}</p>
-                                </div>
-                                <button
-                                    type="button"
-                                    className="btn-add-cost"
-                                    data-toggle="modal"
-                                    data-target="#exampleModal"
-                                >Thêm mới</button>
-                                <div
-                                    className="modal fade"
-                                    id="exampleModal"
-                                    tabIndex="-1"
-                                    role="dialog"
-                                    aria-labelledby="exampleModalLabel"
-                                    aria-hidden="true"
-                                >
-                                    <div className="modal-dialog" role="document">
-                                        <div className="modal-content">
-                                            <div className="modal-body">
-                                                <form action="" method="POST" role="form">
-                                                    <div className="form-group">
-                                                        <label htmlFor="">Loại chi tiêu:</label>
-                                                        <input
-                                                            type="text"
-                                                            className="form-control"
-                                                            name="CostType"
-                                                            placeholder="Nhập loại chi tiêu"
-                                                            value={bill.CostType}
-                                                            onChange={handleOnChange}
-                                                        />
-                                                    </div>
-                                                    <div className="form-group">
-                                                        <label htmlFor="">Tổng tiền:</label>
-                                                        <input
-                                                            type="number"
-                                                            className="form-control"
-                                                            name="CostAmountMoney"
-                                                            placeholder="Nhập tổng tiền"
-                                                            value={bill.CostAmountMoney}
-                                                            onChange={handleOnChange}
-                                                        />
-                                                    </div>
-                                                    <div className="form-group">
-                                                        <label htmlFor="">Chi tiết:</label>
-                                                        <input
-                                                            type="text"
-                                                            className="form-control"
-                                                            name="CostDescription"
-                                                            placeholder="Nhập chi tiết"
-                                                            value={bill.CostDescription}
-                                                            onChange={handleOnChange}
-                                                        />
-                                                    </div>
-                                                </form>
-                                            </div>
-                                            <div className="modal-footer">
-                                                <button
-                                                    style={{ fontSize: 14 }}
-                                                    type="button"
-                                                    className="btn btn-secondary"
-                                                    data-dismiss="modal"
-                                                >
-                                                    Đóng
-                                                </button>
-                                                <button
-                                                    style={{ fontSize: 14 }}
-                                                    onClick={handleSubmit}
-                                                    type="button"
-                                                    className="btn btn-primary"
-                                                >
-                                                    Thêm chi tiêu
-                                                </button>
-                                            </div>
+                        </div>
+                    )}
+                    {user?.Role === "Teacher" && (
+                        <div className="head-cost-content" style={{ display: "flex" }}>
+                            <div>
+                                <h2>Lịch sử chi tiêu</h2>
+                                <p>Tổng chi tiêu trong năm: {sumCost()}</p>
+                            </div>
+                            <button
+                                type="button"
+                                className="btn-add-cost"
+                                data-toggle="modal"
+                                data-target="#exampleModal"
+                            >Thêm mới</button>
+                            <div
+                                className="modal fade"
+                                id="exampleModal"
+                                tabIndex="-1"
+                                role="dialog"
+                                aria-labelledby="exampleModalLabel"
+                                aria-hidden="true"
+                            >
+                                <div className="modal-dialog" role="document">
+                                    <div className="modal-content">
+                                        <div className="modal-body">
+                                            <form action="" method="POST" role="form">
+                                                <div className="form-group">
+                                                    <label htmlFor="">Loại chi tiêu:</label>
+                                                    <input
+                                                        type="text"
+                                                        className="form-control"
+                                                        name="CostType"
+                                                        placeholder="Nhập loại chi tiêu"
+                                                        value={bill.CostType}
+                                                        onChange={handleOnChange}
+                                                    />
+                                                </div>
+                                                <div className="form-group">
+                                                    <label htmlFor="">Tổng tiền:</label>
+                                                    <input
+                                                        type="number"
+                                                        className="form-control"
+                                                        name="CostAmountMoney"
+                                                        placeholder="Nhập tổng tiền"
+                                                        value={bill.CostAmountMoney}
+                                                        onChange={handleOnChange}
+                                                    />
+                                                </div>
+                                                <div className="form-group">
+                                                    <label htmlFor="">Chi tiết:</label>
+                                                    <input
+                                                        type="text"
+                                                        className="form-control"
+                                                        name="CostDescription"
+                                                        placeholder="Nhập chi tiết"
+                                                        value={bill.CostDescription}
+                                                        onChange={handleOnChange}
+                                                    />
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div className="modal-footer">
+                                            <button
+                                                style={{ fontSize: 14 }}
+                                                type="button"
+                                                className="btn btn-secondary"
+                                                data-dismiss="modal"
+                                            >
+                                                Đóng
+                                            </button>
+                                            <button
+                                                style={{ fontSize: 14 }}
+                                                onClick={handleSubmit}
+                                                type="button"
+                                                className="btn btn-primary"
+                                            >
+                                                Thêm chi tiêu
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        )}
-                        <div className="cost-box">
-                            <div className="cost-box-left">
-                                {
-                                    getCost().map((cost) => {
-                                        return (
-                                            <div key={cost.CostID} style={{borderTop:"1px solid #ccc",padding:"10px 0"}}>
-                                                <div className="btn-delete-cost">
-                                                    <h3
-                                                        className="h3-cost-type"
-                                                        onClick={() => handleGetCost(cost)}
-                                                        value={cost.CostID}
-                                                    >{cost.CostType}</h3>
-                                                    {user?.Role === "Teacher" && (
-                                                        <button
+                        </div>
+                    )}
+                    {/* {getCost().length == 0 ? <Spin /> : */}
+                    <div className="cost-box">
+                        <div className="cost-box-left">
+                            {getCost().length == 0 && (<h3 style={{ marginTop: 10, padding: "10px 10px", backgroundColor: "#f2f6fc" }}>Chưa có hóa đơn nào</h3>)}
+                            {
+                                getCost().map((cost) => {
+                                    return (
+                                        <div key={cost.CostID} style={{ borderTop: "1px solid #ccc", padding: "10px 0" }}>
+                                            <div className="btn-delete-cost">
+                                                <h3
+                                                    className="h3-cost-type"
+                                                    onClick={() => handleGetCost(cost)}
+                                                    value={cost.CostID}
+                                                >{cost.CostType}</h3>
+                                                {user?.Role === "Teacher" && (
+                                                    <button
                                                         style={{ fontSize: 14 }}
                                                         onClick={handleDeleteCost}
                                                         type="button"
                                                         value={cost.CostID}
-                                                        >
-                                                            <i className="bx bx-trash-alt icon" />
-                                                        </button>
-                                                    )}
-                                                </div>
-                                                <p>Chi tiết: </p>
-                                                <p className="p-cost-description">{cost.CostDescription}</p>
-                                                <div style={{display:'flex'}}>
-                                                    <p>Tổng tiền: </p>
-                                                    <p style={{paddingLeft:'10px'}}>{parseInt(cost.CostAmountMoney)}</p>
-                                                </div>
+                                                    >
+                                                        <i className="bx bx-trash-alt icon" />
+                                                    </button>
+                                                )}
                                             </div>
-                                        )
-                                    })
-                                }
-                            </div>
-                            <div className="cost-box-right">
-                                <ShowCost data={dataSend}/>
-                            </div>
+                                            <p>Chi tiết: </p>
+                                            <p className="p-cost-description">{cost.CostDescription}</p>
+                                            <div style={{ display: 'flex' }}>
+                                                <p>Tổng tiền: </p>
+                                                <p style={{ paddingLeft: '10px' }}>{parseInt(cost.CostAmountMoney)}</p>
+                                            </div>
+                                        </div>
+                                    )
+                                })
+                            }
+                        </div>
+                        <div className="cost-box-right">
+                            <ShowCost data={dataSend} />
                         </div>
                     </div>
+                    {/* } */}
                 </div>
+            </div>
         </div>
     )
 }
 
-const ShowCost = memo( (props) => {
+const ShowCost = memo((props) => {
     const [getData, setGetData] = useState({});
     useLayoutEffect(() => {
         if (props.data !== getData) {
@@ -324,16 +333,16 @@ const ShowCost = memo( (props) => {
         <>
             {getData != null && (
                 <div className="box-show-cost">
-                    <h3>{getData?.CostType}</h3>
-                    <br/>
+                    <h3 style={{ backgroundColor: "#f2f6fc", padding: "10px" }}>{getData?.CostType}</h3>
+                    <br />
                     <div>
                         <p>Chi tiết: </p>
                         <p>{getData?.CostDescription}</p>
                     </div>
-                    <br/>
-                    <div style={{display:'flex'}}>
+                    <br />
+                    <div style={{ display: 'flex' }}>
                         <p>Tổng tiền: </p>
-                        <p style={{paddingLeft:'10px'}}>{getData?.CostAmountMoney}</p>
+                        <p style={{ paddingLeft: '10px' }}>{getData?.CostAmountMoney}</p>
                     </div>
                 </div>
             )}

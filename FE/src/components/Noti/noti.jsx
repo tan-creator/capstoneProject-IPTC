@@ -2,7 +2,6 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import NavBar from "../NavBar/NavBar";
 import Sidebar from "../Layout/DefaultLayout/Sidebar/Sidebar";
-import { getNotification } from "./../../helpers/getUser";
 import "./noti.css";
 export default function noti() {
     // const [notis, set_notis] = useState([]);
@@ -26,7 +25,6 @@ export default function noti() {
         SetParent(...[findParent]);
     }, []);
 
-    const notis = getNotification();
     console.log(parent);
     return (
         <div>
@@ -41,7 +39,6 @@ export default function noti() {
                         </span>
                     </div>
                     {parent.map(function (noti) {
-                        //(noti?.ParentUserName == account?.UserName)
                         return (
                             <div className="box" key={noti.Phone}>
                                 <div className="box-profile">

@@ -107,14 +107,36 @@
     width: calc(100% - 60px);
 }
 
-.form-group{
+.form-group-comment{
     margin-bottom: 0;
     width: 100%;
 }
 
-.form-control {
-    width: 100% !important;
+.form-control-comment {
+    width: 88% !important;
     border: none;
     border-radius: 50px;
     background-color: #f0f2f5;
+}
+
+.form-group-comment {
+    display: flex !important;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+.btn-comment {
+    width: 10%;
+    font-size: 18px;
+    color: #fff;
+    padding-top: 5px;
+    margin: 0;
+    border-radius: 30px;
+    background-color: #f48023;
+    align-items: center;
+    text-align: center;
+}
+
+.btn-comment:hover {
+    cursor: pointer;
 }

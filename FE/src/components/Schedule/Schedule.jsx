@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import NavBar from "../NavBar/NavBar";
 import Sidebar from "../Layout/DefaultLayout/Sidebar/Sidebar";
+import { Spin } from "antd";
 
 import "./schedule.css";
 
@@ -10,6 +11,7 @@ function Shedule() {
     const [classes, setClass] = useState([]);
     const [student, setStudent] = useState([]);
     const [persons, setPerson] = useState([])
+
 
     useEffect(() => {
 
@@ -44,6 +46,7 @@ function Shedule() {
             })
             .catch((error) => console.log("error", error));
     }, []);
+
 
     function getSubject() {
         const arrLichHoc = [];
@@ -86,6 +89,7 @@ function Shedule() {
         console.log("Lich hoc:\n" + arrLichHoc);
         return arrLichHoc;
     }
+
 
     const listLichHoc = []
     getSubject().map((obj) => {
@@ -198,282 +202,283 @@ function Shedule() {
                                 <strong>Năm học: </strong>2022-2023
                             </p>
                         </div>
-                        <div className="schedule-box">
-                            <table>
-                                <thead>
-                                    <tr style={{ textAlign: "center" }}>
-                                        <th></th>
-                                        <th>Thứ 2</th>
-                                        <th>Thứ 3</th>
-                                        <th>Thứ 4</th>
-                                        <th>Thứ 5</th>
-                                        <th>Thứ 6</th>
-                                        <th>Thứ 7</th>
-                                        <th>Chủ nhật</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            <tr>
-                                                <div className="box-schedule hour">
-                                                    <p>7:00 - 7:45</p>
-                                                </div>
-                                            </tr>
-                                            <tr>
-                                                <div className="box-schedule hour">
-                                                    <p>7:50 - 8:35</p>
-                                                </div>
-                                            </tr>
-                                            <tr>
-                                                <div className="box-schedule hour">
-                                                    <p>8:40 - 9:25</p>
-                                                </div>
-                                            </tr>
-                                            <tr>
-                                                <div className="box-schedule hour">
-                                                    <p>9:40 - 10:25</p>
-                                                </div>
-                                            </tr>
-                                            <tr>
-                                                <div className="box-schedule hour">
-                                                    <p>10:30 - 11:15</p>
-                                                </div>
-                                            </tr>
-                                            <tr>
-                                                <div className="box-schedule hour">
-                                                    <p>13:00 - 13:45</p>
-                                                </div>
-                                            </tr>
-                                            <tr>
-                                                <div className="box-schedule hour">
-                                                    <p>13:50 - 14:35</p>
-                                                </div>
-                                            </tr>
-                                            <tr>
-                                                <div className="box-schedule hour">
-                                                    <p>14:40 - 15:25</p>
-                                                </div>
-                                            </tr>
-                                            <tr>
-                                                <div className="box-schedule hour">
-                                                    <p>15:40 - 16:25</p>
-                                                </div>
-                                            </tr>
-                                            <tr>
-                                                <div className="box-schedule hour">
-                                                    <p>16:30 - 17:15</p>
-                                                </div>
-                                            </tr>
-                                        </td>
-                                        <td>
-                                            {getLich(arrT2, "2").map(
-                                                (data) => {
-                                                    // const date = data.SubjectTime;
-                                                    const color = data.time ? "#f48023" : "#fff";
-                                                    return (
-                                                        <tr>
-                                                            <div
-                                                                className="box-schedule"
-                                                                style={{
-                                                                    backgroundColor:
-                                                                        color,
-                                                                }}
-                                                            >
-                                                                <p> {data?.SubjectName} </p>
-                                                                <p> {data?.ClassName} </p>
-                                                                <p> {data?.Names} </p>
-                                                            </div>
-                                                        </tr>
-                                                    );
-                                                }
-                                            )}
-                                            <tr></tr>
-                                        </td>
-                                        <td>
-                                            {getLich(arrT3, "3").map(
-                                                (data) => {
-                                                    const color = data.time ? "#f48023" : "#fff";
-                                                    return (
-                                                        <tr>
-                                                            <div
-                                                                className="box-schedule"
-                                                                style={{
-                                                                    backgroundColor:
-                                                                        color,
-                                                                }}
-                                                            >
-                                                                <p>
-                                                                    {
-                                                                        data?.SubjectName
-                                                                    }
-                                                                </p>
-                                                                <p>
-                                                                    {
-                                                                        data?.ClassName
-                                                                    }
-                                                                </p>
-                                                                <p> {data?.Names} </p>
-                                                            </div>
-                                                        </tr>
-                                                    );
-                                                }
-                                            )}
-                                        </td>
-                                        <td>
-                                            {getLich(arrT4, "4").map(
-                                                (data) => {
-                                                    const color = data.time ? "#f48023" : "#fff";
-                                                    return (
-                                                        <tr>
-                                                            <div
-                                                                className="box-schedule"
-                                                                style={{
-                                                                    backgroundColor:
-                                                                        color,
-                                                                }}
-                                                            >
-                                                                <p>
-                                                                    {
-                                                                        data?.SubjectName
-                                                                    }
-                                                                </p>
-                                                                <p>
-                                                                    {
-                                                                        data?.ClassName
-                                                                    }
-                                                                </p>
-                                                                <p> {data?.Names} </p>
-                                                            </div>
-                                                        </tr>
-                                                    );
-                                                }
-                                            )}
-                                        </td>
-                                        <td>
-                                            {getLich(arrT5, "5").map(
-                                                (data) => {
-                                                    const color = data.time ? "#f48023" : "#fff";
-                                                    return (
-                                                        <tr>
-                                                            <div
-                                                                className="box-schedule"
-                                                                style={{
-                                                                    backgroundColor:
-                                                                        color,
-                                                                }}
-                                                            >
-                                                                <p>
-                                                                    {
-                                                                        data?.SubjectName
-                                                                    }
-                                                                </p>
-                                                                <p>
-                                                                    {
-                                                                        data?.ClassName
-                                                                    }
-                                                                </p>
-                                                                <p> {data?.Names} </p>
-                                                            </div>
-                                                        </tr>
-                                                    );
-                                                }
-                                            )}
-                                        </td>
-                                        <td>
-                                            {getLich(arrT6, "6").map(
-                                                (data) => {
-                                                    const color = data.time ? "#f48023" : "#fff";
-                                                    return (
-                                                        <tr>
-                                                            <div
-                                                                className="box-schedule"
-                                                                style={{
-                                                                    backgroundColor:
-                                                                        color,
-                                                                }}
-                                                            >
-                                                                <p>
-                                                                    {
-                                                                        data?.SubjectName
-                                                                    }
-                                                                </p>
-                                                                <p>
-                                                                    {
-                                                                        data?.ClassName
-                                                                    }
-                                                                </p>
-                                                                <p> {data?.Names} </p>
-                                                            </div>
-                                                        </tr>
-                                                    );
-                                                }
-                                            )}
-                                        </td>
-                                        <td>
-                                            {getLich(arrT7, "7").map(
-                                                (data) => {
-                                                    const color = data.time ? "#f48023" : "#fff";
-                                                    return (
-                                                        <tr>
-                                                            <div
-                                                                className="box-schedule"
-                                                                style={{
-                                                                    backgroundColor:
-                                                                        color,
-                                                                }}
-                                                            >
-                                                                <p>
-                                                                    {
-                                                                        data?.SubjectName
-                                                                    }
-                                                                </p>
-                                                                <p>
-                                                                    {
-                                                                        data?.ClassName
-                                                                    }
-                                                                </p>
-                                                                <p> {data?.Names} </p>
-                                                            </div>
-                                                        </tr>
-                                                    );
-                                                }
-                                            )}
-                                        </td>
-                                        <td>
-                                            {getLich(arrCN, "8").map(
-                                                (data) => {
-                                                    const color = data.time ? "#f48023" : "#fff";
-                                                    return (
-                                                        <tr>
-                                                            <div
-                                                                className="box-schedule"
-                                                                style={{
-                                                                    backgroundColor:
-                                                                        color,
-                                                                }}
-                                                            >
-                                                                <p>
-                                                                    {
-                                                                        data?.SubjectName
-                                                                    }
-                                                                </p>
-                                                                <p>
-                                                                    {
-                                                                        data?.ClassName
-                                                                    }
-                                                                </p>
-                                                                <p> {data?.Names} </p>
-                                                            </div>
-                                                        </tr>
-                                                    );
-                                                }
-                                            )}
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                        {listLichHoc.length == 0 ? <Spin /> :
+                            <div className="schedule-box">
+                                <table>
+                                    <thead>
+                                        <tr style={{ textAlign: "center" }}>
+                                            <th></th>
+                                            <th>Thứ 2</th>
+                                            <th>Thứ 3</th>
+                                            <th>Thứ 4</th>
+                                            <th>Thứ 5</th>
+                                            <th>Thứ 6</th>
+                                            <th>Thứ 7</th>
+                                            <th>Chủ nhật</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <tr>
+                                                    <div className="box-schedule hour">
+                                                        <p>7:00 - 7:45</p>
+                                                    </div>
+                                                </tr>
+                                                <tr>
+                                                    <div className="box-schedule hour">
+                                                        <p>7:50 - 8:35</p>
+                                                    </div>
+                                                </tr>
+                                                <tr>
+                                                    <div className="box-schedule hour">
+                                                        <p>8:40 - 9:25</p>
+                                                    </div>
+                                                </tr>
+                                                <tr>
+                                                    <div className="box-schedule hour">
+                                                        <p>9:40 - 10:25</p>
+                                                    </div>
+                                                </tr>
+                                                <tr>
+                                                    <div className="box-schedule hour">
+                                                        <p>10:30 - 11:15</p>
+                                                    </div>
+                                                </tr>
+                                                <tr>
+                                                    <div className="box-schedule hour">
+                                                        <p>13:00 - 13:45</p>
+                                                    </div>
+                                                </tr>
+                                                <tr>
+                                                    <div className="box-schedule hour">
+                                                        <p>13:50 - 14:35</p>
+                                                    </div>
+                                                </tr>
+                                                <tr>
+                                                    <div className="box-schedule hour">
+                                                        <p>14:40 - 15:25</p>
+                                                    </div>
+                                                </tr>
+                                                <tr>
+                                                    <div className="box-schedule hour">
+                                                        <p>15:40 - 16:25</p>
+                                                    </div>
+                                                </tr>
+                                                <tr>
+                                                    <div className="box-schedule hour">
+                                                        <p>16:30 - 17:15</p>
+                                                    </div>
+                                                </tr>
+                                            </td>
+                                            <td>
+                                                {getLich(arrT2, "2").map(
+                                                    (data) => {
+                                                        const color = data.time ? "#f48023" : "#fff";
+                                                        return (
+                                                            <tr>
+                                                                <div
+                                                                    className="box-schedule"
+                                                                    style={{
+                                                                        backgroundColor:
+                                                                            color,
+                                                                    }}
+                                                                >
+                                                                    <p> {data?.SubjectName} </p>
+                                                                    <p> {data?.ClassName} </p>
+                                                                    <p> {data?.Names} </p>
+                                                                </div>
+                                                            </tr>
+                                                        );
+                                                    }
+                                                )}
+                                                <tr></tr>
+                                            </td>
+                                            <td>
+                                                {getLich(arrT3, "3").map(
+                                                    (data) => {
+                                                        const color = data.time ? "#f48023" : "#fff";
+                                                        return (
+                                                            <tr>
+                                                                <div
+                                                                    className="box-schedule"
+                                                                    style={{
+                                                                        backgroundColor:
+                                                                            color,
+                                                                    }}
+                                                                >
+                                                                    <p>
+                                                                        {
+                                                                            data?.SubjectName
+                                                                        }
+                                                                    </p>
+                                                                    <p>
+                                                                        {
+                                                                            data?.ClassName
+                                                                        }
+                                                                    </p>
+                                                                    <p> {data?.Names} </p>
+                                                                </div>
+                                                            </tr>
+                                                        );
+                                                    }
+                                                )}
+                                            </td>
+                                            <td>
+                                                {getLich(arrT4, "4").map(
+                                                    (data) => {
+                                                        const color = data.time ? "#f48023" : "#fff";
+                                                        return (
+                                                            <tr>
+                                                                <div
+                                                                    className="box-schedule"
+                                                                    style={{
+                                                                        backgroundColor:
+                                                                            color,
+                                                                    }}
+                                                                >
+                                                                    <p>
+                                                                        {
+                                                                            data?.SubjectName
+                                                                        }
+                                                                    </p>
+                                                                    <p>
+                                                                        {
+                                                                            data?.ClassName
+                                                                        }
+                                                                    </p>
+                                                                    <p> {data?.Names} </p>
+                                                                </div>
+                                                            </tr>
+                                                        );
+                                                    }
+                                                )}
+                                            </td>
+                                            <td>
+                                                {getLich(arrT5, "5").map(
+                                                    (data) => {
+                                                        const color = data.time ? "#f48023" : "#fff";
+                                                        return (
+                                                            <tr>
+                                                                <div
+                                                                    className="box-schedule"
+                                                                    style={{
+                                                                        backgroundColor:
+                                                                            color,
+                                                                    }}
+                                                                >
+                                                                    <p>
+                                                                        {
+                                                                            data?.SubjectName
+                                                                        }
+                                                                    </p>
+                                                                    <p>
+                                                                        {
+                                                                            data?.ClassName
+                                                                        }
+                                                                    </p>
+                                                                    <p> {data?.Names} </p>
+                                                                </div>
+                                                            </tr>
+                                                        );
+                                                    }
+                                                )}
+                                            </td>
+                                            <td>
+                                                {getLich(arrT6, "6").map(
+                                                    (data) => {
+                                                        const color = data.time ? "#f48023" : "#fff";
+                                                        return (
+                                                            <tr>
+                                                                <div
+                                                                    className="box-schedule"
+                                                                    style={{
+                                                                        backgroundColor:
+                                                                            color,
+                                                                    }}
+                                                                >
+                                                                    <p>
+                                                                        {
+                                                                            data?.SubjectName
+                                                                        }
+                                                                    </p>
+                                                                    <p>
+                                                                        {
+                                                                            data?.ClassName
+                                                                        }
+                                                                    </p>
+                                                                    <p> {data?.Names} </p>
+                                                                </div>
+                                                            </tr>
+                                                        );
+                                                    }
+                                                )}
+                                            </td>
+                                            <td>
+                                                {getLich(arrT7, "7").map(
+                                                    (data) => {
+                                                        const color = data.time ? "#f48023" : "#fff";
+                                                        return (
+                                                            <tr>
+                                                                <div
+                                                                    className="box-schedule"
+                                                                    style={{
+                                                                        backgroundColor:
+                                                                            color,
+                                                                    }}
+                                                                >
+                                                                    <p>
+                                                                        {
+                                                                            data?.SubjectName
+                                                                        }
+                                                                    </p>
+                                                                    <p>
+                                                                        {
+                                                                            data?.ClassName
+                                                                        }
+                                                                    </p>
+                                                                    <p> {data?.Names} </p>
+                                                                </div>
+                                                            </tr>
+                                                        );
+                                                    }
+                                                )}
+                                            </td>
+                                            <td>
+                                                {getLich(arrCN, "8").map(
+                                                    (data) => {
+                                                        const color = data.time ? "#f48023" : "#fff";
+                                                        return (
+                                                            <tr>
+                                                                <div
+                                                                    className="box-schedule"
+                                                                    style={{
+                                                                        backgroundColor:
+                                                                            color,
+                                                                    }}
+                                                                >
+                                                                    <p>
+                                                                        {
+                                                                            data?.SubjectName
+                                                                        }
+                                                                    </p>
+                                                                    <p>
+                                                                        {
+                                                                            data?.ClassName
+                                                                        }
+                                                                    </p>
+                                                                    <p> {data?.Names} </p>
+                                                                </div>
+                                                            </tr>
+                                                        );
+                                                    }
+                                                )}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        }
                     </div>
                 </div>
             </div>

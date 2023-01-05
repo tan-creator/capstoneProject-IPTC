@@ -41,7 +41,6 @@ export default function Student(props) {
         });
     };
     const handleSubject = async () => {
-
         var subjectList = JSON.parse(localStorage.getItem("subjects"));
         console.log(subjectList);
         let findSubjectByUserName = [];
@@ -128,7 +127,7 @@ export default function Student(props) {
                 await axios.post("http://127.0.0.1:8000/api/Point", obj);
 
                 console.log(obj);
-                alert.success("Create Point Successfully: ");
+                alert.success("Tạo bảng điểm thành công: ");
                 handleSubject();
                 clearState();
             } else {
@@ -137,13 +136,13 @@ export default function Student(props) {
                     { ...point }
                 );
 
-                alert.success("Update Point Successfully: ");
+                alert.success("Cập nhật điểm thành công: ");
                 handleSubject();
                 clearState();
                 setIsUpdate(false);
             }
         } catch (error) {
-            alert.error("Create Point Error: ");
+            alert.error("Tạo bảng điểm thất bại: ");
         }
     };
     const handleUpdate = (point) => {
@@ -403,15 +402,17 @@ export default function Student(props) {
                                                             fontWeight: "bold",
                                                         }}
                                                     >
-                                                        {(p?.Quiz1 +
-                                                            p?.Quiz2 +
-                                                            p?.Quiz3 +
-                                                            p?.Oral_1 +
-                                                            p?.Oral_2 +
-                                                            p?.Oral_3 +
-                                                            p?.Midterm +
-                                                            p?.Final) /
-                                                            8}
+                                                        {(
+                                                            (p?.Quiz1 +
+                                                                p?.Quiz2 +
+                                                                p?.Quiz3 +
+                                                                p?.Oral_1 +
+                                                                p?.Oral_2 +
+                                                                p?.Oral_3 +
+                                                                p?.Midterm * 2 +
+                                                                p?.Final * 3) /
+                                                            11
+                                                        ).toFixed(2)}
                                                     </td>
                                                     {account?.Role ===
                                                         "Teacher" && (
