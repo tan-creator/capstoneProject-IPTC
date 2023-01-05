@@ -245,7 +245,7 @@ export default function Personnal() {
                                                                 Mat Khau Cu
                                                             </label>
                                                             <input
-                                                                type="text"
+                                                                type="password"
                                                                 className="form-control"
                                                                 name="oldPassword"
                                                                 placeholder="Nhập Mat khau cu"
@@ -259,7 +259,7 @@ export default function Personnal() {
                                                                 Mat Khau Moi
                                                             </label>
                                                             <input
-                                                                type="text"
+                                                                type="password"
                                                                 className="form-control"
                                                                 name="newPassword"
                                                                 placeholder="Nhập Mat Khau Moi"
@@ -274,7 +274,7 @@ export default function Personnal() {
                                                                 Khau Moi
                                                             </label>
                                                             <input
-                                                                type="text"
+                                                                type="password"
                                                                 className="form-control"
                                                                 name="verifyPassword"
                                                                 placeholder="Nhập Lai Mat Khau Moi"
