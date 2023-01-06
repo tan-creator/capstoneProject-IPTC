@@ -48,6 +48,13 @@ export default function App() {
             .then((json) => {
                 localStorage.setItem("permissions", JSON.stringify(json));
             });
+
+        fetch("http://127.0.0.1:8000/api/cost")
+            .then(response => response.json())
+            .then(json => {
+                localStorage.setItem("costs", JSON.stringify(json));
+            })
+            .catch(error => console.log('error', error));
     };
     useEffect(() => {
         getApi();

@@ -16,45 +16,24 @@ function Form() {
     const alertNav = useAlert();
 
     useEffect(() => {
-        // fetch("http://127.0.0.1:8000/api/student")
-        //     .then(response => response.json())
-        //     .then(json => {
-        //         setStudent(json)
-        //     })
-        //     .catch(error => console.log('error', error));
-
-        // fetch("http://127.0.0.1:8000/api/class")
-        //     .then(response => response.json())
-        //     .then(json => {
-        //         setClass(json)
-        //     })
-        //     .catch(error => console.log('error', error));
-
-        // fetch("http://127.0.0.1:8000/api/user")
-        //     .then(response => response.json())
-        //     .then(json => {
-        //         setUser(json)
-        //     })
-        //     .catch(error => console.log('error', error));
 
         setStudent(getStudent());
         setClass(getClass());
         setUser(getUser());
-        setPermission(getPermission())
-        setIsLoading(false)
+        // setPermission(getPermission())
+
+        fetch("http://127.0.0.1:8000/api/permission")
+            .then(response => response.json())
+            .then(json => {
+                setPermission(json)
+                setIsLoading(false)
+            })
+            .catch(error => console.log('error', error));
 
         const users = JSON.parse(localStorage.getItem("account"));
         setAccount({ ...users })
         console.log("Thong tin account\n" + account);
 
-        // fetch("http://127.0.0.1:8000/api/permission")
-        //     .then(response => response.json())
-        //     .then(json => {
-        //         setPermission(json)
-        //         setIsLoading(false)
-        //         console.log(permission);
-        //     })
-        //     .catch(error => console.log('error', error));
     }, []);
 
     const [form, setForm] = useState({
@@ -67,19 +46,19 @@ function Form() {
         let idClass = "";
         let idTeacher = "";
         let teacherClassName = ""
-        student.map((std) => {
+        student?.map((std) => {
             if (account.UserName == std.ParentUserName) {
                 idClass = std.ClassID;
             }
         })
 
-        classes.map((cls) => {
+        classes?.map((cls) => {
             if (cls.ClassID == idClass) {
                 idTeacher = cls.TeacherClassUserName;
             }
         })
 
-        users.map((user) => {
+        users?.map((user) => {
             if (user.UserName == idTeacher) {
                 teacherClassName = user.Names;
             }
@@ -136,17 +115,18 @@ function Form() {
 
         form.StudentID = studentID;
         const today = new Date();
-        const time = today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
+        const time = today.getFullYear() + "-" + (today.getMonth() < 10 ? ("0" + (today.getMonth() + 1)) : (today.getMonth() + 1)) + "-" + (today.getDate() < 10 ? ("0" + today.getDate()) : today.getDate());
         // +" "+today.getHours()+":"+today.getMinutes()+":"+today.getSeconds()
         // form.PermissionDay  = time;
 
         console.log(form);
+        console.log(time);
         if (!form.PermissionDay) {
             alert("Thời gian đang trống")
             return;
         }
         if (form.PermissionDay < time) {
-            alert("Thời gian không được nhập trước ngày hôm nay")
+            alert("Không được nhập ngày cũ")
             return;
         }
         if (!form.PermissionContent) {
@@ -287,7 +267,6 @@ const ShowPermission = memo((props) => {
                     <div>
                         <div className="ant-spin-loading">{isLoading && <Spin />}</div>
                     </div>
-                    {arrPerParent.length == 0 && !isLoading && (<h3>Không có đơn nào được gửi đi</h3>)}
                     {
                         arrPerParent.map((per) => {
                             if (per.StudentName == props.studentName)
@@ -308,6 +287,7 @@ const ShowPermission = memo((props) => {
                                 )
                         })
                     }
+                    {arrPerParent.length == 0 && !isLoading && (<h3>Không có đơn nào được gửi đi</h3>)}
                 </div>
             )}
             {account?.Role == "Teacher" && (
@@ -317,7 +297,6 @@ const ShowPermission = memo((props) => {
                     <div>
                         <div className="ant-spin-loading">{isLoading && <Spin />}</div>
                     </div>
-                    {arrPerTeacher.length == 0 && !isLoading && (<h3>Không có đơn nào được gửi tới</h3>)}
                     {
                         arrPerTeacher.map((per) => {
                             if (per.TeacherName == account.Names)
@@ -338,6 +317,7 @@ const ShowPermission = memo((props) => {
                                 )
                         })
                     }
+                    {arrPerTeacher.length == 0 && !isLoading && (<h3>Không có đơn nào được gửi tới</h3>)}
                 </div>
             )}
         </>

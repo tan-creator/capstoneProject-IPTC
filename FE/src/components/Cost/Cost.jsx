@@ -4,6 +4,7 @@ import Sidebar from "../Layout/DefaultLayout/Sidebar/Sidebar";
 import { useAlert } from "react-alert";
 import "./cost.css"
 import { Spin } from "antd";
+import { getCost } from "../../helpers/getUser";
 
 function Cost() {
     const [classes, setClass] = useState([]);
@@ -46,7 +47,6 @@ function Cost() {
             .then(response => response.json())
             .then(json => {
                 setCosts(json)
-                console.log(json);
             })
             .catch(error => console.log('error', error));
     }, [costs])
@@ -105,15 +105,19 @@ function Cost() {
     }
 
     const handleSubmit = async () => {
-
-        var idCl = "";
+        var id = "";
         if (user.Role == "Teacher") {
             classes.map((cls) => {
-                if (user.UserName === cls.TeacherClassUserName) { idCl = cls.ClassID }
+                if (user.UserName === cls.TeacherClassUserName) { id = cls.ClassID }
             })
         }
-        bill.ClassID = idCl;
-
+        if (id != "") {
+            bill.ClassID = id;
+        }
+        else {
+            alert("Hiện tại giáo viên này không chủ nhiệm lớp nào")
+            return;
+        }
         if (!bill.CostType) {
             alert("Loại chi tiêu đang trống")
             return;
@@ -128,7 +132,7 @@ function Cost() {
         }
 
         const today = new Date();
-        const time = today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate() + " " + today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+        const time = today.getFullYear() + "-" + (today.getMonth() < 10 ? ("0" + (today.getMonth() + 1)) : (today.getMonth() + 1)) + "-" + (today.getDate() < 10 ? ("0" + today.getDate()) : today.getDate()) + " " + (today.getHours() < 10 ? ("0" + today.getHours()) : today.getHours()) + ":" + (today.getMinutes() < 10 ? ("0" + today.getMinutes()) : today.getMinutes()) + ":" + (today.getSeconds() < 10 ? ("0" + today.getSeconds()) : today.getSeconds());
         bill.CreateAt = time;
 
         console.log(bill);
@@ -140,7 +144,7 @@ function Cost() {
         fetch('http://127.0.0.1:8000/api/cost', requestOptions)
             .then((response) => {
                 if (response.status == 200) {
-                    console.log("Thành công\n" + bill);
+                    console.log(response);
                     alertNav.success("Thêm thành công: ");
                 } else {
                     console.log("Thất bại\n" + bill);
@@ -273,10 +277,9 @@ function Cost() {
                             </div>
                         </div>
                     )}
-                    {/* {getCost().length == 0 ? <Spin /> : */}
+                    {/* {isLoading ? <Spin /> : */}
                     <div className="cost-box">
                         <div className="cost-box-left">
-                            {getCost().length == 0 && (<h3 style={{ marginTop: 10, padding: "10px 10px", backgroundColor: "#f2f6fc" }}>Chưa có hóa đơn nào</h3>)}
                             {
                                 getCost().map((cost) => {
                                     return (
@@ -308,6 +311,7 @@ function Cost() {
                                     )
                                 })
                             }
+                            {getCost().length == 0 && !isLoading && (<h3 style={{ marginTop: 10, padding: "10px 10px", backgroundColor: "#f2f6fc" }}>Chưa có hóa đơn nào</h3>)}
                         </div>
                         <div className="cost-box-right">
                             <ShowCost data={dataSend} />

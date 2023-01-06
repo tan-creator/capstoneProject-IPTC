@@ -32,3 +32,8 @@ export const getPermission = () => {
     const permissions = JSON.parse(localStorage.getItem("permissions"));
     return permissions;
 };
+
+export const getCost = () => {
+    const costs = JSON.parse(localStorage.getItem("costs"));
+    return costs;
+};
