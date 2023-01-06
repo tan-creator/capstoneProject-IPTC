@@ -38,6 +38,11 @@ export default function Personnal() {
                     "Mật khẩu cũ và mới không được giống nhau"
                 );
             }
+            if (dataUpdate.newPassword != dataUpdate.verifyPassword) {
+                return alert.error(
+                    "Mật khẩu mới và xác nhận mật khẩu khác nhau"
+                );
+            }
             const result = await axios.post(
                 `http://127.0.0.1:8000/api/resetPassword?UserName=${account.UserName}&oldPassword=${dataUpdate.oldPassword}&newPassword=${dataUpdate.newPassword}&verifyPassword=${dataUpdate.verifyPassword}`
             );
@@ -63,7 +68,7 @@ export default function Personnal() {
                 }
             })
             .catch((error) => {
-                alert.error("Fetch thất bại: ");
+                alert.error("Cập nhật thất bại: ");
                 console.log("error", error);
             });
         const newAccount = {
