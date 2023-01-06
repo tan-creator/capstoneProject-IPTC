@@ -76,7 +76,7 @@ export default function noti() {
                         <div className="anounce box">
                             <div className="pb10">
                                 <i className="bx bxs-notepad" />
-                                <span>Thông báo</span>
+                                <span>Lịch</span>
                             </div>
                             <div>
                                 <a href="#">

@@ -54,7 +54,7 @@ export default function NavBar() {
                         onClick={handleOnClick}
                         type="button"
                     />
-                    <div className="button-div">
+                    {/* <div className="button-div">
                         <img
                             className="plus-circle-icon"
                             alt=""
@@ -62,7 +62,7 @@ export default function NavBar() {
                         />
 
                         <div className="ask-a-question">Ask a question</div>
-                    </div>
+                    </div> */}
                 </div>
 
                 <div

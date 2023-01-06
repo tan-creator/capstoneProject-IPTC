@@ -8,12 +8,12 @@ export default function Sidebar() {
     useEffect(() => {
         const body = document.querySelector("body"),
             sidebar = body.querySelector(".sidebar"),
-            searchBtn = body.querySelector(".search-box"),
+            // searchBtn = body.querySelector(".search-box"),
             modeSwitch = body.querySelector(".toggle-switch"),
             modeText = body.querySelector(".mode-text");
-        searchBtn.addEventListener("click", () => {
-            sidebar.classList.remove("close");
-        });
+        // searchBtn.addEventListener("click", () => {
+        //     sidebar.classList.remove("close");
+        // });
         // modeSwitch.addEventListener("click", () => {
         //     body.classList.toggle("dark");
         //     if (body.classList.contains("dark")) {
@@ -62,10 +62,10 @@ export default function Sidebar() {
                     </header>
                     <div className="menu-bar">
                         <div className="menu">
-                            <li className="search-box">
+                            {/* <li className="search-box">
                                 <i className="bx bx-search icon" />
                                 <input type="text" placeholder="Search..." />
-                            </li>
+                            </li> */}
                             <ul className="menu-links">
                                 <li id="dashboard" className="nav-link">
                                     <a href="/dashboard">
