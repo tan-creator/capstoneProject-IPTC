@@ -20,7 +20,7 @@ class PostResource extends JsonResource
     {
         return [
             'PostID' => $this->PostID,
-            'UserName' => $this->UserName,
+            'UserName' => $this->AdminUserName,
             'Content' => $this->Content,
             'PostImage' => $this->PostImage,
             'Likes' => DB::table('Likes')

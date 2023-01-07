@@ -13,7 +13,7 @@ class Post extends Model
     
     protected $fillable = [
         'PostID',
-        'UserName',
+        'AdminUserName',
         'Content',
         'PostImage',
         'PostDay'
