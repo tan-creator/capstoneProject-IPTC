@@ -45,6 +45,12 @@ Go to /capstoneProject-IPTC/FE by terminal and run:
 npm i
 ```
 
+Go to /capstoneProject-IPTC/FE by terminal and run:
+
+```bash
+npm install antd
+```
+
 ## Run source code in localHost:
 
 Go to /capstoneProject-IPTC by terminal and run:
@@ -116,3 +122,5 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+
