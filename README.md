@@ -39,13 +39,13 @@ php artisan key:generate
 php artisan key:generate
 ```
 
-Go to /capstoneProject-IPTC/FE by terminal and run:
+Run API, go to /capstoneProject-IPTC/FE by terminal and run:
 
 ```bash
 npm i
 ```
 
-Go to /capstoneProject-IPTC/FE by terminal and run:
+Run UI, go to /capstoneProject-IPTC/FE by terminal and run:
 
 ```bash
 npm install antd
