@@ -49,10 +49,10 @@ Go to /capstoneProject-IPTC/FE by terminal and run:
 npm i
 ```
 
-Go to /capstoneProject-IPTC/FE by terminal and run:
+Libraries used in the project(Front-End):
 
 ```bash
-npm install antd
+react, react-alert, react-router-dom, react-router, antd,  axios, chart.js, date-and-time, framer-motion, is-valid-birthdate
 ```
 
 ## Run source code in localHost:
