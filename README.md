@@ -1,3 +1,7 @@
+## url Admin
+<a href="https://trialapps3.genexus.com/Id6b6f27b03b9f0b5b19a8b8ee097f3ace/developermenu.html"></a>
+
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
@@ -9,11 +13,7 @@
 
 ## Installation
 
-To installation this product, make sure you have <a href="https://www.php.net/manual/en/install.php">PHP</a>, <a href="https://laravel.com/">Laravel</a>, <a href="https://learn.microsoft.com/en-us/sql/connect/php/download-drivers-php-sql-server?view=sql-server-ver16">sqlsvr for php</a>, <a href="https://getcomposer.org/">COMPOSER</a>, <a href="https://nodejs.org/en/">Node, NPM</a>, <a href="https://www.microsoft.com/en-us/sql-server/sql-server-downloads">SQL server</a>, <a href="https://ant.design/docs/react/introduce">Antd</a>.
-
-## Develop tool/Code editer
-
-<a href="https://code.visualstudio.com/">Visual studio code</a> for user page
+To installation this product, make sure you have PHP, <a href="https://learn.microsoft.com/en-us/sql/connect/php/download-drivers-php-sql-server?view=sql-server-ver16">sqlsvr for php</a>, <a href="https://getcomposer.org/">COMPOSER</a>, <a href="https://nodejs.org/en/">Node, NPM</a>, <a href="https://www.microsoft.com/en-us/sql-server/sql-server-downloads">SQL server</a>.
 
 Use `git clone` to clone source code:
 
@@ -43,13 +43,13 @@ php artisan key:generate
 php artisan key:generate
 ```
 
-Run API, go to /capstoneProject-IPTC/FE by terminal and run:
+Go to /capstoneProject-IPTC/FE by terminal and run:
 
 ```bash
 npm i
 ```
 
-Run UI, go to /capstoneProject-IPTC/FE by terminal and run:
+Go to /capstoneProject-IPTC/FE by terminal and run:
 
 ```bash
 npm install antd
@@ -68,9 +68,6 @@ Go to /capstoneProject-IPTC/FE by terminal and run:
 ```bash
 npm run dev
 ```
-## Authenticate
-Email: view in admin
-Password: Test-1234 (Almost user had same password)
 
 ## About Laravel
 
