@@ -11,6 +11,10 @@
 
 To installation this product, make sure you have PHP, <a href="https://learn.microsoft.com/en-us/sql/connect/php/download-drivers-php-sql-server?view=sql-server-ver16">sqlsvr for php</a>, <a href="https://getcomposer.org/">COMPOSER</a>, <a href="https://nodejs.org/en/">Node, NPM</a>, <a href="https://www.microsoft.com/en-us/sql-server/sql-server-downloads">SQL server</a>.
 
+## Develop tool/Code editer
+
+<a href="https://code.visualstudio.com/">Visual studio code</a> for user page
+
 Use `git clone` to clone source code:
 
 ```bash
