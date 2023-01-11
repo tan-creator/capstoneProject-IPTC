@@ -1,5 +1,3 @@
-## url Admin
-<a href="https://trialapps3.genexus.com/Id6b6f27b03b9f0b5b19a8b8ee097f3ace/developermenu.html">admin</a>
 
 
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
@@ -76,6 +74,19 @@ npm run dev
 For User(Parent and Teacher)</br>
 Email: View in admin </br>
 Password: Test-1234 (For almost user)
+
+For Admin </br>
+UserName: letruong@iptc.edu.vn
+PassWord: letruong280801
+
+## Url Admin
+<a href="https://trialapps3.genexus.com/Id6b6f27b03b9f0b5b19a8b8ee097f3ace/developermenu.html">Link admin</a> </br>
+
+## Link Installation Genexus 17 Trial
+<a href="https://training.genexus.com/en/download-genexus-trial">Genexus-17-trial</a>
+
+## Run Genexus 17 Trial
+Click "Run Developer Menu"</br>
 
 ## About Laravel
 
