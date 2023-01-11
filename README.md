@@ -76,7 +76,7 @@ Email: View in admin </br>
 Password: Test-1234 (For almost user)
 
 For Admin </br>
-UserName: letruong@iptc.edu.vn
+UserName: letruong@iptc.edu.vn </br>
 PassWord: letruong280801
 
 ## Url Admin
