@@ -69,6 +69,7 @@ Go to /capstoneProject-IPTC/FE by terminal and run:
 npm run dev
 ```
 ## Authenticate
+For User(Parent and Teacher)
 Email: View in admin </br>
 Password: Test-1234 (For almost user)
 
