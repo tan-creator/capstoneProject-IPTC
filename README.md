@@ -69,7 +69,7 @@ Go to /capstoneProject-IPTC/FE by terminal and run:
 npm run dev
 ```
 ## Authenticate
-Email: View in admin
+Email: View in admin </br>
 Password: Test-1234 (For almost user)
 
 ## About Laravel
