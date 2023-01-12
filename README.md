@@ -1,4 +1,4 @@
-<img src="./img/logo.svg" alt="#" />
+ <img src="./FE/public/img/logo.svg" alt="">
 <p size="24px" align="center" >IPTC</p>
 <p align="center">Capstone Project</p>
 
