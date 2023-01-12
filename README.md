@@ -15,7 +15,8 @@ To installation this product, make sure you have PHP,
 <a href="https://learn.microsoft.com/en-us/sql/connect/php/download-drivers-php-sql-server?view=sql-server-ver16">sqlsvr for php</a>, 
 <a href="https://getcomposer.org/">COMPOSER</a>, 
 <a href="https://nodejs.org/en/">Node, NPM</a>,
-<a href="https://www.microsoft.com/en-us/sql-server/sql-server-downloads">SQL server</a>.
+<a href="https://www.microsoft.com/en-us/sql-server/sql-server-downloads">SQL server</a>
+<a href="https://training.genexus.com/en/download-genexus-trial">Genexus-17-trial</a>.
 
 Use `git clone` to clone source code:
 
@@ -81,9 +82,6 @@ PassWord: letruong280801
 
 ## Url Admin
 <a href="https://trialapps3.genexus.com/Id6b6f27b03b9f0b5b19a8b8ee097f3ace/developermenu.html">Link admin</a> </br>
-
-## Link Installation Genexus 17 Trial
-<a href="https://training.genexus.com/en/download-genexus-trial">Genexus-17-trial</a>
 
 ## Run Genexus 17 Trial
 Click "Run Developer Menu"</br>
