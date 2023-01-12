@@ -83,9 +83,6 @@ PassWord: letruong280801
 ## Url Admin
 <a href="https://trialapps3.genexus.com/Id6b6f27b03b9f0b5b19a8b8ee097f3ace/developermenu.html">Link admin</a> </br>
 
-## Run Genexus 17 Trial
-Click "Run Developer Menu"</br>
-
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
