@@ -1,4 +1,5 @@
 <h1 align="center">IPTC</h1>
+<p align="center">Capstone Project</p>
 
 ## Installation
 
