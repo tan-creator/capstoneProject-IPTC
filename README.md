@@ -1,6 +1,6 @@
 <div align="center"><img src="./FE/public/img/logo.svg" alt=""></div>
 
-<p align="center" >IPTC</p>
+<h1 align="center" ># IPTC</h1>
 <p align="center">Capstone Project</p>
 
 ## Installation
