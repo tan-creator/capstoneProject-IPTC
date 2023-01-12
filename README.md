@@ -1,10 +1,9 @@
-<div align="center"><img src="./FE/public/img/logo.svg" alt=""></div>
+<div align="center"><img width="200" src="./FE/public/img/logo.svg" alt=""></div>
 
-<h1 align="center" >IPTC</h1>
-<h1 align="center" >IMPROVING PARENT-TEACHER COMMUNICATION SYSTEM</h1>
+<h1 font-size="200px" align="center" >IPTC</h1>
+<h3 align="center" >IMPROVING PARENT-TEACHER COMMUNICATION SYSTEM</h3>
 
-
-<p align="center">Capstone Project</p>
+<h3 align="center">Capstone Project</h3>
 
 ## Installation
 
