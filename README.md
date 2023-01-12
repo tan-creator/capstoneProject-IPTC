@@ -1,3 +1,5 @@
+<h1 style="align-self: center;" >IPTC</h1>
+
 ## Installation
 
 To installation this product, make sure you have PHP, 
