@@ -1,7 +1,7 @@
 <div align="center"><img src="./FE/public/img/logo.svg" alt=""></div>
 
 <h1 align="center" >IPTC</h1>
-<h1 align="center" >IMPROVING PARENT-TEACHER<space><space>COMMUNICATION SYSTEM</h1>
+<h1 align="center" >IMPROVING PARENT-TEACHER COMMUNICATION SYSTEM</h1>
 
 
 <p align="center">Capstone Project</p>
