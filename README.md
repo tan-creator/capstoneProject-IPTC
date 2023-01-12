@@ -1,4 +1,4 @@
-<font size="24px" align="center" >IPTC</font>
+<p size="24px" align="center" >IPTC</p>
 <p align="center">Capstone Project</p>
 
 ## Installation
