@@ -1,4 +1,4 @@
-<center><h1>IPTC</h1></center>
+<h1 align="center">IPTC</h1>
 
 ## Installation
 
